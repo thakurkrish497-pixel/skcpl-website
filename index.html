@@ -8,6 +8,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
+  
+  <!-- Supabase JS Library -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <!-- Tailwind Configuration -->
   <script>
@@ -580,20 +583,82 @@
     </section>
 
     <!-- ────────────────────────────────────────── -->
-    <!-- 6. CONTACT CTA STRIP                       -->
+    <!-- 6. CONTACT CTA & FORM                      -->
     <!-- ────────────────────────────────────────── -->
     <section class="py-xl bg-primary-container relative" id="contact">
-      <div class="container mx-auto px-margin text-center">
-        <h3 class="font-headline-xl text-headline-xl text-white mb-md">Ready to Build the Future?</h3>
-        <p class="font-body-lg text-body-lg text-white/60 max-w-xl mx-auto mb-lg">Get in touch with our specialist team for your next project in Telecom, Infrastructure, or Real Estate.</p>
-        <p class="font-body-md text-white mb-8">45, Maa Sharda Nagar, Near Bharat Public School, Royal Bunglow Square,<br>Kabit Khedi, MR-10, Indore, Madhya Pradesh, 452010, India</p>
-        <div class="flex flex-wrap justify-center gap-md">
-          <a href="mailto:s.kumarcreation@yahoo.com" class="inline-flex items-center gap-2 bg-secondary-fixed text-on-secondary-fixed px-8 py-4 font-label-md text-label-md rounded-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
-            <span class="material-symbols-outlined text-lg">mail</span> EMAIL US
-          </a>
-          <a href="tel:+917314938668" class="inline-flex items-center gap-2 border border-white/30 text-white px-8 py-4 font-label-md text-label-md rounded-lg hover:bg-white/10 transition-all duration-300">
-            <span class="material-symbols-outlined text-lg">call</span> 0731-4938668
-          </a>
+      <div class="container mx-auto px-margin">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-xl items-center">
+          <!-- Left side: Contact Info -->
+          <div>
+            <h3 class="font-headline-xl text-headline-xl text-white mb-md">Ready to Build the Future?</h3>
+            <p class="font-body-lg text-body-lg text-white/60 mb-lg max-w-md">Get in touch with our specialist team for your next project in Telecom, Infrastructure, or Real Estate. Submit the form to request a callback.</p>
+            
+            <div class="flex flex-col gap-6 mb-8">
+              <div class="flex items-center gap-4 text-white">
+                <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center border border-white/20">
+                  <span class="material-symbols-outlined text-secondary-fixed">location_on</span>
+                </div>
+                <div>
+                  <p class="font-label-md text-label-md text-white/60">Address</p>
+                  <p class="font-body-md text-body-md">45, Maa Sharda Nagar, MR-10, Indore, MP</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4 text-white">
+                <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center border border-white/20">
+                  <span class="material-symbols-outlined text-secondary-fixed">mail</span>
+                </div>
+                <div>
+                  <p class="font-label-md text-label-md text-white/60">Email</p>
+                  <a href="mailto:s.kumarcreation@yahoo.com" class="font-body-md text-body-md hover:text-secondary-fixed transition-colors">s.kumarcreation@yahoo.com</a>
+                </div>
+              </div>
+              <div class="flex items-center gap-4 text-white">
+                <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center border border-white/20">
+                  <span class="material-symbols-outlined text-secondary-fixed">call</span>
+                </div>
+                <div>
+                  <p class="font-label-md text-label-md text-white/60">Phone</p>
+                  <a href="tel:+917314938668" class="font-body-md text-body-md hover:text-secondary-fixed transition-colors">0731-4938668</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Right side: Enquiry Form -->
+          <div class="bg-surface rounded-2xl p-8 shadow-2xl relative overflow-hidden border border-white/10">
+            <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-secondary-fixed to-secondary"></div>
+            <h4 class="font-headline-md text-headline-md text-primary mb-6">Send an Enquiry</h4>
+            <form id="enquiry-form" class="flex flex-col gap-5">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div>
+                  <label class="block font-label-md text-label-md text-primary mb-2" for="name">Full Name *</label>
+                  <input type="text" id="name" required class="w-full bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
+                </div>
+                <div>
+                  <label class="block font-label-md text-label-md text-primary mb-2" for="phone">Phone Number</label>
+                  <input type="tel" id="phone" class="w-full bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
+                </div>
+              </div>
+              <div>
+                <label class="block font-label-md text-label-md text-primary mb-2" for="email">Email Address *</label>
+                <input type="email" id="email" required class="w-full bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
+              </div>
+              <div>
+                <label class="block font-label-md text-label-md text-primary mb-2" for="message">Message *</label>
+                <textarea id="message" required rows="4" class="w-full bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none"></textarea>
+              </div>
+              <button type="submit" id="submit-btn" class="bg-primary text-white font-label-md text-label-md py-4 px-6 rounded-lg hover:bg-primary-container transition-colors mt-2 flex items-center justify-center gap-2 relative">
+                <span id="btn-text">SUBMIT ENQUIRY</span>
+                <span id="btn-spinner" class="material-symbols-outlined animate-spin hidden">progress_activity</span>
+              </button>
+              <div id="form-success" class="hidden text-green-600 font-label-md mt-2 flex items-center gap-2">
+                <span class="material-symbols-outlined">check_circle</span> Message sent successfully! We will contact you soon.
+              </div>
+              <div id="form-error" class="hidden text-red-600 font-label-md mt-2 flex items-center gap-2">
+                <span class="material-symbols-outlined">error</span> Failed to send message. Please try again.
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </section>

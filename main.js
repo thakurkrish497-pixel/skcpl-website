@@ -146,4 +146,59 @@
   }
 
   init();
+
+  /* ── Supabase Integration & Form Handling ── */
+  const SUPABASE_URL = "https://ishemnvgjpwetoljxrkjw.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_dkdAC8Q-78JEZmWm2B3IEg_frXP3JdH";
+  
+  let supabase = null;
+  if (window.supabase) {
+    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  }
+
+  const form = document.getElementById("enquiry-form");
+  if (form && supabase) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      
+      const submitBtn = document.getElementById("submit-btn");
+      const btnText = document.getElementById("btn-text");
+      const btnSpinner = document.getElementById("btn-spinner");
+      const successMsg = document.getElementById("form-success");
+      const errorMsg = document.getElementById("form-error");
+      
+      // Reset UI
+      submitBtn.disabled = true;
+      btnText.classList.add("hidden");
+      btnSpinner.classList.remove("hidden");
+      successMsg.classList.add("hidden");
+      errorMsg.classList.add("hidden");
+      
+      // Gather data
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const message = document.getElementById("message").value.trim();
+      
+      try {
+        const { error } = await supabase
+          .from("enquiries")
+          .insert([{ name, phone, email, message }]);
+          
+        if (error) throw error;
+        
+        // Success
+        successMsg.classList.remove("hidden");
+        form.reset();
+      } catch (err) {
+        console.error("Error submitting form:", err);
+        errorMsg.classList.remove("hidden");
+      } finally {
+        // Restore UI
+        submitBtn.disabled = false;
+        btnText.classList.remove("hidden");
+        btnSpinner.classList.add("hidden");
+      }
+    });
+  }
 })();
