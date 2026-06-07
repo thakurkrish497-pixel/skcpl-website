@@ -148,7 +148,7 @@
   init();
 
   /* ── Supabase Integration & Form Handling ── */
-  const SUPABASE_URL = "https://ishemnvgjpwetoljxrkjw.supabase.co";
+  const SUPABASE_URL = "https://shemnvgjpwetoljxrkjw.supabase.co";
   const SUPABASE_ANON_KEY = "sb_publishable_dkdAC8Q-78JEZmWm2B3IEg_frXP3JdH";
   
   let supabase = null;
