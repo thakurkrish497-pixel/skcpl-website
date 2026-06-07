@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKumar Solar - Clean Energy Solutions | SKCPL Group</title>
+  <meta name="description" content="SKumar Solar in Sukhliya, Indore. Best Solar Energy System Manufacturers. Providing residential and commercial solar panels, water heaters, and subsidy consultation.">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  
+  <!-- Supabase JS Library -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-variant": "#e1e3e4",
+            "on-primary-fixed-variant": "#344767",
+            "outline-variant": "#c4c6ce",
+            "surface-container": "#edeeef",
+            "error-container": "#ffdad6",
+            "tertiary": "#001b2c",
+            "surface-tint": "#4c5f80",
+            "on-secondary": "#ffffff",
+            "inverse-surface": "#2e3132",
+            "background": "#f8f9fa",
+            "secondary": "#735c00",
+            "on-error": "#ffffff",
+            "secondary-container": "#fed65b",
+            "tertiary-fixed-dim": "#90cdfd",
+            "secondary-fixed-dim": "#e9c349",
+            "inverse-primary": "#b4c7ed",
+            "on-primary-fixed": "#051b39",
+            "tertiary-container": "#00314b",
+            "surface-dim": "#d9dadb",
+            "surface": "#f8f9fa",
+            "on-tertiary-fixed-variant": "#004b70",
+            "primary-fixed": "#d6e3ff",
+            "inverse-on-surface": "#f0f1f2",
+            "on-secondary-container": "#745c00",
+            "surface-container-highest": "#e1e3e4",
+            "primary-fixed-dim": "#b4c7ed",
+            "outline": "#74777e",
+            "surface-bright": "#f8f9fa",
+            "on-error-container": "#93000a",
+            "surface-container-lowest": "#ffffff",
+            "on-primary": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "on-secondary-fixed": "#241a00",
+            "on-surface-variant": "#44474e",
+            "primary": "#021936",
+            "primary-container": "#1a2e4c",
+            "surface-container-low": "#f3f4f5",
+            "on-surface": "#191c1d",
+            "on-secondary-fixed-variant": "#574500",
+            "on-tertiary-fixed": "#001e30",
+            "on-primary-container": "#8396b9",
+            "secondary-fixed": "#ffe088",
+            "surface-container-high": "#e7e8e9",
+            "on-background": "#191c1d",
+            "tertiary-fixed": "#cae6ff",
+            "on-tertiary-container": "#5e9bc9",
+            "error": "#ba1a1a"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "xs": "4px",
+            "margin": "32px",
+            "gutter": "24px",
+            "sm": "12px",
+            "base": "8px",
+            "xl": "80px",
+            "md": "24px",
+            "lg": "48px"
+          },
+          "fontFamily": {
+            "caption": ["Inter"],
+            "body-lg": ["Inter"],
+            "headline-lg": ["Montserrat"],
+            "headline-xl": ["Montserrat"],
+            "headline-md": ["Montserrat"],
+            "body-md": ["Inter"],
+            "label-md": ["Inter"],
+            "headline-lg-mobile": ["Montserrat"]
+          },
+          "fontSize": {
+            "caption": ["12px", {"lineHeight": "1.4", "fontWeight": "400"}],
+            "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+            "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+            "headline-xl": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+            "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+            "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+            "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "fontWeight": "600"}]
+          }
+        },
+      },
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .solar-hero {
+      background-image: linear-gradient(rgba(2, 25, 54, 0.75), rgba(2, 25, 54, 0.45)), url('./public/brands/skumar_solar_hero.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    /* ── Activity Cards ── */
+    .activity-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 28px;
+      border: 1px solid rgba(2,25,54,0.06);
+      box-shadow: 0 4px 24px rgba(2,25,54,0.06);
+      transition: all 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .activity-card:hover {
+      box-shadow: 0 16px 48px rgba(2,25,54,0.12);
+      transform: translateY(-4px);
+      border-color: #22c55e; /* Green accent for solar */
+    }
+
+    /* ── Partner Logos ── */
+    .partner-logo {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #021936;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.25rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border: 1px solid rgba(0,0,0,0.05);
+      transition: all 0.3s;
+    }
+    .partner-logo:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      color: #22c55e;
+    }
+
+    /* ── Mobile Hamburger ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    @media (max-width: 900px) {
+      .hamburger { display: flex; }
+      .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: #021936;
+        flex-direction: column;
+        padding: 80px 32px 32px;
+        gap: 2rem;
+        transition: right 0.4s ease;
+        z-index: 200;
+        overflow-y: auto;
+      }
+      .nav-menu.open { right: 0; }
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-green-500 selection:text-white">
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- NAVIGATION BAR                                -->
+  <!-- ══════════════════════════════════════════════ -->
+  <nav class="site-navbar scrolled" style="background: #021936;" id="site-navbar">
+    <a href="index.html" class="nav-brand">SKCPL</a>
+    <ul class="nav-menu" id="nav-menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#about">About SKCPL</a></li>
+      <li><a href="index.html#expertise">Services</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#gallery">Gallery</a></li>
+      <li><a href="index.html#group">SKCPL Group</a></li>
+      <li><a href="#contact" class="bg-green-500 text-white px-4 py-2 rounded-lg font-bold hover:shadow-lg transition-all ml-2">Get Quote</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- HERO SECTION                                  -->
+  <!-- ══════════════════════════════════════════════ -->
+  <header class="solar-hero h-screen flex items-center justify-center text-center px-margin pt-20" id="top">
+    <div>
+      <span class="inline-block py-2 px-5 bg-green-500 text-white font-label-md text-label-md mb-md rounded-lg tracking-widest">A SKCPL GROUP PROPERTY</span>
+      <h1 class="font-headline-xl text-headline-xl text-white mb-base lg:text-7xl">SKumar Solar</h1>
+      <p class="font-body-lg text-body-lg text-white/90 max-w-2xl mx-auto mb-sm">Premium Solar Energy System Manufacturers & Installers in Indore</p>
+      <div class="flex items-center justify-center gap-2 mb-lg text-yellow-400">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star_half</span>
+        <span class="text-white font-bold ml-2">4.5 Rating</span>
+      </div>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="#contact" class="inline-flex items-center gap-2 bg-green-500 text-white px-8 py-4 font-label-md text-label-md rounded-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
+          <span class="material-symbols-outlined text-lg">bolt</span> GET A FREE QUOTE
+        </a>
+        <a href="#services" class="inline-flex items-center gap-2 bg-white/10 text-white border border-white/30 px-8 py-4 font-label-md text-label-md rounded-lg hover:bg-white/20 transition-all duration-300 backdrop-blur-sm">
+          <span class="material-symbols-outlined text-lg">explore</span> EXPLORE SOLUTIONS
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ────────────────────────────────────────── -->
+    <!-- QUICK FACTS STRIP                          -->
+    <!-- ────────────────────────────────────────── -->
+    <div class="bg-green-600 py-4">
+      <div class="container mx-auto px-margin">
+        <div class="flex flex-wrap justify-center gap-6 md:gap-12">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">verified</span>
+            <span class="font-label-md text-label-md text-white">Authorized Partners</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">home</span>
+            <span class="font-label-md text-label-md text-white">Residential Subsidy</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">factory</span>
+            <span class="font-label-md text-label-md text-white">Commercial Solar</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">settings</span>
+            <span class="font-label-md text-label-md text-white">AMC & Maintenance</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ────────────────────────────────────────── -->
+    <!-- ABOUT SECTION                              -->
+    <!-- ────────────────────────────────────────── -->
+    <section class="py-xl bg-surface" id="about">
+      <div class="container mx-auto px-margin">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-xl items-center">
+          <div>
+            <span class="inline-block py-2 px-5 bg-green-500/10 text-green-700 font-label-md text-label-md mb-md rounded-lg tracking-widest">ABOUT US</span>
+            <h2 class="font-headline-xl text-headline-xl text-primary mb-base">Empowering Indore with Clean Energy</h2>
+            <p class="font-body-lg text-body-lg text-on-surface-variant mb-md">Located conveniently at Shop N0-3, Ma Sharda Nagar, Sukhliya, SKumar Solar brings world-class solar technology right to your doorstep. We are dedicated to providing sustainable, cost-effective energy solutions for both residential and commercial sectors in Madhya Pradesh.</p>
+            <p class="font-body-md text-body-md text-on-surface-variant mb-lg">With a stellar 4.5-star rating on JustDial, we pride ourselves on exceptional customer service, seamless installation processes, and complete assistance with government subsidies (like PM Surya Ghar Muft Bijli Yojana) and net metering procedures.</p>
+            
+            <div class="flex flex-col gap-4 mt-8">
+              <div class="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                  <span class="material-symbols-outlined">schedule</span>
+                </div>
+                <div>
+                  <h4 class="font-bold text-primary">Business Hours</h4>
+                  <p class="text-on-surface-variant text-sm">Open Daily: 10:00 AM - 7:00 PM</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                  <span class="material-symbols-outlined">location_on</span>
+                </div>
+                <div>
+                  <h4 class="font-bold text-primary">Location</h4>
+                  <p class="text-on-surface-variant text-sm">Shop N0-3, Ma Sharda Nagar, 45-A, Sukhliya, Indore</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="relative">
+            <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
+              <!-- Using the generated hero image here as well since we don't have other real photos -->
+              <img src="./public/brands/skumar_solar_hero.png" alt="SKumar Solar Installations" class="w-full h-full object-cover">
+            </div>
+            <div class="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-xl max-w-xs border border-gray-100 hidden md:block">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="material-symbols-outlined text-green-500 text-3xl" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+                <h4 class="font-bold text-lg text-primary">Top Rated</h4>
+              </div>
+              <p class="text-sm text-on-surface-variant">Recognized as one of the best Solar Energy System Manufacturers in Indore.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ────────────────────────────────────────── -->
+    <!-- SERVICES SECTION                           -->
+    <!-- ────────────────────────────────────────── -->
+    <section class="py-xl bg-surface-container-low" id="services">
+      <div class="container mx-auto px-margin">
+        <div class="text-center mb-xl">
+          <span class="inline-block py-2 px-5 bg-green-500/10 text-green-700 font-label-md text-label-md mb-md rounded-lg tracking-widest">OUR EXPERTISE</span>
+          <h2 class="font-headline-xl text-headline-xl text-primary mb-base">Comprehensive Solar Solutions</h2>
+          <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">From concept to commissioning, we handle every aspect of your transition to clean, renewable energy.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
+          <div class="activity-card group">
+            <div class="w-16 h-16 rounded-2xl bg-green-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <span class="material-symbols-outlined text-3xl text-green-600" style="font-variation-settings: 'FILL' 1;">roofing</span>
+            </div>
+            <h3 class="font-headline-md text-headline-md text-primary mb-4">Residential Solar Rooftop</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">Turn your roof into a power plant. We offer end-to-end installation of grid-tied, off-grid, and hybrid solar systems for homes.</p>
+          </div>
+
+          <div class="activity-card group">
+            <div class="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <span class="material-symbols-outlined text-3xl text-blue-600" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+            </div>
+            <h3 class="font-headline-md text-headline-md text-primary mb-4">Subsidy Consultation</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">We guide you through the complete documentation and approval process for the PM Surya Ghar scheme to maximize your savings.</p>
+          </div>
+
+          <div class="activity-card group">
+            <div class="w-16 h-16 rounded-2xl bg-orange-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <span class="material-symbols-outlined text-3xl text-orange-600" style="font-variation-settings: 'FILL' 1;">factory</span>
+            </div>
+            <h3 class="font-headline-md text-headline-md text-primary mb-4">Commercial Solar</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">Large-scale solar installations for factories, warehouses, and office buildings to drastically reduce operational electricity costs.</p>
+          </div>
+
+          <div class="activity-card group">
+            <div class="w-16 h-16 rounded-2xl bg-teal-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <span class="material-symbols-outlined text-3xl text-teal-600" style="font-variation-settings: 'FILL' 1;">hot_tub</span>
+            </div>
+            <h3 class="font-headline-md text-headline-md text-primary mb-4">Solar Water Heaters</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">High-efficiency solar thermal systems providing hot water year-round for domestic, hospital, or hotel usage.</p>
+          </div>
+
+          <div class="activity-card group">
+            <div class="w-16 h-16 rounded-2xl bg-purple-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <span class="material-symbols-outlined text-3xl text-purple-600" style="font-variation-settings: 'FILL' 1;">electric_meter</span>
+            </div>
+            <h3 class="font-headline-md text-headline-md text-primary mb-4">Net Metering Setup</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">Complete liaisoning with local electricity boards (MPWZ) to install bidirectional meters and ensure you get credit for excess power.</p>
+          </div>
+
+          <div class="activity-card group">
+            <div class="w-16 h-16 rounded-2xl bg-red-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <span class="material-symbols-outlined text-3xl text-red-600" style="font-variation-settings: 'FILL' 1;">engineering</span>
+            </div>
+            <h3 class="font-headline-md text-headline-md text-primary mb-4">Maintenance & AMC</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">Regular cleaning, performance monitoring, and rapid repair services to ensure your solar plant operates at peak efficiency.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ────────────────────────────────────────── -->
+    <!-- TRUSTED BRANDS SECTION                     -->
+    <!-- ────────────────────────────────────────── -->
+    <section class="py-xl bg-surface border-t border-surface-variant">
+      <div class="container mx-auto px-margin">
+        <div class="text-center mb-xl">
+          <h2 class="font-headline-md text-headline-md text-primary mb-base">Our Authorized Brand Partners</h2>
+          <p class="font-body-md text-body-md text-on-surface-variant">We supply and install Tier-1 solar equipment from industry leaders.</p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-6">
+          <div class="partner-logo">Adani Solar</div>
+          <div class="partner-logo">Havells</div>
+          <div class="partner-logo">Luminous</div>
+          <div class="partner-logo">KStar</div>
+          <div class="partner-logo">Waaree</div>
+          <div class="partner-logo">GreenTech</div>
+          <div class="partner-logo">Microtek</div>
+          <div class="partner-logo">RenewSys</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ────────────────────────────────────────── -->
+    <!-- CONTACT SECTION                            -->
+    <!-- ────────────────────────────────────────── -->
+    <section class="py-xl bg-surface-container-low" id="contact">
+      <div class="container mx-auto px-margin">
+        <div class="bg-white rounded-3xl overflow-hidden shadow-2xl flex flex-col lg:flex-row">
+          
+          <!-- Left side: Contact Info -->
+          <div class="bg-primary text-white p-lg lg:w-2/5 flex flex-col justify-between">
+            <div>
+              <span class="inline-block py-2 px-5 bg-white/10 text-white font-label-md text-label-md mb-md rounded-lg tracking-widest backdrop-blur-sm border border-white/20">GET STARTED</span>
+              <h2 class="font-headline-xl text-headline-xl mb-base">Request a Quote</h2>
+              <p class="font-body-lg text-body-lg text-white/80 mb-xl">Ready to switch to solar? Contact us for a free site assessment and detailed quotation.</p>
+              
+              <div class="space-y-8">
+                <div class="flex items-start gap-4">
+                  <div class="bg-white/10 w-12 h-12 rounded-full flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-secondary-fixed">location_on</span>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-lg mb-1">Our Office</h4>
+                    <p class="text-white/80">Shop N0-3, Ma Sharda Nagar, 45-A, Row House, Near Ma Sharda Mandir, Sukhliya, Indore-452010</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-start gap-4">
+                  <div class="bg-white/10 w-12 h-12 rounded-full flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-secondary-fixed">phone_in_talk</span>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-lg mb-1">Call Us</h4>
+                    <p class="text-white/80">0731-4938668</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-start gap-4">
+                  <div class="bg-white/10 w-12 h-12 rounded-full flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-secondary-fixed">mail</span>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-lg mb-1">Email Us</h4>
+                    <p class="text-white/80">s.kumarcreation@yahoo.com</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Right side: Enquiry Form -->
+          <div class="p-lg lg:w-3/5">
+            <h3 class="font-headline-md text-headline-md text-primary mb-lg">Send us a message</h3>
+            <form id="solar-enquiry-form" class="space-y-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label for="name" class="block font-label-md text-sm text-on-surface-variant mb-2">Full Name *</label>
+                  <input type="text" id="name" required class="w-full bg-surface-container-low border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-green-500 font-body-md placeholder:text-outline/60" placeholder="John Doe">
+                </div>
+                <div>
+                  <label for="phone" class="block font-label-md text-sm text-on-surface-variant mb-2">Phone Number *</label>
+                  <input type="tel" id="phone" required class="w-full bg-surface-container-low border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-green-500 font-body-md placeholder:text-outline/60" placeholder="+91 98765 43210">
+                </div>
+              </div>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label for="email" class="block font-label-md text-sm text-on-surface-variant mb-2">Email Address</label>
+                  <input type="email" id="email" class="w-full bg-surface-container-low border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-green-500 font-body-md placeholder:text-outline/60" placeholder="john@example.com">
+                </div>
+                <div>
+                  <label for="service-type" class="block font-label-md text-sm text-on-surface-variant mb-2">Interested In *</label>
+                  <select id="service-type" required class="w-full bg-surface-container-low border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-green-500 font-body-md text-on-surface">
+                    <option value="" disabled selected>Select a service</option>
+                    <option value="Residential Solar">Residential Solar (Rooftop)</option>
+                    <option value="Commercial Solar">Commercial Solar</option>
+                    <option value="Solar Water Heater">Solar Water Heater</option>
+                    <option value="Subsidy Information">Subsidy Information</option>
+                    <option value="Maintenance">Maintenance & Repair</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div>
+                <label for="roof-area" class="block font-label-md text-sm text-on-surface-variant mb-2">Approx. Roof Area (sq. ft.) - Optional</label>
+                <input type="number" id="roof-area" class="w-full bg-surface-container-low border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-green-500 font-body-md placeholder:text-outline/60" placeholder="e.g. 1000">
+              </div>
+              
+              <div>
+                <label for="message" class="block font-label-md text-sm text-on-surface-variant mb-2">Additional Details</label>
+                <textarea id="message" rows="4" class="w-full bg-surface-container-low border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-green-500 font-body-md placeholder:text-outline/60" placeholder="Tell us about your electricity bill or specific requirements..."></textarea>
+              </div>
+              
+              <button type="submit" class="w-full bg-green-500 text-white font-label-md text-label-md py-4 rounded-lg hover:bg-green-600 hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                SUBMIT ENQUIRY <span class="material-symbols-outlined">send</span>
+              </button>
+              
+              <div id="form-message" class="hidden mt-4 p-4 rounded-lg text-center font-body-md"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- FOOTER                                        -->
+  <!-- ══════════════════════════════════════════════ -->
+  <footer class="bg-primary text-white pt-xl pb-6 border-t border-white/10">
+    <div class="container mx-auto px-margin">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-xl mb-xl">
+        <!-- Col 1 -->
+        <div>
+          <h3 class="font-headline-lg text-headline-lg mb-6 tracking-wide">SKCPL</h3>
+          <p class="font-body-md text-white/70 mb-6 max-w-sm">Total turnkey solution provider in India specializing in Telecom, Infrastructure, Real Estate, Hospitality, and Renewable Energy.</p>
+          <div class="flex gap-4">
+            <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-green-500 transition-colors"><span class="material-symbols-outlined text-xl">language</span></a>
+            <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-green-500 transition-colors"><span class="material-symbols-outlined text-xl">share</span></a>
+          </div>
+        </div>
+        
+        <!-- Col 2 -->
+        <div>
+          <h4 class="font-headline-md text-xl mb-6 text-green-500">Quick Links</h4>
+          <ul class="space-y-4 font-body-md text-white/80">
+            <li><a href="index.html" class="hover:text-green-500 transition-colors">Back to SKCPL Main Site</a></li>
+            <li><a href="#about" class="hover:text-green-500 transition-colors">About SKumar Solar</a></li>
+            <li><a href="#services" class="hover:text-green-500 transition-colors">Solar Solutions</a></li>
+            <li><a href="fun-n-food.html" class="hover:text-green-500 transition-colors">Fun N Food Resort</a></li>
+          </ul>
+        </div>
+        
+        <!-- Col 3 -->
+        <div>
+          <h4 class="font-headline-md text-xl mb-6 text-green-500">Contact SKumar Solar</h4>
+          <ul class="space-y-4 font-body-md text-white/80">
+            <li class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-green-500 shrink-0">location_on</span>
+              <span>Shop N0-3, Ma Sharda Nagar, 45-A, Sukhliya, Indore, MP – 452010</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-green-500 shrink-0">phone_in_talk</span>
+              <span>0731-4938668</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-green-500 shrink-0">mail</span>
+              <span>s.kumarcreation@yahoo.com</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-green-500 shrink-0">schedule</span>
+              <span>10:00 AM - 7:00 PM (Daily)</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-white/50 text-sm font-body-md">
+        <p>&copy; 2026 S. Kumar Creation Pvt. Ltd. All rights reserved.</p>
+        <p>A SKCPL Group Company</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script for interactions and form submission -->
+  <script>
+    // Supabase Initialization
+    // NOTE: In a real environment, replace these with actual Supabase project credentials.
+    // For this prototype, we're simulating the form submission.
+    const SUPABASE_URL = 'https://YOUR_SUPABASE_PROJECT_ID.supabase.co';
+    const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+    
+    // Hamburger Menu Logic
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+    
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('open');
+      const spans = hamburger.querySelectorAll('span');
+      if (navMenu.classList.contains('open')) {
+        spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+        spans[1].style.opacity = '0';
+        spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+      } else {
+        spans[0].style.transform = 'none';
+        spans[1].style.opacity = '1';
+        spans[2].style.transform = 'none';
+      }
+    });
+
+    // Close menu when clicking a link
+    navMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if(window.innerWidth <= 900) {
+          navMenu.classList.remove('open');
+          const spans = hamburger.querySelectorAll('span');
+          spans[0].style.transform = 'none';
+          spans[1].style.opacity = '1';
+          spans[2].style.transform = 'none';
+        }
+      });
+    });
+
+    // Form Submission Simulation
+    const form = document.getElementById('solar-enquiry-form');
+    const formMsg = document.getElementById('form-message');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">refresh</span> SENDING...';
+      submitBtn.disabled = true;
+
+      // Simulate API call delay
+      setTimeout(() => {
+        formMsg.classList.remove('hidden', 'bg-red-100', 'text-red-700');
+        formMsg.classList.add('bg-green-100', 'text-green-700');
+        formMsg.innerHTML = '<div class="flex items-center justify-center gap-2"><span class="material-symbols-outlined">check_circle</span> <strong>Success!</strong> Your solar enquiry has been submitted. Our team will contact you shortly.</div>';
+        
+        form.reset();
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        
+        // Hide message after 5 seconds
+        setTimeout(() => {
+          formMsg.classList.add('hidden');
+        }, 5000);
+      }, 1500);
+    });
+  </script>
+</body>
+</html>
