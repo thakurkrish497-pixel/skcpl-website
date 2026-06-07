@@ -17,6 +17,11 @@
   let scrollY = 0;
   let targetY = 0;
 
+  /* ── Cached Layout Metrics (prevent layout thrashing) ── */
+  let cachedSpacerHeight = 0;
+  let cachedSpacerTop = 0;
+  let cachedMaxScroll = 0;
+
   /* ── Resize (retina-aware) ── */
   function resize() {
     const dpr = window.devicePixelRatio || 1;
@@ -24,6 +29,11 @@
     canvas.height = window.innerHeight * dpr;
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = "high";
+    
+    cachedSpacerHeight = spacer.offsetHeight;
+    cachedSpacerTop = spacer.offsetTop;
+    cachedMaxScroll = cachedSpacerHeight - window.innerHeight;
+    
     drawn = -1;
   }
 
@@ -50,10 +60,8 @@
 
   /* ── Scroll → frame index (only within the spacer zone) ── */
   function frameAt(y) {
-    const spacerEnd = spacer.offsetHeight;
-    const maxScroll = spacerEnd - window.innerHeight;
-    const clamped = Math.min(Math.max(y, 0), maxScroll);
-    const t = maxScroll > 0 ? clamped / maxScroll : 0;
+    const clamped = Math.min(Math.max(y, 0), cachedMaxScroll);
+    const t = cachedMaxScroll > 0 ? clamped / cachedMaxScroll : 0;
     return Math.round(t * (TOTAL - 1));
   }
 
@@ -61,16 +69,15 @@
   const heroOverlay = document.getElementById("hero-overlay");
 
   function updateCanvasVisibility() {
-    const spacerBottom = spacer.offsetTop + spacer.offsetHeight;
+    const spacerBottom = cachedSpacerTop + cachedSpacerHeight;
     const past = window.scrollY >= spacerBottom;
     canvas.classList.toggle("hidden-canvas", past);
     heroOverlay.classList.toggle("hidden-canvas", past);
   }
 
-  /* ── Fade hero text: fully visible at 0%, gone by 30% ── */
+  /* ── Fade hero text: fully visible at 0%, gone by 45% ── */
   function updateHeroFade(y) {
-    const maxScroll = spacer.offsetHeight - window.innerHeight;
-    const fraction = maxScroll > 0 ? Math.min(1, Math.max(0, y / maxScroll)) : 0;
+    const fraction = cachedMaxScroll > 0 ? Math.min(1, Math.max(0, y / cachedMaxScroll)) : 0;
 
     // Map 0–0.45 → 1–0 opacity (stay visible longer into animation)
     const opacity = fraction < 0.45
@@ -82,8 +89,9 @@
 
   /* ── Animation loop ── */
   function tick() {
-    scrollY += (targetY - scrollY) * 0.10;
-    if (Math.abs(targetY - scrollY) < 0.5) scrollY = targetY;
+    // Smoother lerp factor, increased responsiveness
+    scrollY += (targetY - scrollY) * 0.15;
+    if (Math.abs(targetY - scrollY) < 0.1) scrollY = targetY;
 
     paint(frameAt(scrollY));
     updateCanvasVisibility();
