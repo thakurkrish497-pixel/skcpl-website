@@ -244,33 +244,389 @@ html, body {
 }
 
 /* ══════════════════════════════════════════════ */
-/* SKCPL GROUP COMPANY CARDS                     */
+/* OUR BRANDS SECTION                            */
 /* ══════════════════════════════════════════════ */
-.group-company-card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  padding: 32px 24px;
-  transition: all 0.4s ease;
-  cursor: pointer;
+.brands-section {
+  padding: 100px 0 120px;
+  background: #021936;
+  position: relative;
+  overflow: hidden;
 }
 
-.group-company-card:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(254, 214, 91, 0.3);
-  transform: translateY(-4px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+.brands-section::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(254, 214, 91, 0.06) 0%, transparent 70%);
+  pointer-events: none;
 }
 
-.group-company-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
+.brands-section::after {
+  content: '';
+  position: absolute;
+  bottom: -150px;
+  left: -150px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(180, 199, 237, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Section Header ── */
+.brands-header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 72px;
+  padding: 0 32px;
+  position: relative;
+  z-index: 2;
+}
+
+.brands-tag {
+  display: inline-block;
+  padding: 8px 24px;
   background: rgba(254, 214, 91, 0.1);
+  border: 1px solid rgba(254, 214, 91, 0.2);
+  color: #fed65b;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  border-radius: 40px;
+  margin-bottom: 24px;
+}
+
+.brands-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.brands-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+.brands-divider {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 28px;
+}
+
+.brands-divider span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(254, 214, 91, 0.4);
+}
+
+.brands-divider span:nth-child(2) {
+  width: 32px;
+  border-radius: 4px;
+  background: #fed65b;
+}
+
+/* ── Brands Grid ── */
+.brands-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Brand Card ── */
+.brand-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  min-height: 520px;
+  cursor: pointer;
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+              box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.brand-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(254, 214, 91, 0.15);
+}
+
+/* ── Card Image ── */
+.brand-card-image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.brand-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.brand-card:hover .brand-card-image img {
+  transform: scale(1.08);
+}
+
+.brand-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(2, 25, 54, 0.15) 0%,
+    rgba(2, 25, 54, 0.5) 35%,
+    rgba(2, 25, 54, 0.88) 65%,
+    rgba(2, 25, 54, 0.96) 100%
+  );
+  transition: background 0.5s ease;
+}
+
+.brand-card:hover .brand-card-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(2, 25, 54, 0.1) 0%,
+    rgba(2, 25, 54, 0.4) 30%,
+    rgba(2, 25, 54, 0.85) 60%,
+    rgba(2, 25, 54, 0.95) 100%
+  );
+}
+
+/* ── Badge ── */
+.brand-card-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(254, 214, 91, 0.9);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(254, 214, 91, 0.3);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.brand-card:hover .brand-card-badge {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 6px 24px rgba(254, 214, 91, 0.5);
+}
+
+.badge-years {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  color: #021936;
+  line-height: 1;
+}
+
+.badge-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  color: #021936;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.brand-card-badge.badge-green {
+  background: rgba(34, 197, 94, 0.9);
+  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.3);
+}
+
+.brand-card:hover .brand-card-badge.badge-green {
+  box-shadow: 0 6px 24px rgba(34, 197, 94, 0.5);
+}
+
+.badge-green .badge-years,
+.badge-green .badge-label {
+  color: #fff;
+}
+
+/* ── Card Content ── */
+.brand-card-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Card Icon ── */
+.brand-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(254, 214, 91, 0.15);
+  border: 1px solid rgba(254, 214, 91, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 16px;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.brand-card-icon .material-symbols-outlined {
+  font-size: 26px;
+  color: #fed65b;
+}
+
+.brand-card:hover .brand-card-icon {
+  background: rgba(254, 214, 91, 0.25);
+  transform: scale(1.05);
+}
+
+.brand-card-icon.icon-green {
+  background: rgba(34, 197, 94, 0.15);
+  border-color: rgba(34, 197, 94, 0.25);
+}
+
+.brand-card-icon.icon-green .material-symbols-outlined {
+  color: #22c55e;
+}
+
+.brand-card:hover .brand-card-icon.icon-green {
+  background: rgba(34, 197, 94, 0.25);
+}
+
+/* ── Card Name & Short ── */
+.brand-card-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 6px;
+  line-height: 1.2;
+}
+
+.brand-card-short {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fed65b;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  display: inline-block;
+}
+
+#brand-solar .brand-card-short {
+  color: #22c55e;
+}
+
+/* ── Card Description ── */
+.brand-card-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0 0 18px;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.3s ease;
+}
+
+.brand-card:hover .brand-card-desc {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ── Card Stats ── */
+.brand-card-stats {
+  display: flex;
+  gap: 12px;
   margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.brand-stat {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.brand-card:hover .brand-stat {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.brand-stat .material-symbols-outlined {
+  font-size: 16px;
+  color: rgba(254, 214, 91, 0.8);
+}
+
+.brand-stat span:last-child {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.03em;
+}
+
+#brand-solar .brand-stat .material-symbols-outlined {
+  color: rgba(34, 197, 94, 0.8);
+}
+
+/* ── Card CTA ── */
+.brand-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fed65b;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  transition: gap 0.3s ease, color 0.3s ease;
+}
+
+.brand-card-cta .material-symbols-outlined {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+.brand-card:hover .brand-card-cta {
+  gap: 14px;
+}
+
+.brand-card:hover .brand-card-cta .material-symbols-outlined {
+  transform: translateX(4px);
+}
+
+#brand-solar .brand-card-cta {
+  color: #22c55e;
 }
 
 /* ══════════════════════════════════════════════ */
@@ -291,9 +647,82 @@ html, body {
 }
 
 /* ══════════════════════════════════════════════ */
+/* OUR CLIENTS MARQUEE                           */
+/* ══════════════════════════════════════════════ */
+.clients-marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  width: 100%;
+  padding: 16px 0;
+}
+
+.clients-marquee-container::before,
+.clients-marquee-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 150px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.clients-marquee-container::before {
+  left: 0;
+  background: linear-gradient(to right, #ffffff, transparent);
+}
+
+.clients-marquee-container::after {
+  right: 0;
+  background: linear-gradient(to left, #ffffff, transparent);
+}
+
+.clients-marquee {
+  display: inline-flex;
+  animation: scroll-marquee 40s linear infinite;
+  gap: 40px;
+  align-items: center;
+}
+
+.client-logo {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  color: #021936;
+  opacity: 0.5;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  padding: 0 16px;
+}
+
+.client-logo:hover {
+  opacity: 1;
+  transform: scale(1.05);
+  color: #fed65b;
+}
+
+@keyframes scroll-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ══════════════════════════════════════════════ */
 /* RESPONSIVE                                    */
 /* ══════════════════════════════════════════════ */
 @media (max-width: 1024px) {
+  .brands-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .brands-grid .brand-card:last-child {
+    grid-column: span 2;
+    max-width: 600px;
+    justify-self: center;
+    width: 100%;
+  }
+  .brands-title {
+    font-size: 40px;
+  }
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
     grid-auto-rows: 220px;
@@ -318,6 +747,37 @@ html, body {
   }
   .hero-subheading {
     font-size: 14px;
+  }
+  .brands-section {
+    padding: 64px 0 80px;
+  }
+  .brands-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 16px;
+  }
+  .brands-grid .brand-card:last-child {
+    grid-column: span 1;
+    max-width: none;
+  }
+  .brand-card {
+    min-height: 440px;
+  }
+  .brands-title {
+    font-size: 32px;
+  }
+  .brands-header {
+    margin-bottom: 48px;
+    padding: 0 16px;
+  }
+  .brands-subtitle {
+    font-size: 15px;
+  }
+  .brand-card-name {
+    font-size: 20px;
+  }
+  .brand-card-content {
+    padding: 24px 20px;
   }
   .gallery-grid {
     grid-template-columns: 1fr;
