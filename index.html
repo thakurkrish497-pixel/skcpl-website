@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKCPL Construction | Building Your Vision</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+
+  <!-- Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-variant": "#e1e3e4",
+            "on-primary-fixed-variant": "#344767",
+            "outline-variant": "#c4c6ce",
+            "surface-container": "#edeeef",
+            "error-container": "#ffdad6",
+            "tertiary": "#001b2c",
+            "surface-tint": "#4c5f80",
+            "on-secondary": "#ffffff",
+            "inverse-surface": "#2e3132",
+            "background": "#f8f9fa",
+            "secondary": "#735c00",
+            "on-error": "#ffffff",
+            "secondary-container": "#fed65b",
+            "tertiary-fixed-dim": "#90cdfd",
+            "secondary-fixed-dim": "#e9c349",
+            "inverse-primary": "#b4c7ed",
+            "on-primary-fixed": "#051b39",
+            "tertiary-container": "#00314b",
+            "surface-dim": "#d9dadb",
+            "surface": "#f8f9fa",
+            "on-tertiary-fixed-variant": "#004b70",
+            "primary-fixed": "#d6e3ff",
+            "inverse-on-surface": "#f0f1f2",
+            "on-secondary-container": "#745c00",
+            "surface-container-highest": "#e1e3e4",
+            "primary-fixed-dim": "#b4c7ed",
+            "outline": "#74777e",
+            "surface-bright": "#f8f9fa",
+            "on-error-container": "#93000a",
+            "surface-container-lowest": "#ffffff",
+            "on-primary": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "on-secondary-fixed": "#241a00",
+            "on-surface-variant": "#44474e",
+            "primary": "#021936",
+            "primary-container": "#1a2e4c",
+            "surface-container-low": "#f3f4f5",
+            "on-surface": "#191c1d",
+            "on-secondary-fixed-variant": "#574500",
+            "on-tertiary-fixed": "#001e30",
+            "on-primary-container": "#8396b9",
+            "secondary-fixed": "#ffe088",
+            "surface-container-high": "#e7e8e9",
+            "on-background": "#191c1d",
+            "tertiary-fixed": "#cae6ff",
+            "on-tertiary-container": "#5e9bc9",
+            "error": "#ba1a1a"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "xs": "4px",
+            "margin": "32px",
+            "gutter": "24px",
+            "sm": "12px",
+            "base": "8px",
+            "xl": "80px",
+            "md": "24px",
+            "lg": "48px"
+          },
+          "fontFamily": {
+            "caption": ["Inter"],
+            "body-lg": ["Inter"],
+            "headline-lg": ["Montserrat"],
+            "headline-xl": ["Montserrat"],
+            "headline-md": ["Montserrat"],
+            "body-md": ["Inter"],
+            "label-md": ["Inter"],
+            "headline-lg-mobile": ["Montserrat"]
+          },
+          "fontSize": {
+            "caption": ["12px", {"lineHeight": "1.4", "fontWeight": "400"}],
+            "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+            "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+            "headline-xl": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+            "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+            "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+            "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "fontWeight": "600"}]
+          }
+        },
+      },
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .perspective-grid {
+      background-image: radial-gradient(circle, #02193610 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- TRANSPARENT NAVIGATION BAR                    -->
+  <!-- ══════════════════════════════════════════════ -->
+  <nav class="site-navbar" id="site-navbar">
+    <a href="#animation" class="nav-brand">SKCPL</a>
+    <ul class="nav-menu">
+      <li><a href="#animation">Home</a></li>
+      <li><a href="#expertise">Services</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#group">SKCPL Group</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="loader-ring"></div>
+    <div class="loader-percent" id="loader-percent">0%</div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SCROLL ANIMATION SECTION                      -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div id="scroll-spacer"></div>
+  <div id="animation"></div>
+  <canvas id="canvas"></canvas>
+
+  <!-- Hero text overlay on top of the animation -->
+  <div class="hero-overlay" id="hero-overlay">
+    <h1 class="hero-heading">SKCPL</h1>
+    <p class="hero-subheading">Connecting to Waves</p>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- MAIN CONTENT SECTIONS                         -->
+  <!-- ══════════════════════════════════════════════ -->
+  <main>
+
+    <!-- ────────────────────────────────────────── -->
+    <!-- 1. OUR EXPERTISE                           -->
+    <!-- ────────────────────────────────────────── -->
+    <section class="py-xl bg-surface" id="expertise">
+      <div class="container mx-auto px-margin">
+        <div class="text-center mb-xl">
+          <span class="inline-block py-2 px-5 bg-secondary-fixed/20 text-secondary font-label-md text-label-md mb-md rounded-lg tracking-widest">WHAT WE DO</span>
+          <h3 class="font-headline-xl text-headline-xl text-primary mb-base">Our Expertise</h3>
+          <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Combining decades of structural mastery with innovative architectural approaches across diverse sectors.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+          <!-- Residential -->
+          <div class="group p-lg bg-surface-container-lowest rounded-xl border border-transparent hover:border-secondary-fixed transition-all duration-500 shadow-[0px_10px_30px_rgba(26,46,76,0.05)] hover:shadow-[0px_20px_60px_rgba(26,46,76,0.12)] hover:-translate-y-1">
+            <div class="w-16 h-16 rounded-xl bg-primary/5 flex items-center justify-center mb-md group-hover:bg-primary transition-colors duration-300">
+              <span class="material-symbols-outlined text-primary group-hover:text-white text-4xl" data-icon="home">home</span>
+            </div>
+            <h4 class="font-headline-md text-headline-md text-primary mb-sm">Residential</h4>
+            <p class="font-body-md text-body-md text-on-surface-variant">Ultra-luxury coastal estates and sustainable urban residential complexes built for durability and comfort.</p>
+          </div>
+          <!-- Commercial -->
+          <div class="group p-lg bg-surface-container-lowest rounded-xl border border-transparent hover:border-secondary-fixed transition-all duration-500 shadow-[0px_10px_30px_rgba(26,46,76,0.05)] hover:shadow-[0px_20px_60px_rgba(26,46,76,0.12)] hover:-translate-y-1">
+            <div class="w-16 h-16 rounded-xl bg-primary/5 flex items-center justify-center mb-md group-hover:bg-primary transition-colors duration-300">
+              <span class="material-symbols-outlined text-primary group-hover:text-white text-4xl" data-icon="domain">domain</span>
+            </div>
+            <h4 class="font-headline-md text-headline-md text-primary mb-sm">Commercial</h4>
+            <p class="font-body-md text-body-md text-on-surface-variant">High-performance office environments and retail hubs that integrate structural integrity with business aesthetics.</p>
+          </div>
+          <!-- Infrastructure -->
+          <div class="group p-lg bg-surface-container-lowest rounded-xl border border-transparent hover:border-secondary-fixed transition-all duration-500 shadow-[0px_10px_30px_rgba(26,46,76,0.05)] hover:shadow-[0px_20px_60px_rgba(26,46,76,0.12)] hover:-translate-y-1">
+            <div class="w-16 h-16 rounded-xl bg-primary/5 flex items-center justify-center mb-md group-hover:bg-primary transition-colors duration-300">
+              <span class="material-symbols-outlined text-primary group-hover:text-white text-4xl" data-icon="construction">construction</span>
+            </div>
+            <h4 class="font-headline-md text-headline-md text-primary mb-sm">Infrastructure</h4>
+            <p class="font-body-md text-body-md text-on-surface-variant">Critical civil engineering projects including bridges, maritime structures, and public connectivity hubs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ────────────────────────────────────────── -->
+    <!-- 2. OUR PROJECTS                            -->
+    <!-- ────────────────────────────────────────── -->
+    <section class="py-xl bg-white relative overflow-hidden" id="projects">
+      <div class="perspective-grid absolute inset-0 opacity-40"></div>
+      <div class="container mx-auto px-margin relative z-10">
+        <div class="text-center mb-xl">
+          <span class="inline-block py-2 px-5 bg-primary/5 text-primary font-label-md text-label-md mb-md rounded-lg tracking-widest">PORTFOLIO</span>
+          <h3 class="font-headline-xl text-headline-xl text-primary mb-base">Our Projects</h3>
+          <div class="w-20 h-1 bg-secondary-fixed mx-auto rounded-full"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
+          <!-- Project 1 -->
+          <div class="bg-white rounded-xl overflow-hidden shadow-[0px_10px_30px_rgba(26,46,76,0.05)] group hover:shadow-[0px_20px_60px_rgba(26,46,76,0.15)] transition-all duration-500">
+            <div class="relative h-64 overflow-hidden">
+              <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="The Azure Heights residential tower" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARIhPKi0z9Vt_UzVBtq0MWa09bFjUhsT66pN-jT091QtJL9B3KTXYN-PhuCMapALK8wvfZC05nNwscD1nTsD5CB2ym1QNSbtN2th9p8Q8s9EHpnh1QWSB4zcu7O2oD81aXHREcpZRrdPrBgIPBgtdVgQNpThd0wYp6ausYP8NYRK6OmMjP1IIcVZ9-dGH0e5hIXmog2ioReoOhVdCKnlV2BWI8aNpP_3m-D8VzbhDCp05WfiKcXeV-xtySuasEnq_AeRU_AnK7XD8"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div class="absolute top-4 right-4 bg-secondary-fixed text-on-secondary-fixed px-3 py-1 font-label-md text-label-md rounded-lg text-xs">COMPLETED 2023</div>
+            </div>
+            <div class="p-lg">
+              <h4 class="font-headline-md text-headline-md text-primary mb-base">The Azure Heights</h4>
+              <p class="font-body-md text-body-md text-on-surface-variant mb-md">A 45-story residential masterpiece featuring panoramic ocean views and zero-carbon engineering standards.</p>
+              <a class="inline-flex items-center gap-2 text-primary font-label-md text-label-md group-hover:gap-4 transition-all" href="#">
+                EXPLORE <span class="material-symbols-outlined text-lg">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+          <!-- Project 2 -->
+          <div class="bg-white rounded-xl overflow-hidden shadow-[0px_10px_30px_rgba(26,46,76,0.05)] group hover:shadow-[0px_20px_60px_rgba(26,46,76,0.15)] transition-all duration-500">
+            <div class="relative h-64 overflow-hidden">
+              <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Meridian Business Plaza" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbNLWUXpCzf6x6klZXmuPZwwr-BI20P5JhewyQQrDEMD62DPcNVSX9axtYKUXhGwuj9i2kQ928TsDbDvC4UjzFZsmzzT4GrVy18HrormRyfDq5r0Fp2tlDmstG8DZu9ErlKHrc3IC9jk6MylKEywyQhCluEtWO0mMUzv_uG8yy9IUW-B6NCk37SaNv8rI1_0EJaJBDQV0vO4oEwaix4VewSInsaVEQMIUhwXtv-GeM5uxP-VRqWdc9qJ5FdkGbyBMusJJV8bvG75A"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div class="absolute top-4 right-4 bg-secondary-fixed text-on-secondary-fixed px-3 py-1 font-label-md text-label-md rounded-lg text-xs">PHASE II</div>
+            </div>
+            <div class="p-lg">
+              <h4 class="font-headline-md text-headline-md text-primary mb-base">Meridian Business Plaza</h4>
+              <p class="font-body-md text-body-md text-on-surface-variant mb-md">Redefining corporate environments with integrated smart-building technology and adaptive workspace layouts.</p>
+              <a class="inline-flex items-center gap-2 text-primary font-label-md text-label-md group-hover:gap-4 transition-all" href="#">
+                EXPLORE <span class="material-symbols-outlined text-lg">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+          <!-- Project 3 -->
+          <div class="bg-white rounded-xl overflow-hidden shadow-[0px_10px_30px_rgba(26,46,76,0.05)] group hover:shadow-[0px_20px_60px_rgba(26,46,76,0.15)] transition-all duration-500">
+            <div class="relative h-64 overflow-hidden">
+              <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Coastal Wave Towers" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div class="absolute top-4 right-4 bg-secondary-fixed text-on-secondary-fixed px-3 py-1 font-label-md text-label-md rounded-lg text-xs">IN PROGRESS</div>
+            </div>
+            <div class="p-lg">
+              <h4 class="font-headline-md text-headline-md text-primary mb-base">Coastal Wave Towers</h4>
+              <p class="font-body-md text-body-md text-on-surface-variant mb-md">Twin 32-story beachfront towers with wave-resistant foundations and sustainable marine-grade materials.</p>
+              <a class="inline-flex items-center gap-2 text-primary font-label-md text-label-md group-hover:gap-4 transition-all" href="#">
+                EXPLORE <span class="material-symbols-outlined text-lg">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ────────────────────────────────────────── -->
+    <!-- 3. GALLERY SECTION                         -->
+    <!-- ────────────────────────────────────────── -->
+    <section class="py-xl bg-surface-container-low" id="gallery">
+      <div class="container mx-auto px-margin">
+        <div class="text-center mb-xl">
+          <span class="inline-block py-2 px-5 bg-primary/5 text-primary font-label-md text-label-md mb-md rounded-lg tracking-widest">VISUAL SHOWCASE</span>
+          <h3 class="font-headline-xl text-headline-xl text-primary mb-base">Gallery</h3>
+          <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">A glimpse into our world of precision engineering, craftsmanship, and transformative architecture.</p>
+        </div>
+        <!-- Masonry-style Gallery Grid -->
+        <div class="gallery-grid">
+          <div class="gallery-item gallery-tall group">
+            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80" alt="Construction crane at sunset" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <div class="gallery-overlay">
+              <span class="font-label-md text-label-md text-white tracking-widest">SKYLINE CRANES</span>
+            </div>
+          </div>
+          <div class="gallery-item group">
+            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=80" alt="Modern building facade" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <div class="gallery-overlay">
+              <span class="font-label-md text-label-md text-white tracking-widest">MODERN FACADES</span>
+            </div>
+          </div>
+          <div class="gallery-item group">
+            <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&q=80" alt="Architectural blueprint" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <div class="gallery-overlay">
+              <span class="font-label-md text-label-md text-white tracking-widest">BLUEPRINTS</span>
+            </div>
+          </div>
+          <div class="gallery-item gallery-wide group">
+            <img src="https://images.unsplash.com/photo-1429497419816-9ca5cfb4571a?w=800&q=80" alt="Urban skyline" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <div class="gallery-overlay">
+              <span class="font-label-md text-label-md text-white tracking-widest">URBAN SKYLINE</span>
+            </div>
+          </div>
+          <div class="gallery-item group">
+            <img src="https://images.unsplash.com/photo-1590274853856-f22d5ee3d228?w=600&q=80" alt="Interior design" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <div class="gallery-overlay">
+              <span class="font-label-md text-label-md text-white tracking-widest">INTERIORS</span>
+            </div>
+          </div>
+          <div class="gallery-item group">
+            <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=600&q=80" alt="Structural steel work" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <div class="gallery-overlay">
+              <span class="font-label-md text-label-md text-white tracking-widest">STEEL WORK</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ────────────────────────────────────────── -->
+    <!-- 4. SKCPL GROUP                             -->
+    <!-- ────────────────────────────────────────── -->
+    <section class="py-xl bg-primary relative overflow-hidden" id="group">
+      <div class="container mx-auto px-margin relative z-10">
+        <div class="text-center mb-xl">
+          <span class="inline-block py-2 px-5 bg-white/10 text-secondary-fixed font-label-md text-label-md mb-md rounded-lg tracking-widest">OUR COMPANIES</span>
+          <h3 class="font-headline-xl text-headline-xl text-white mb-base">SKCPL Group</h3>
+          <p class="font-body-lg text-body-lg text-white/60 max-w-2xl mx-auto">A diversified portfolio of companies under the SKCPL umbrella, each excelling in its own domain.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md">
+          <!-- Company 1: Fun and Food Resort -->
+          <div class="group-company-card group">
+            <div class="group-company-icon">
+              <span class="material-symbols-outlined text-4xl text-secondary-fixed" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+            </div>
+            <h4 class="font-headline-md text-headline-md text-white mb-sm">Fun & Food Resort</h4>
+            <p class="font-body-md text-body-md text-white/50 mb-md">Premium hospitality and leisure destination offering world-class dining, entertainment, and vacation experiences.</p>
+            <div class="flex items-center gap-2 text-secondary-fixed font-label-md text-label-md">
+              <span>LEARN MORE</span>
+              <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            </div>
+          </div>
+          <!-- Company 2: SKCPL Infra -->
+          <div class="group-company-card group">
+            <div class="group-company-icon">
+              <span class="material-symbols-outlined text-4xl text-secondary-fixed" style="font-variation-settings: 'FILL' 1;">engineering</span>
+            </div>
+            <h4 class="font-headline-md text-headline-md text-white mb-sm">SKCPL Infra</h4>
+            <p class="font-body-md text-body-md text-white/50 mb-md">Large-scale infrastructure development including highways, bridges, tunnels, and public transit systems.</p>
+            <div class="flex items-center gap-2 text-secondary-fixed font-label-md text-label-md">
+              <span>LEARN MORE</span>
+              <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            </div>
+          </div>
+          <!-- Company 3: SKCPL Realty -->
+          <div class="group-company-card group">
+            <div class="group-company-icon">
+              <span class="material-symbols-outlined text-4xl text-secondary-fixed" style="font-variation-settings: 'FILL' 1;">apartment</span>
+            </div>
+            <h4 class="font-headline-md text-headline-md text-white mb-sm">SKCPL Realty</h4>
+            <p class="font-body-md text-body-md text-white/50 mb-md">Premium real estate development and property management across residential and commercial sectors.</p>
+            <div class="flex items-center gap-2 text-secondary-fixed font-label-md text-label-md">
+              <span>LEARN MORE</span>
+              <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            </div>
+          </div>
+          <!-- Company 4: SKCPL Materials -->
+          <div class="group-company-card group">
+            <div class="group-company-icon">
+              <span class="material-symbols-outlined text-4xl text-secondary-fixed" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+            </div>
+            <h4 class="font-headline-md text-headline-md text-white mb-sm">SKCPL Materials</h4>
+            <p class="font-body-md text-body-md text-white/50 mb-md">Supply chain management for construction materials — cement, steel, aggregates, and specialized composites.</p>
+            <div class="flex items-center gap-2 text-secondary-fixed font-label-md text-label-md">
+              <span>LEARN MORE</span>
+              <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ────────────────────────────────────────── -->
+    <!-- 5. REVIEWS SECTION                         -->
+    <!-- ────────────────────────────────────────── -->
+    <section class="py-xl bg-surface" id="reviews">
+      <div class="container mx-auto px-margin">
+        <div class="text-center mb-xl">
+          <span class="inline-block py-2 px-5 bg-secondary-fixed/20 text-secondary font-label-md text-label-md mb-md rounded-lg tracking-widest">TESTIMONIALS</span>
+          <h3 class="font-headline-xl text-headline-xl text-primary mb-base">What Our Clients Say</h3>
+          <div class="w-20 h-1 bg-secondary-fixed mx-auto rounded-full"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+          <!-- Review 1 -->
+          <div class="review-card">
+            <div class="flex gap-1 mb-md">
+              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+            </div>
+            <blockquote class="font-body-md text-body-md text-on-surface-variant mb-lg italic leading-relaxed">"SKCPL transformed our vision into a structural reality that exceeded every expectation. Their commitment to architectural precision is truly unparalleled."</blockquote>
+            <div class="flex items-center gap-md">
+              <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-secondary-fixed/30">
+                <img class="w-full h-full object-cover" alt="Alexander Vance" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9FCbsSNk_T2ae2q1umMZ1kSDcn2jAqD2wGR2BKcFyAxq51VHsfkp7w7i2o54_YltqBItRLOxH82-Gfv0Y4s-PmVMWymJMxMyBDDnOowRgAMkHAW2tjvzfNrbwjUwcsfpyijH5G2rUuCWLI2MDB0gsh5bijaV_6T3JlBHCAwT2P2AewmfPOY8z9XUmVdlTaexhnGbEjfvNP4IdXHJ46gWNr35LtB53RKLuh3x7WQP4K8Pp1V6HlOyRGWpTgye5L45fJ7iIBpqufJ0"/>
+              </div>
+              <div>
+                <p class="font-label-md text-label-md text-primary font-bold">Alexander Vance</p>
+                <p class="font-caption text-caption text-on-surface-variant">Chief Architect, Meridian Global</p>
+              </div>
+            </div>
+          </div>
+          <!-- Review 2 -->
+          <div class="review-card">
+            <div class="flex gap-1 mb-md">
+              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+            </div>
+            <blockquote class="font-body-md text-body-md text-on-surface-variant mb-lg italic leading-relaxed">"The Fun & Food Resort project was delivered ahead of schedule with exceptional quality. SKCPL's team handled every challenge with professionalism and creativity."</blockquote>
+            <div class="flex items-center gap-md">
+              <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-secondary-fixed/30 bg-primary flex items-center justify-center">
+                <span class="text-white font-bold text-lg">RP</span>
+              </div>
+              <div>
+                <p class="font-label-md text-label-md text-primary font-bold">Rajesh Patel</p>
+                <p class="font-caption text-caption text-on-surface-variant">Director, Horizon Hospitality</p>
+              </div>
+            </div>
+          </div>
+          <!-- Review 3 -->
+          <div class="review-card">
+            <div class="flex gap-1 mb-md">
+              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+            </div>
+            <blockquote class="font-body-md text-body-md text-on-surface-variant mb-lg italic leading-relaxed">"Working with SKCPL on the Coastal Wave Towers was a seamless experience. Their expertise in maritime engineering is second to none in the industry."</blockquote>
+            <div class="flex items-center gap-md">
+              <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-secondary-fixed/30 bg-tertiary-container flex items-center justify-center">
+                <span class="text-white font-bold text-lg">SM</span>
+              </div>
+              <div>
+                <p class="font-label-md text-label-md text-primary font-bold">Sarah Mitchell</p>
+                <p class="font-caption text-caption text-on-surface-variant">CEO, Pacific Development Corp</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ────────────────────────────────────────── -->
+    <!-- 6. CONTACT CTA STRIP                       -->
+    <!-- ────────────────────────────────────────── -->
+    <section class="py-xl bg-primary-container relative" id="contact">
+      <div class="container mx-auto px-margin text-center">
+        <h3 class="font-headline-xl text-headline-xl text-white mb-md">Ready to Build the Future?</h3>
+        <p class="font-body-lg text-body-lg text-white/60 max-w-xl mx-auto mb-lg">Get in touch with our specialist engineering team for your next project.</p>
+        <div class="flex flex-wrap justify-center gap-md">
+          <a href="mailto:info@skcpl.com" class="inline-flex items-center gap-2 bg-secondary-fixed text-on-secondary-fixed px-8 py-4 font-label-md text-label-md rounded-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
+            <span class="material-symbols-outlined text-lg">mail</span> EMAIL US
+          </a>
+          <a href="tel:+911234567890" class="inline-flex items-center gap-2 border border-white/30 text-white px-8 py-4 font-label-md text-label-md rounded-lg hover:bg-white/10 transition-all duration-300">
+            <span class="material-symbols-outlined text-lg">call</span> CALL NOW
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-primary py-lg px-margin">
+    <div class="container mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-md">
+        <div class="flex items-center gap-md">
+          <h2 class="font-headline-md text-headline-md font-bold text-white">SKCPL</h2>
+          <span class="hidden md:inline text-white/20">|</span>
+          <p class="font-caption text-caption text-white/40">Building Your Vision</p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-md">
+          <a class="text-white/50 hover:text-secondary-fixed transition-colors font-caption text-caption" href="#">About</a>
+          <a class="text-white/50 hover:text-secondary-fixed transition-colors font-caption text-caption" href="#">Privacy Policy</a>
+          <a class="text-white/50 hover:text-secondary-fixed transition-colors font-caption text-caption" href="#">Terms of Service</a>
+          <a class="text-white/50 hover:text-secondary-fixed transition-colors font-caption text-caption" href="#">LinkedIn</a>
+          <a class="text-white/50 hover:text-secondary-fixed transition-colors font-caption text-caption" href="#">Instagram</a>
+        </div>
+      </div>
+      <div class="border-t border-white/10 mt-md pt-md text-center">
+        <p class="font-caption text-caption text-white/30">© 2024 SKCPL Construction Pvt. Ltd. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./main.js"></script>
+
+  <!-- Scroll reveal animations -->
+  <script>
+    const observerOptions = { threshold: 0.1 };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('opacity-100', 'translate-y-0');
+          entry.target.classList.remove('opacity-0', 'translate-y-10');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('main section > div').forEach(section => {
+      section.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
+      observer.observe(section);
+    });
+  </script>
+</body>
+</html>

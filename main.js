@@ -1,0 +1,149 @@
+(() => {
+  /* ── Config ── */
+  const TOTAL = 157;
+  const src = (i) => `/public/frames/ezgif-frame-${String(i).padStart(3, "0")}.jpg`;
+
+  /* ── DOM ── */
+  const canvas = document.getElementById("canvas");
+  const ctx = canvas.getContext("2d");
+  const spacer = document.getElementById("scroll-spacer");
+  const preloader = document.getElementById("preloader");
+  const pctEl = document.getElementById("loader-percent");
+
+  /* ── State ── */
+  const imgs = new Array(TOTAL);
+  let loaded = 0;
+  let drawn = -1;
+  let scrollY = 0;
+  let targetY = 0;
+
+  /* ── Resize (retina-aware) ── */
+  function resize() {
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
+    drawn = -1;
+  }
+
+  /* ── Draw one frame (contain-fit, centred) ── */
+  function paint(idx) {
+    if (idx === drawn) return;
+    drawn = idx;
+
+    const img = imgs[idx];
+    if (!img || !img.complete) return;
+
+    const cw = canvas.width, ch = canvas.height;
+    const iw = img.naturalWidth, ih = img.naturalHeight;
+
+    const s = Math.min(cw / iw, ch / ih);
+    const dw = iw * s, dh = ih * s;
+    const dx = (cw - dw) / 2;
+    const dy = (ch - dh) / 2;
+
+    ctx.clearRect(0, 0, cw, ch);
+    ctx.drawImage(img, dx, dy, dw, dh);
+  }
+
+  /* ── Scroll → frame index (only within the spacer zone) ── */
+  function frameAt(y) {
+    const spacerEnd = spacer.offsetHeight;
+    const maxScroll = spacerEnd - window.innerHeight;
+    const clamped = Math.min(Math.max(y, 0), maxScroll);
+    const t = maxScroll > 0 ? clamped / maxScroll : 0;
+    return Math.round(t * (TOTAL - 1));
+  }
+
+  /* ── Toggle canvas & hero visibility ── */
+  const heroOverlay = document.getElementById("hero-overlay");
+
+  function updateCanvasVisibility() {
+    const spacerBottom = spacer.offsetTop + spacer.offsetHeight;
+    const past = window.scrollY >= spacerBottom;
+    canvas.classList.toggle("hidden-canvas", past);
+    heroOverlay.classList.toggle("hidden-canvas", past);
+  }
+
+  /* ── Fade hero text: fully visible at 0%, gone by 30% ── */
+  function updateHeroFade(y) {
+    const maxScroll = spacer.offsetHeight - window.innerHeight;
+    const fraction = maxScroll > 0 ? Math.min(1, Math.max(0, y / maxScroll)) : 0;
+
+    // Map 0–0.30 → 1–0 opacity
+    const opacity = fraction < 0.30
+      ? 1 - (fraction / 0.30)
+      : 0;
+
+    heroOverlay.style.opacity = opacity;
+  }
+
+  /* ── Animation loop ── */
+  function tick() {
+    scrollY += (targetY - scrollY) * 0.12;
+    if (Math.abs(targetY - scrollY) < 0.5) scrollY = targetY;
+
+    paint(frameAt(scrollY));
+    updateCanvasVisibility();
+    updateHeroFade(scrollY);
+    requestAnimationFrame(tick);
+  }
+
+  /* ── Navbar scroll state ── */
+  const navbar = document.getElementById("site-navbar");
+  function updateNavbar() {
+    if (window.scrollY > 80) {
+      navbar.classList.add("scrolled");
+    } else {
+      navbar.classList.remove("scrolled");
+    }
+  }
+
+  /* ── Listen ── */
+  window.addEventListener("scroll", () => {
+    targetY = window.scrollY;
+    updateNavbar();
+  }, { passive: true });
+  window.addEventListener("resize", resize);
+
+  /* ── Preload all frames ── */
+  function preload() {
+    return new Promise((resolve) => {
+      for (let i = 0; i < TOTAL; i++) {
+        const img = new Image();
+        img.decoding = "async";
+        img.src = src(i + 1);
+
+        const done = () => {
+          loaded++;
+          pctEl.textContent = `${Math.round((loaded / TOTAL) * 100)}%`;
+          if (loaded === TOTAL) resolve();
+        };
+        img.onload = done;
+        img.onerror = done;
+        imgs[i] = img;
+      }
+    });
+  }
+
+  /* ── Boot ── */
+  async function init() {
+    resize();
+    await preload();
+
+    await Promise.all(
+      imgs.filter(i => i && i.complete && i.naturalWidth > 0)
+        .map(i => i.decode().catch(() => { }))
+    );
+
+    preloader.classList.add("done");
+
+    targetY = window.scrollY;
+    scrollY = targetY;
+    paint(frameAt(scrollY));
+    requestAnimationFrame(tick);
+  }
+
+  init();
+})();
