@@ -70,6 +70,16 @@
 
   function updateCanvasVisibility() {
     const spacerBottom = cachedSpacerTop + cachedSpacerHeight;
+    const startFadeY = spacerBottom - window.innerHeight;
+
+    // Smoothly fade out the canvas as the main content slides up
+    if (scrollY >= startFadeY && startFadeY > 0) {
+      const fadeFraction = Math.min(1, (scrollY - startFadeY) / window.innerHeight);
+      canvas.style.opacity = 1 - fadeFraction;
+    } else {
+      canvas.style.opacity = 1;
+    }
+
     const past = window.scrollY >= spacerBottom;
     canvas.classList.toggle("hidden-canvas", past);
     heroOverlay.classList.toggle("hidden-canvas", past);
