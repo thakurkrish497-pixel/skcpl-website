@@ -27,7 +27,7 @@
     drawn = -1;
   }
 
-  /* ── Draw one frame (contain-fit, centred) ── */
+  /* ── Draw one frame (cover-fit, centred — fills full viewport, no grey bars) ── */
   function paint(idx) {
     if (idx === drawn) return;
     drawn = idx;
@@ -38,7 +38,8 @@
     const cw = canvas.width, ch = canvas.height;
     const iw = img.naturalWidth, ih = img.naturalHeight;
 
-    const s = Math.min(cw / iw, ch / ih);
+    // cover: scale so the image fills the canvas entirely (crops if needed)
+    const s = Math.max(cw / iw, ch / ih);
     const dw = iw * s, dh = ih * s;
     const dx = (cw - dw) / 2;
     const dy = (ch - dh) / 2;
@@ -71,9 +72,9 @@
     const maxScroll = spacer.offsetHeight - window.innerHeight;
     const fraction = maxScroll > 0 ? Math.min(1, Math.max(0, y / maxScroll)) : 0;
 
-    // Map 0–0.30 → 1–0 opacity
-    const opacity = fraction < 0.30
-      ? 1 - (fraction / 0.30)
+    // Map 0–0.45 → 1–0 opacity (stay visible longer into animation)
+    const opacity = fraction < 0.45
+      ? 1 - (fraction / 0.45)
       : 0;
 
     heroOverlay.style.opacity = opacity;
@@ -81,7 +82,7 @@
 
   /* ── Animation loop ── */
   function tick() {
-    scrollY += (targetY - scrollY) * 0.12;
+    scrollY += (targetY - scrollY) * 0.10;
     if (Math.abs(targetY - scrollY) < 0.5) scrollY = targetY;
 
     paint(frameAt(scrollY));
@@ -101,9 +102,18 @@
   }
 
   /* ── Listen ── */
+  const scrollIndicator = document.getElementById('scroll-indicator');
+  let hasScrolled = false;
+
   window.addEventListener("scroll", () => {
     targetY = window.scrollY;
     updateNavbar();
+    // Hide scroll indicator once user starts scrolling
+    if (!hasScrolled && window.scrollY > 20 && scrollIndicator) {
+      hasScrolled = true;
+      scrollIndicator.style.opacity = '0';
+      scrollIndicator.style.transition = 'opacity 0.5s ease';
+    }
   }, { passive: true });
   window.addEventListener("resize", resize);
 

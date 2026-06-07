@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fun & Food Resort N Water Park | SKCPL Group</title>
+  <title>Fun N Food Resort &amp; Water Park | SKCPL Group, Indore</title>
+  <meta name="description" content="Fun N Food Family Restaurant Resort &amp; Water Park, Indore — India's premier family destination with swimming pool, rain dance, marriage gardens, banquet halls, sports facilities and more. A SKCPL Group property.">
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
@@ -112,10 +113,75 @@
       font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
     }
     .resort-hero {
-      background-image: linear-gradient(rgba(2, 25, 54, 0.7), rgba(2, 25, 54, 0.3)), url('./public/resort/resort-2.jpg');
+      background-image: linear-gradient(rgba(2, 25, 54, 0.65), rgba(2, 25, 54, 0.35)), url('./public/resort/resort-2.jpg');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
+    }
+
+    /* ── Activity Cards ── */
+    .activity-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 28px;
+      border: 1px solid rgba(2,25,54,0.06);
+      box-shadow: 0 4px 24px rgba(2,25,54,0.06);
+      transition: all 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .activity-card:hover {
+      box-shadow: 0 16px 48px rgba(2,25,54,0.12);
+      transform: translateY(-4px);
+      border-color: #ffe088;
+    }
+
+    /* ── Pricing Cards ── */
+    .pricing-card {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(2,25,54,0.1);
+      transition: all 0.4s ease;
+    }
+    .pricing-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 64px rgba(2,25,54,0.18);
+    }
+
+    /* ── Mobile Hamburger ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    @media (max-width: 900px) {
+      .hamburger { display: flex; }
+      .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: #021936;
+        flex-direction: column;
+        padding: 80px 32px 32px;
+        gap: 2rem;
+        transition: right 0.4s ease;
+        z-index: 200;
+        overflow-y: auto;
+      }
+      .nav-menu.open { right: 0; }
     }
   </style>
 </head>
@@ -125,33 +191,72 @@
   <!-- NAVIGATION BAR                                -->
   <!-- ══════════════════════════════════════════════ -->
   <nav class="site-navbar scrolled" style="background: #021936;" id="site-navbar">
-    <a href="index.html#animation" class="nav-brand">SKCPL</a>
-    <ul class="nav-menu">
-      <li><a href="index.html#animation">Home</a></li>
-      <li><a href="index.html#about">About Us</a></li>
+    <a href="index.html" class="nav-brand">SKCPL</a>
+    <ul class="nav-menu" id="nav-menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#about">About SKCPL</a></li>
       <li><a href="index.html#expertise">Services</a></li>
       <li><a href="index.html#projects">Projects</a></li>
       <li><a href="index.html#gallery">Gallery</a></li>
       <li><a href="index.html#group">SKCPL Group</a></li>
-      <li><a href="#contact" class="bg-secondary-fixed text-on-secondary-fixed px-4 py-2 rounded-lg font-bold hover:shadow-lg transition-all ml-2">Enquiry</a></li>
+      <li><a href="#contact" class="bg-secondary-fixed text-on-secondary-fixed px-4 py-2 rounded-lg font-bold hover:shadow-lg transition-all ml-2">Book Now</a></li>
     </ul>
+    <div class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </div>
   </nav>
 
   <!-- ══════════════════════════════════════════════ -->
   <!-- HERO SECTION                                  -->
   <!-- ══════════════════════════════════════════════ -->
-  <header class="resort-hero h-screen flex items-center justify-center text-center px-margin pt-20">
+  <header class="resort-hero h-screen flex items-center justify-center text-center px-margin pt-20" id="top">
     <div>
       <span class="inline-block py-2 px-5 bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md mb-md rounded-lg tracking-widest">A SKCPL GROUP PROPERTY</span>
-      <h1 class="font-headline-xl text-headline-xl text-white mb-base lg:text-7xl">Fun & Food Resort</h1>
-      <p class="font-body-lg text-body-lg text-white/90 max-w-2xl mx-auto mb-lg">Experience ultimate leisure and hospitality. From thrilling water parks to elegant marriage gardens, create unforgettable memories with us.</p>
-      <a href="#contact" class="inline-flex items-center gap-2 bg-secondary-fixed text-on-secondary-fixed px-8 py-4 font-label-md text-label-md rounded-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
-        <span class="material-symbols-outlined text-lg">calendar_month</span> BOOK NOW
-      </a>
+      <h1 class="font-headline-xl text-headline-xl text-white mb-base lg:text-7xl">Fun N Food Resort</h1>
+      <p class="font-body-lg text-body-lg text-white/90 max-w-2xl mx-auto mb-sm">Family Restaurant, Resort &amp; Water Park</p>
+      <p class="font-body-md text-body-md text-white/70 max-w-xl mx-auto mb-lg">Khandwa Road, near BSNL Exchange, Tejaji Nagar, Indore, Madhya Pradesh</p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="#contact" class="inline-flex items-center gap-2 bg-secondary-fixed text-on-secondary-fixed px-8 py-4 font-label-md text-label-md rounded-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
+          <span class="material-symbols-outlined text-lg">calendar_month</span> BOOK NOW
+        </a>
+        <a href="#facilities" class="inline-flex items-center gap-2 bg-white/10 text-white border border-white/30 px-8 py-4 font-label-md text-label-md rounded-lg hover:bg-white/20 transition-all duration-300 backdrop-blur-sm">
+          <span class="material-symbols-outlined text-lg">explore</span> EXPLORE
+        </a>
+      </div>
     </div>
   </header>
 
   <main>
+    <!-- ────────────────────────────────────────── -->
+    <!-- QUICK FACTS STRIP                          -->
+    <!-- ────────────────────────────────────────── -->
+    <div class="bg-secondary-fixed py-4">
+      <div class="container mx-auto px-margin">
+        <div class="flex flex-wrap justify-center gap-6 md:gap-12">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-on-secondary-fixed" style="font-variation-settings: 'FILL' 1;">pool</span>
+            <span class="font-label-md text-label-md text-on-secondary-fixed">Swimming Pool</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-on-secondary-fixed" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+            <span class="font-label-md text-label-md text-on-secondary-fixed">Rain Dance</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-on-secondary-fixed" style="font-variation-settings: 'FILL' 1;">celebration</span>
+            <span class="font-label-md text-label-md text-on-secondary-fixed">Marriage Garden</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-on-secondary-fixed" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+            <span class="font-label-md text-label-md text-on-secondary-fixed">Restaurant</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-on-secondary-fixed" style="font-variation-settings: 'FILL' 1;">sports_cricket</span>
+            <span class="font-label-md text-label-md text-on-secondary-fixed">Sports Grounds</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- ────────────────────────────────────────── -->
     <!-- ABOUT THE RESORT                           -->
     <!-- ────────────────────────────────────────── -->
@@ -160,13 +265,25 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-xl items-center">
           <div>
             <span class="inline-block py-2 px-5 bg-primary/5 text-primary font-label-md text-label-md mb-md rounded-lg tracking-widest">ABOUT US</span>
-            <h3 class="font-headline-xl text-headline-xl text-primary mb-base">Your Perfect Getaway</h3>
-            <p class="font-body-lg text-body-lg text-on-surface-variant mb-md">Located near Tejaji Nagar, Khandwa Road, Fun & Food Resort N Water Park is Indore's premier destination for leisure, celebrations, and corporate events.</p>
-            <p class="font-body-md text-body-md text-on-surface-variant mb-md">As a proud member of the SKCPL Group, we bring over a decade of hospitality excellence to every guest. Whether you're looking for a thrilling day at the water park, a luxurious stay, or the perfect venue for your dream wedding, our resort offers world-class amenities nestled in a serene environment.</p>
+            <h2 class="font-headline-xl text-headline-xl text-primary mb-base">Your Perfect Getaway in Indore</h2>
+            <p class="font-body-lg text-body-lg text-on-surface-variant mb-md">Located near BSNL Exchange, Tejaji Nagar on Khandwa Road, Fun N Food Family Restaurant Resort &amp; Water Park is Indore's premier destination for leisure, celebrations, and corporate events.</p>
+            <p class="font-body-md text-body-md text-on-surface-variant mb-md">As a proud member of the SKCPL Group, we bring over a decade of hospitality excellence to every guest. Whether you're looking for a thrilling water park experience, a luxurious venue for your dream wedding, or an exciting family day out — Fun N Food has it all.</p>
+            <p class="font-body-md text-body-md text-on-surface-variant mb-lg">Fun N Food offers Indian families fun-filled and affordable vacations — featuring a beautiful swimming pool, rain dance area, cricket and football grounds, badminton court, indoor games (snooker, billiards, carom, chess), spacious marriage garden, and a multi-cuisine restaurant.</p>
+            <div class="flex flex-wrap gap-4">
+              <a href="#contact" class="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 font-label-md text-label-md rounded-lg hover:bg-primary-container transition-colors">
+                <span class="material-symbols-outlined">call</span>Contact Us
+              </a>
+              <a href="#facilities" class="inline-flex items-center gap-2 border border-primary text-primary px-6 py-3 font-label-md text-label-md rounded-lg hover:bg-primary hover:text-white transition-colors">
+                <span class="material-symbols-outlined">view_list</span>All Facilities
+              </a>
+            </div>
           </div>
           <div class="grid grid-cols-2 gap-4">
-            <img src="./public/brands/fun-food-resort.png" alt="Resort Pool" class="rounded-xl w-full h-full object-cover shadow-lg">
-            <img src="./public/resort/resort-6.jpg" alt="Resort Architecture" class="rounded-xl w-full h-full object-cover shadow-lg mt-8">
+            <img src="./public/brands/fun-food-resort.png" 
+                 alt="Fun N Food Resort Pool" class="rounded-xl w-full h-full object-cover shadow-lg">
+            <img src="http://skumarcreation.com/wp-content/flagallery/fun-and-food/webview/img_0680.jpg" 
+                 onerror="this.src='./public/resort/resort-6.jpg'" 
+                 alt="Resort Architecture &amp; Landscape" class="rounded-xl w-full h-full object-cover shadow-lg mt-8">
           </div>
         </div>
       </div>
@@ -179,33 +296,81 @@
       <div class="container mx-auto px-margin">
         <div class="text-center mb-xl">
           <span class="inline-block py-2 px-5 bg-secondary-fixed/20 text-secondary font-label-md text-label-md mb-md rounded-lg tracking-widest">AMENITIES</span>
-          <h3 class="font-headline-xl text-headline-xl text-primary mb-base">World-Class Facilities</h3>
-          <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Everything you need for an unforgettable experience.</p>
+          <h2 class="font-headline-xl text-headline-xl text-primary mb-base">World-Class Facilities</h2>
+          <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Everything you need for an unforgettable experience — all under one roof.</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
-          <!-- Water Park -->
-          <div class="group p-lg bg-surface-container-lowest rounded-xl border border-transparent hover:border-secondary-fixed transition-all duration-500 shadow-md hover:-translate-y-1">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md">
+          <!-- Water Activities -->
+          <div class="activity-card group">
             <div class="w-16 h-16 rounded-xl bg-primary/5 flex items-center justify-center mb-md group-hover:bg-primary transition-colors duration-300">
-              <span class="material-symbols-outlined text-primary group-hover:text-white text-4xl" data-icon="pool">pool</span>
+              <span class="material-symbols-outlined text-primary group-hover:text-white text-4xl" style="font-variation-settings: 'FILL' 1;">pool</span>
             </div>
-            <h4 class="font-headline-md text-headline-md text-primary mb-sm">Water Park & Pools</h4>
-            <p class="font-body-md text-body-md text-on-surface-variant">Dive into excitement with our massive water slides, wave pools, and dedicated safe swimming zones for kids.</p>
+            <h3 class="font-headline-md text-headline-md text-primary mb-sm">Swimming Pool</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">Dive into our pristine swimming pool — designed for both adults and children, with professional lifeguards on duty for a safe and enjoyable experience.</p>
           </div>
-          <!-- Banquet Hall -->
-          <div class="group p-lg bg-surface-container-lowest rounded-xl border border-transparent hover:border-secondary-fixed transition-all duration-500 shadow-md hover:-translate-y-1">
+          <!-- Rain Dance -->
+          <div class="activity-card group">
             <div class="w-16 h-16 rounded-xl bg-primary/5 flex items-center justify-center mb-md group-hover:bg-primary transition-colors duration-300">
-              <span class="material-symbols-outlined text-primary group-hover:text-white text-4xl" data-icon="celebration">celebration</span>
+              <span class="material-symbols-outlined text-primary group-hover:text-white text-4xl" style="font-variation-settings: 'FILL' 1;">water_drop</span>
             </div>
-            <h4 class="font-headline-md text-headline-md text-primary mb-sm">Marriage Gardens & Banquets</h4>
-            <p class="font-body-md text-body-md text-on-surface-variant">Host your dream wedding or corporate event in our sprawling green gardens and elegant, fully AC banquet halls.</p>
+            <h3 class="font-headline-md text-headline-md text-primary mb-sm">Rain Dance Area</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">Experience the joy of rain dancing with our dedicated rain dance zone — complete with music, lights, and high-energy entertainment for all age groups.</p>
           </div>
-          <!-- In-house Restaurant -->
-          <div class="group p-lg bg-surface-container-lowest rounded-xl border border-transparent hover:border-secondary-fixed transition-all duration-500 shadow-md hover:-translate-y-1">
+          <!-- Marriage Garden -->
+          <div class="activity-card group">
             <div class="w-16 h-16 rounded-xl bg-primary/5 flex items-center justify-center mb-md group-hover:bg-primary transition-colors duration-300">
-              <span class="material-symbols-outlined text-primary group-hover:text-white text-4xl" data-icon="restaurant">restaurant</span>
+              <span class="material-symbols-outlined text-primary group-hover:text-white text-4xl" style="font-variation-settings: 'FILL' 1;">celebration</span>
             </div>
-            <h4 class="font-headline-md text-headline-md text-primary mb-sm">In-House Restaurant</h4>
-            <p class="font-body-md text-body-md text-on-surface-variant">Savor multi-cuisine delicacies prepared by our expert chefs, ensuring a delightful culinary experience for every guest.</p>
+            <h3 class="font-headline-md text-headline-md text-primary mb-sm">Marriage Gardens &amp; Banquets</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">Host your dream wedding or reception in our sprawling lush green gardens. Our AC banquet halls accommodate large gatherings with impeccable decoration and service.</p>
+          </div>
+          <!-- Restaurant -->
+          <div class="activity-card group">
+            <div class="w-16 h-16 rounded-xl bg-primary/5 flex items-center justify-center mb-md group-hover:bg-primary transition-colors duration-300">
+              <span class="material-symbols-outlined text-primary group-hover:text-white text-4xl" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+            </div>
+            <h3 class="font-headline-md text-headline-md text-primary mb-sm">In-House Restaurant</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">Savor multi-cuisine delicacies prepared by our expert chefs. From traditional Indian food to international cuisines — a delightful culinary experience for every guest.</p>
+          </div>
+          <!-- Cricket & Sports -->
+          <div class="activity-card group">
+            <div class="w-16 h-16 rounded-xl bg-primary/5 flex items-center justify-center mb-md group-hover:bg-primary transition-colors duration-300">
+              <span class="material-symbols-outlined text-primary group-hover:text-white text-4xl" style="font-variation-settings: 'FILL' 1;">sports_cricket</span>
+            </div>
+            <h3 class="font-headline-md text-headline-md text-primary mb-sm">Sports Grounds</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">Play cricket and football on our open grounds, or challenge your skills on our badminton court. Complete sports facilities for the entire family.</p>
+          </div>
+          <!-- Indoor Games -->
+          <div class="activity-card group">
+            <div class="w-16 h-16 rounded-xl bg-primary/5 flex items-center justify-center mb-md group-hover:bg-primary transition-colors duration-300">
+              <span class="material-symbols-outlined text-primary group-hover:text-white text-4xl" style="font-variation-settings: 'FILL' 1;">sports_esports</span>
+            </div>
+            <h3 class="font-headline-md text-headline-md text-primary mb-sm">Indoor Games Zone</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">Enjoy a variety of indoor recreational activities including Snooker, Billiards, Carom, Chess, and more — perfect for socializing with family and friends.</p>
+          </div>
+          <!-- Kids Play Area -->
+          <div class="activity-card group">
+            <div class="w-16 h-16 rounded-xl bg-primary/5 flex items-center justify-center mb-md group-hover:bg-primary transition-colors duration-300">
+              <span class="material-symbols-outlined text-primary group-hover:text-white text-4xl" style="font-variation-settings: 'FILL' 1;">child_care</span>
+            </div>
+            <h3 class="font-headline-md text-headline-md text-primary mb-sm">Kids' Play Area</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">A dedicated, safe play zone for children with fun rides, slides, and interactive games. Let your little ones have the time of their lives!</p>
+          </div>
+          <!-- Corporate Events -->
+          <div class="activity-card group">
+            <div class="w-16 h-16 rounded-xl bg-primary/5 flex items-center justify-center mb-md group-hover:bg-primary transition-colors duration-300">
+              <span class="material-symbols-outlined text-primary group-hover:text-white text-4xl" style="font-variation-settings: 'FILL' 1;">corporate_fare</span>
+            </div>
+            <h3 class="font-headline-md text-headline-md text-primary mb-sm">Corporate Events</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">Our resort is an ideal venue for corporate events, team outings, annual gatherings, and conferences — with full event management and catering support.</p>
+          </div>
+          <!-- Parking -->
+          <div class="activity-card group">
+            <div class="w-16 h-16 rounded-xl bg-primary/5 flex items-center justify-center mb-md group-hover:bg-primary transition-colors duration-300">
+              <span class="material-symbols-outlined text-primary group-hover:text-white text-4xl" style="font-variation-settings: 'FILL' 1;">local_parking</span>
+            </div>
+            <h3 class="font-headline-md text-headline-md text-primary mb-sm">Ample Parking</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">Large, secure parking space for cars, buses and two-wheelers — ensuring hassle-free access for individuals and large groups alike.</p>
           </div>
         </div>
       </div>
@@ -218,10 +383,10 @@
       <div class="container mx-auto px-margin">
         <div class="text-center mb-xl">
           <span class="inline-block py-2 px-5 bg-primary/5 text-primary font-label-md text-label-md mb-md rounded-lg tracking-widest">GOOGLE REVIEWS</span>
-          <h3 class="font-headline-xl text-headline-xl text-primary mb-base">What Our Guests Say</h3>
+          <h2 class="font-headline-xl text-headline-xl text-primary mb-base">What Our Guests Say</h2>
           <div class="w-20 h-1 bg-secondary-fixed mx-auto rounded-full"></div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
           <div class="bg-surface-container-low p-8 rounded-xl border border-outline-variant/30 relative">
             <span class="material-symbols-outlined absolute top-6 right-6 text-4xl text-primary/10">format_quote</span>
             <div class="flex gap-1 mb-4">
@@ -243,8 +408,20 @@
               <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
               <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star_half</span>
             </div>
-            <p class="font-body-lg text-body-lg text-on-surface-variant italic mb-6">"Attended a wedding reception at their marriage garden. The arrangement, decoration, and space were fantastic. The staff was very cooperative. A great venue for large gatherings."</p>
+            <p class="font-body-lg text-body-lg text-on-surface-variant italic mb-6">"Attended a wedding reception at their marriage garden. The arrangement, decoration, and space were fantastic. The staff was very cooperative. A great venue for large gatherings in Indore!"</p>
             <p class="font-label-md text-label-md text-primary font-bold">— Priya M.</p>
+          </div>
+          <div class="bg-surface-container-low p-8 rounded-xl border border-outline-variant/30 relative">
+            <span class="material-symbols-outlined absolute top-6 right-6 text-4xl text-primary/10">format_quote</span>
+            <div class="flex gap-1 mb-4">
+              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+            </div>
+            <p class="font-body-lg text-body-lg text-on-surface-variant italic mb-6">"Came here for a corporate team outing. The snooker, indoor games and sports grounds kept everyone engaged! The management was very helpful with organizing the event. Will definitely return!"</p>
+            <p class="font-label-md text-label-md text-primary font-bold">— Amit K.</p>
           </div>
         </div>
       </div>
@@ -257,14 +434,45 @@
       <div class="container mx-auto px-margin">
         <div class="text-center mb-xl">
           <span class="inline-block py-2 px-5 bg-secondary-fixed/20 text-secondary font-label-md text-label-md mb-md rounded-lg tracking-widest">MOMENTS</span>
-          <h3 class="font-headline-xl text-headline-xl text-primary mb-base">Resort Gallery</h3>
+          <h2 class="font-headline-xl text-headline-xl text-primary mb-base">Resort Gallery</h2>
+          <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Glimpses from Fun N Food Resort — fun, celebrations, and cherished family moments.</p>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          <img src="./public/resort/resort-2.jpg" alt="Resort Architecture" class="rounded-xl w-full h-64 object-cover shadow-sm hover:scale-[1.02] transition-transform">
-          <img src="./public/brands/fun-food-resort.png" alt="Resort Pool" class="rounded-xl w-full h-64 object-cover shadow-sm hover:scale-[1.02] transition-transform">
-          <img src="./public/resort/resort-3.jpg" alt="Banquet Hall Setup" class="rounded-xl w-full h-64 object-cover shadow-sm hover:scale-[1.02] transition-transform">
-          <img src="./public/resort/resort-4.jpg" alt="Kids Play Area" class="rounded-xl w-full h-64 object-cover shadow-sm hover:scale-[1.02] transition-transform">
-          <img src="./public/resort/resort-6.jpg" alt="Water Park Slides" class="rounded-xl w-full h-64 object-cover shadow-sm hover:scale-[1.02] transition-transform sm:col-span-2">
+        <div class="gallery-grid">
+          <div class="gallery-item gallery-tall group">
+            <img src="http://skumarcreation.com/wp-content/flagallery/fun-and-food/webview/dsc_6647.jpg" 
+                 onerror="this.src='./public/resort/resort-2.jpg'" 
+                 alt="Resort Overview" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <div class="gallery-overlay"><span class="font-label-md text-label-md text-white tracking-widest">RESORT</span></div>
+          </div>
+          <div class="gallery-item group">
+            <img src="http://skumarcreation.com/wp-content/flagallery/fun-and-food/webview/dsc_6962.jpg" 
+                 onerror="this.src='./public/resort/resort-3.jpg'" 
+                 alt="Family Activities" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <div class="gallery-overlay"><span class="font-label-md text-label-md text-white tracking-widest">ACTIVITIES</span></div>
+          </div>
+          <div class="gallery-item group">
+            <img src="http://skumarcreation.com/wp-content/flagallery/fun-and-food/webview/dsc_8310.jpg" 
+                 onerror="this.src='./public/resort/resort-4.jpg'" 
+                 alt="Pool Area" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <div class="gallery-overlay"><span class="font-label-md text-label-md text-white tracking-widest">POOL</span></div>
+          </div>
+          <div class="gallery-item gallery-wide group">
+            <img src="http://skumarcreation.com/wp-content/flagallery/fun-and-food/webview/img_0680.jpg" 
+                 onerror="this.src='./public/resort/resort-6.jpg'" 
+                 alt="Resort Landscape" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <div class="gallery-overlay"><span class="font-label-md text-label-md text-white tracking-widest">LANDSCAPE</span></div>
+          </div>
+          <div class="gallery-item group">
+            <img src="./public/brands/fun-food-resort.png" 
+                 alt="Fun N Food Logo &amp; Brand" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <div class="gallery-overlay"><span class="font-label-md text-label-md text-white tracking-widest">BRAND</span></div>
+          </div>
+          <div class="gallery-item group">
+            <img src="http://skumarcreation.com/wp-content/flagallery/fun-and-food/webview/dsc_6862.jpg" 
+                 onerror="this.src='./public/resort/resort-2.jpg'" 
+                 alt="Resort Events" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <div class="gallery-overlay"><span class="font-label-md text-label-md text-white tracking-widest">EVENTS</span></div>
+          </div>
         </div>
       </div>
     </section>
@@ -276,12 +484,12 @@
       <div class="container mx-auto px-margin">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-xl items-center">
           <div>
-            <h3 class="font-headline-xl text-headline-xl text-white mb-md">Book Your Experience</h3>
-            <p class="font-body-lg text-body-lg text-white/60 mb-lg max-w-md">Plan your visit, book a room, or inquire about our banquet halls for your next event.</p>
+            <h2 class="font-headline-xl text-headline-xl text-white mb-md">Book Your Experience</h2>
+            <p class="font-body-lg text-body-lg text-white/60 mb-lg max-w-md">Plan your visit, book a venue for your wedding, or inquire about our corporate packages. We'll get back to you promptly.</p>
             
             <div class="flex flex-col gap-6 mb-8">
-              <div class="flex items-center gap-4 text-white">
-                <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center border border-white/20">
+              <div class="flex items-start gap-4 text-white">
+                <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center border border-white/20 flex-shrink-0">
                   <span class="material-symbols-outlined text-secondary-fixed">location_on</span>
                 </div>
                 <div>
@@ -290,7 +498,7 @@
                 </div>
               </div>
               <div class="flex items-center gap-4 text-white">
-                <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center border border-white/20">
+                <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center border border-white/20 flex-shrink-0">
                   <span class="material-symbols-outlined text-secondary-fixed">call</span>
                 </div>
                 <div>
@@ -298,12 +506,33 @@
                   <a href="tel:+917314938668" class="font-body-md text-body-md hover:text-secondary-fixed transition-colors">0731-4938668</a>
                 </div>
               </div>
+              <div class="flex items-center gap-4 text-white">
+                <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center border border-white/20 flex-shrink-0">
+                  <span class="material-symbols-outlined text-secondary-fixed">mail</span>
+                </div>
+                <div>
+                  <p class="font-label-md text-label-md text-white/60">Email</p>
+                  <a href="mailto:s.kumarcreation@yahoo.com" class="font-body-md text-body-md hover:text-secondary-fixed transition-colors">s.kumarcreation@yahoo.com</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Event Types -->
+            <div>
+              <p class="font-label-md text-label-md text-white/60 mb-3">We host:</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="bg-white/10 border border-white/20 text-white px-3 py-1 rounded-lg text-sm">Weddings &amp; Receptions</span>
+                <span class="bg-white/10 border border-white/20 text-white px-3 py-1 rounded-lg text-sm">Birthday Parties</span>
+                <span class="bg-white/10 border border-white/20 text-white px-3 py-1 rounded-lg text-sm">Corporate Events</span>
+                <span class="bg-white/10 border border-white/20 text-white px-3 py-1 rounded-lg text-sm">Family Outings</span>
+                <span class="bg-white/10 border border-white/20 text-white px-3 py-1 rounded-lg text-sm">School Trips</span>
+              </div>
             </div>
           </div>
           
           <div class="bg-surface rounded-2xl p-8 shadow-2xl relative overflow-hidden border border-white/10">
             <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-secondary-fixed to-secondary"></div>
-            <h4 class="font-headline-md text-headline-md text-primary mb-6">Send an Enquiry</h4>
+            <h3 class="font-headline-md text-headline-md text-primary mb-6">Send an Enquiry</h3>
             <form id="enquiry-form" class="flex flex-col gap-5">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
@@ -318,6 +547,19 @@
               <div>
                 <label class="block font-label-md text-label-md text-primary mb-2" for="email">Email Address *</label>
                 <input type="email" id="email" required class="w-full bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
+              </div>
+              <div>
+                <label class="block font-label-md text-label-md text-primary mb-2" for="event-type">Event Type</label>
+                <select id="event-type" class="w-full bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
+                  <option value="">Select event type...</option>
+                  <option value="wedding">Wedding / Reception</option>
+                  <option value="birthday">Birthday Party</option>
+                  <option value="corporate">Corporate Event / Team Outing</option>
+                  <option value="family">Family Outing</option>
+                  <option value="school">School / College Trip</option>
+                  <option value="day-visit">Day Visit</option>
+                  <option value="other">Other</option>
+                </select>
               </div>
               <div>
                 <label class="block font-label-md text-label-md text-primary mb-2" for="message">Message / Requirements *</label>
@@ -341,20 +583,61 @@
   </main>
 
   <footer class="bg-primary py-lg px-margin">
-    <div class="container mx-auto text-center">
-      <h2 class="font-headline-md text-headline-md font-bold text-white mb-2">Fun & Food Resort N Water Park</h2>
-      <p class="font-caption text-caption text-white/50 mb-6">A prestigious property of the SKCPL Group</p>
-      <div class="flex flex-wrap justify-center gap-md mb-6">
-        <a class="text-white/50 hover:text-secondary-fixed transition-colors font-caption text-caption" href="index.html#about">About SKCPL</a>
-        <a class="text-white/50 hover:text-secondary-fixed transition-colors font-caption text-caption" href="index.html#expertise">Services</a>
-        <a class="text-white/50 hover:text-secondary-fixed transition-colors font-caption text-caption" href="index.html#group">Group Companies</a>
+    <div class="container mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-lg mb-lg">
+        <div>
+          <h2 class="font-headline-md text-headline-md font-bold text-white mb-2">Fun N Food Resort</h2>
+          <p class="font-caption text-caption text-white/40 mb-2">Family Restaurant, Resort &amp; Water Park</p>
+          <p class="font-body-md text-body-md text-white/50">A prestigious property of the SKCPL Group — your complete leisure destination in Indore, MP.</p>
+        </div>
+        <div>
+          <h3 class="font-label-md text-label-md text-white/70 uppercase tracking-widest mb-4">Quick Links</h3>
+          <div class="flex flex-col gap-2">
+            <a class="text-white/50 hover:text-secondary-fixed transition-colors font-body-md text-body-md" href="#about">About Resort</a>
+            <a class="text-white/50 hover:text-secondary-fixed transition-colors font-body-md text-body-md" href="#facilities">Facilities</a>
+            <a class="text-white/50 hover:text-secondary-fixed transition-colors font-body-md text-body-md" href="#gallery">Gallery</a>
+            <a class="text-white/50 hover:text-secondary-fixed transition-colors font-body-md text-body-md" href="#contact">Contact &amp; Book</a>
+            <a class="text-white/50 hover:text-secondary-fixed transition-colors font-body-md text-body-md" href="index.html">SKCPL Group</a>
+          </div>
+        </div>
+        <div>
+          <h3 class="font-label-md text-label-md text-white/70 uppercase tracking-widest mb-4">Contact</h3>
+          <div class="flex flex-col gap-3">
+            <div class="flex items-start gap-2">
+              <span class="material-symbols-outlined text-secondary-fixed text-base mt-1 flex-shrink-0">location_on</span>
+              <p class="font-body-md text-body-md text-white/50">Khandwa Road, near BSNL Exchange, Tejaji Nagar, Indore, MP</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-secondary-fixed text-base flex-shrink-0">call</span>
+              <a href="tel:+917314938668" class="font-body-md text-body-md text-white/50 hover:text-secondary-fixed">0731-4938668</a>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-secondary-fixed text-base flex-shrink-0">mail</span>
+              <a href="mailto:s.kumarcreation@yahoo.com" class="font-body-md text-body-md text-white/50 hover:text-secondary-fixed">s.kumarcreation@yahoo.com</a>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="border-t border-white/10 pt-md text-center">
-        <p class="font-caption text-caption text-white/30">Copyright © S.Kumar Creation Pvt. Ltd. All rights reserved.</p>
+      <div class="border-t border-white/10 pt-md flex flex-col md:flex-row justify-between items-center gap-2">
+        <p class="font-caption text-caption text-white/30">Copyright &copy; S. Kumar Creation Pvt. Ltd. All rights reserved.</p>
+        <a href="index.html" class="font-caption text-caption text-white/40 hover:text-secondary-fixed transition-colors">← Back to SKCPL Main Site</a>
       </div>
     </div>
   </footer>
 
   <script src="./main.js"></script>
+  <script>
+    // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+    if (hamburger && navMenu) {
+      hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('open');
+      });
+      navMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => navMenu.classList.remove('open'));
+      });
+    }
+  </script>
 </body>
 </html>

@@ -144,6 +144,7 @@ html, body {
   z-index: 0;
   display: block;
   pointer-events: none;
+  background: #000; /* Prevent grey flash while frames load */
 }
 
 /* ── Hero text overlay ── */
@@ -201,6 +202,43 @@ html, body {
 
 .hero-overlay.hidden-canvas {
   display: none;
+}
+
+/* ── Scroll Down Indicator ── */
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.7;
+  animation: scroll-bounce 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.scroll-indicator-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.8);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.scroll-indicator-arrow {
+  width: 26px;
+  height: 26px;
+  border-right: 2px solid rgba(255,255,255,0.8);
+  border-bottom: 2px solid rgba(255,255,255,0.8);
+  transform: rotate(45deg);
+}
+
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(10px); }
 }
 
 /* ══════════════════════════════════════════════ */
