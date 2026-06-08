@@ -41,7 +41,7 @@
         <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
         <input type="password" id="password" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all" onkeypress="if(event.key === 'Enter') attemptLogin()">
       </div>
-      <button type="button" id="login-btn" onclick="attemptLogin()" class="w-full bg-blue-600 text-white font-semibold py-2.5 rounded-lg hover:bg-blue-700 transition-colors flex justify-center items-center gap-2">
+      <button type="button" id="login-btn" class="w-full bg-blue-600 text-white font-semibold py-2.5 rounded-lg hover:bg-blue-700 transition-colors flex justify-center items-center gap-2">
         <span>Sign In</span>
       </button>
     </div>
@@ -60,7 +60,7 @@
       <h1 class="text-xl font-bold">Image Manager</h1>
       <div class="flex items-center gap-4">
         <span id="user-email" class="text-sm text-gray-300 hidden sm:block"></span>
-        <button id="logout-btn" onclick="attemptLogout()" class="text-sm bg-gray-800 hover:bg-gray-700 border border-gray-700 px-4 py-1.5 rounded-md transition-colors">Sign Out</button>
+        <button id="logout-btn" class="text-sm bg-gray-800 hover:bg-gray-700 border border-gray-700 px-4 py-1.5 rounded-md transition-colors">Sign Out</button>
       </div>
     </div>
 
@@ -86,6 +86,14 @@
         debugEl.scrollTop = debugEl.scrollHeight;
       }
     }
+
+    // Catch global errors so user can see them
+    window.onerror = function(message, source, lineno, colno, error) {
+      logDebug(`GLOBAL CRASH: ${message} at line ${lineno}`);
+    };
+    window.addEventListener('unhandledrejection', function(event) {
+      logDebug(`PROMISE CRASH: ${event.reason}`);
+    });
 
     // --- SUPABASE INITIALIZATION ---
     logDebug("Initializing Supabase...");
@@ -366,6 +374,18 @@
         logDebug(`Upload Error: ${err.message}`);
         showToast(err.message || 'An error occurred during upload.', 'error');
       }
+    }
+
+    // --- BIND EVENT LISTENERS ---
+    try {
+      document.getElementById('login-btn').addEventListener('click', attemptLogin);
+      document.getElementById('logout-btn').addEventListener('click', attemptLogout);
+      document.getElementById('password').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') attemptLogin();
+      });
+      logDebug("Event listeners attached successfully.");
+    } catch(err) {
+      logDebug(`CRITICAL ERROR attaching listeners: ${err.message}`);
     }
   </script>
 </body>
