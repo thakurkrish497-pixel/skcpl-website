@@ -23,17 +23,10 @@
   let cachedMaxScroll = 0;
 
   /* ── Resize (retina-aware) ── */
-  let lastWidth = -1;
   function resize() {
-    // Prevent massive layout jank on mobile when URL bar expands/collapses during scroll
-    if (window.innerWidth === lastWidth) return;
-    lastWidth = window.innerWidth;
-
     const dpr = window.devicePixelRatio || 1;
     canvas.width = window.innerWidth * dpr;
-    // Use screen height on mobile to ensure canvas is always large enough regardless of URL bar
-    const isMobile = window.innerWidth < 768;
-    canvas.height = (isMobile ? window.screen.height : window.innerHeight) * dpr;
+    canvas.height = window.innerHeight * dpr;
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = "high";
     
@@ -44,7 +37,7 @@
     drawn = -1;
   }
 
-  /* ── Draw one frame (cover-fit on desktop, contain-fit on mobile) ── */
+  /* ── Draw one frame (cover-fit, centred — fills full viewport, no grey bars) ── */
   function paint(idx) {
     if (idx === drawn) return;
     drawn = idx;
@@ -55,10 +48,8 @@
     const cw = canvas.width, ch = canvas.height;
     const iw = img.naturalWidth, ih = img.naturalHeight;
 
-    // Use contain on mobile (to prevent extreme cropping) and cover on desktop
-    const isMobile = window.innerWidth < 768;
-    const s = isMobile ? Math.min(cw / iw, ch / ih) : Math.max(cw / iw, ch / ih);
-    
+    // cover: scale so the image fills the canvas entirely (crops if needed)
+    const s = Math.max(cw / iw, ch / ih);
     const dw = iw * s, dh = ih * s;
     const dx = (cw - dw) / 2;
     const dy = (ch - dh) / 2;
@@ -76,23 +67,17 @@
 
   /* ── Toggle canvas & hero visibility ── */
   const heroOverlay = document.getElementById("hero-overlay");
-  const mainContent = document.querySelector("main");
 
   function updateCanvasVisibility() {
     const spacerBottom = cachedSpacerTop + cachedSpacerHeight;
     const startFadeY = spacerBottom - window.innerHeight;
 
-    // Linear opacity fade-in for the website content as we scroll down
+    // Smoothly fade out the canvas as the main content slides up over it
     if (scrollY >= startFadeY && startFadeY > 0) {
       const fadeFraction = Math.min(1, (scrollY - startFadeY) / window.innerHeight);
-      mainContent.style.opacity = fadeFraction;
       canvas.style.opacity = 1 - fadeFraction;
-    } else if (scrollY < startFadeY) {
-      mainContent.style.opacity = 0;
-      canvas.style.opacity = 1;
     } else {
-      mainContent.style.opacity = 1;
-      canvas.style.opacity = 0;
+      canvas.style.opacity = 1;
     }
 
     const past = window.scrollY >= spacerBottom;
