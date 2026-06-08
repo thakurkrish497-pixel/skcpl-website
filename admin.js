@@ -1,3 +1,6 @@
+// CACHE BUSTER & EXECUTION PROOF
+alert("Admin JS file successfully downloaded and started executing!");
+
 // --- DEBUG LOGGING UTILITY ---
 const debugEl = document.getElementById('debug-log');
 function logDebug(msg) {
@@ -8,6 +11,8 @@ function logDebug(msg) {
     debugEl.scrollTop = debugEl.scrollHeight;
   }
 }
+
+logDebug("Admin JS executing...");
 
 // Catch global errors so user can see them
 window.onerror = function(message, source, lineno, colno, error) {
@@ -116,7 +121,7 @@ if (supabase) {
   checkAuth();
 }
 
-async function attemptLogin() {
+window.attemptLogin = async function() {
   logDebug("Login button clicked!");
   if (!supabase) {
     showToast("System error: Supabase is not connected.", "error");
@@ -164,7 +169,7 @@ async function attemptLogin() {
   }
 }
 
-async function attemptLogout() {
+window.attemptLogout = async function() {
   logDebug("Logging out...");
   const { error } = await supabase.auth.signOut();
   if (error) {
@@ -230,7 +235,6 @@ async function loadDashboardImages() {
   }
 }
 
-// Ensure triggerFileInput and handleImageUpload are globally accessible for the inline onclick attributes we just built in the template literal above
 window.triggerFileInput = function(key) {
   document.getElementById(`file-${key}`).click();
 }
@@ -281,10 +285,8 @@ window.handleImageUpload = async function(event, key) {
 
 // --- BIND EVENT LISTENERS ---
 try {
-  document.getElementById('login-btn').addEventListener('click', attemptLogin);
-  document.getElementById('logout-btn').addEventListener('click', attemptLogout);
   document.getElementById('password').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') attemptLogin();
+    if (e.key === 'Enter') window.attemptLogin();
   });
   logDebug("Event listeners attached successfully.");
 } catch(err) {
