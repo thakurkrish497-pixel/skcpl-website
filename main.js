@@ -68,17 +68,23 @@
 
   /* ── Toggle canvas & hero visibility ── */
   const heroOverlay = document.getElementById("hero-overlay");
+  const mainContent = document.querySelector("main");
 
   function updateCanvasVisibility() {
     const spacerBottom = cachedSpacerTop + cachedSpacerHeight;
     const startFadeY = spacerBottom - window.innerHeight;
 
-    // Smoothly fade out the canvas as the main content slides up over it
+    // Linear opacity fade-in for the website content as we scroll down
     if (scrollY >= startFadeY && startFadeY > 0) {
       const fadeFraction = Math.min(1, (scrollY - startFadeY) / window.innerHeight);
+      mainContent.style.opacity = fadeFraction;
       canvas.style.opacity = 1 - fadeFraction;
-    } else {
+    } else if (scrollY < startFadeY) {
+      mainContent.style.opacity = 0;
       canvas.style.opacity = 1;
+    } else {
+      mainContent.style.opacity = 1;
+      canvas.style.opacity = 0;
     }
 
     const past = window.scrollY >= spacerBottom;
