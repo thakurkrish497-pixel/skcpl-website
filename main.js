@@ -257,6 +257,9 @@
         els.forEach(el => {
           if (record.image_url && el.tagName === 'IMG') {
             el.src = record.image_url;
+            if (!el.hasAttribute("loading")) {
+              el.setAttribute("loading", "lazy");
+            }
           } else if (record.image_url) {
             // Background image replacement for any block element (e.g., DIV, HEADER, SECTION)
             el.style.backgroundImage = `url('${record.image_url}')`;
