@@ -74,7 +74,7 @@
       <h1 class="text-xl font-bold">Image Manager</h1>
       <div class="flex items-center gap-4">
         <span id="user-email" class="text-sm text-gray-300 hidden sm:block"></span>
-        <button id="logout-btn" class="text-sm bg-gray-800 hover:bg-gray-700 border border-gray-700 px-4 py-1.5 rounded-md transition-colors">Sign Out</button>
+        <button id="logout-btn" onclick="attemptLogout()" class="text-sm bg-gray-800 hover:bg-gray-700 border border-gray-700 px-4 py-1.5 rounded-md transition-colors">Sign Out</button>
       </div>
     </div>
 
@@ -121,8 +121,18 @@ try {
   try {
     if (window.supabase) {
       logDebug("window.supabase exists, calling createClient...");
-      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      // Use sessionStorage so the login doesn't persist if they close the tab
+      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+        auth: {
+          storage: window.sessionStorage
+        }
+      });
       logDebug("Supabase client created successfully.");
+      
+      // Auto-logout if they navigate away from the page (e.g. hitting back button)
+      window.addEventListener('pagehide', () => {
+        supabase.auth.signOut();
+      });
     } else {
       logDebug("ERROR: window.supabase is undefined. Library failed to load from CDN.");
     }
