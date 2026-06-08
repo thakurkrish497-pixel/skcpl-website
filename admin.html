@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | SKCPL Website</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f3f4f6;
+    }
+    h1, h2, h3 {
+      font-family: 'Montserrat', sans-serif;
+    }
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+  <!-- Status Notification Container -->
+  <div id="status-toast" class="fixed top-4 right-4 max-w-sm w-full p-4 rounded-lg shadow-lg hidden transition-opacity duration-300 z-50 text-white font-medium">
+    <span id="status-message"></span>
+  </div>
+
+  <!-- AUTHENTICATION VIEW -->
+  <div id="auth-view" class="w-full max-w-md bg-white p-8 rounded-xl shadow-md border border-gray-100 hidden">
+    <div class="text-center mb-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-2">Admin Access</h2>
+      <p class="text-gray-500 text-sm">Sign in to manage website content and images.</p>
+    </div>
+    
+    <form id="login-form" class="space-y-5">
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+        <input type="email" id="email" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
+      </div>
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+        <input type="password" id="password" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
+      </div>
+      <button type="submit" id="login-btn" class="w-full bg-blue-600 text-white font-semibold py-2.5 rounded-lg hover:bg-blue-700 transition-colors flex justify-center items-center gap-2">
+        <span>Sign In</span>
+      </button>
+    </form>
+  </div>
+
+  <!-- DASHBOARD VIEW -->
+  <div id="dashboard-view" class="w-full max-w-2xl bg-white rounded-xl shadow-md border border-gray-100 hidden flex-col overflow-hidden">
+    <!-- Header -->
+    <div class="bg-gray-900 text-white px-6 py-4 flex justify-between items-center">
+      <h1 class="text-xl font-bold">Content Dashboard</h1>
+      <div class="flex items-center gap-4">
+        <span id="user-email" class="text-sm text-gray-300 hidden sm:block"></span>
+        <button id="logout-btn" class="text-sm bg-gray-800 hover:bg-gray-700 border border-gray-700 px-4 py-1.5 rounded-md transition-colors">Sign Out</button>
+      </div>
+    </div>
+
+    <!-- Main Form Content -->
+    <div class="p-6 sm:p-8">
+      <h2 class="text-lg font-bold text-gray-800 mb-1">Update Website Content</h2>
+      <p class="text-sm text-gray-500 mb-8">Update text fields or upload new banners/product photos to the website.</p>
+
+      <form id="content-form" class="space-y-6">
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div class="sm:col-span-2">
+            <label for="content-key" class="block text-sm font-medium text-gray-700 mb-1">Content Key / Identifier <span class="text-red-500">*</span></label>
+            <input type="text" id="content-key" placeholder="e.g., hero_banner, about_us_text" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all text-sm">
+            <p class="text-xs text-gray-400 mt-1">The unique identifier used on the website to fetch this content.</p>
+          </div>
+        </div>
+
+        <div>
+          <label for="content-text" class="block text-sm font-medium text-gray-700 mb-1">Text Content</label>
+          <textarea id="content-text" rows="4" placeholder="Enter the text to display on the website..." class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all text-sm"></textarea>
+        </div>
+
+        <div class="border border-dashed border-gray-300 rounded-xl p-6 bg-gray-50">
+          <label class="block text-sm font-medium text-gray-700 mb-3">Upload Image (Banner or Product Photo)</label>
+          <div class="flex items-center justify-center w-full">
+            <label for="image-upload" class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white hover:bg-gray-50 transition-colors">
+              <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                <svg class="w-8 h-8 mb-3 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                </svg>
+                <p class="mb-1 text-sm text-gray-500"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                <p class="text-xs text-gray-400">PNG, JPG, WEBP, AVIF (MAX. 5MB)</p>
+              </div>
+              <input id="image-upload" type="file" accept="image/*" class="hidden" />
+            </label>
+          </div>
+          <p id="file-name-display" class="text-sm text-blue-600 mt-2 font-medium hidden text-center truncate"></p>
+        </div>
+
+        <div class="pt-2">
+          <button type="submit" id="save-btn" class="w-full bg-green-600 text-white font-bold py-3 rounded-lg hover:bg-green-700 transition-colors shadow-sm flex justify-center items-center gap-2">
+            <span>Save Content</span>
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Supabase Initialization
+    const SUPABASE_URL = "https://shemnvgjpwetoljxrkjw.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_dkdAC8Q-78JEZmWm2B3IEg_frXP3JdH";
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // DOM Elements
+    const authView = document.getElementById('auth-view');
+    const dashboardView = document.getElementById('dashboard-view');
+    const loginForm = document.getElementById('login-form');
+    const loginBtn = document.getElementById('login-btn');
+    const logoutBtn = document.getElementById('logout-btn');
+    const userEmailSpan = document.getElementById('user-email');
+    
+    const contentForm = document.getElementById('content-form');
+    const saveBtn = document.getElementById('save-btn');
+    const fileInput = document.getElementById('image-upload');
+    const fileNameDisplay = document.getElementById('file-name-display');
+    const statusToast = document.getElementById('status-toast');
+    const statusMessage = document.getElementById('status-message');
+
+    // Utility: Show Toast Notification
+    function showToast(message, type = 'info') {
+      statusMessage.textContent = message;
+      statusToast.className = `fixed top-4 right-4 max-w-sm w-full p-4 rounded-lg shadow-lg transition-opacity duration-300 z-50 text-white font-medium`;
+      
+      if (type === 'error') {
+        statusToast.classList.add('bg-red-500');
+      } else if (type === 'success') {
+        statusToast.classList.add('bg-green-500');
+      } else {
+        statusToast.classList.add('bg-blue-500');
+      }
+      
+      statusToast.classList.remove('hidden');
+      
+      // Auto hide after 4 seconds if not explicitly loading
+      if (type !== 'loading') {
+        setTimeout(() => {
+          statusToast.classList.add('hidden');
+        }, 4000);
+      }
+    }
+
+    function hideToast() {
+      statusToast.classList.add('hidden');
+    }
+
+    // State Management
+    async function checkAuth() {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        showDashboard(session.user);
+      } else {
+        showLogin();
+      }
+    }
+
+    function showLogin() {
+      authView.classList.remove('hidden');
+      dashboardView.classList.add('hidden');
+    }
+
+    function showDashboard(user) {
+      authView.classList.add('hidden');
+      dashboardView.classList.remove('hidden');
+      dashboardView.classList.add('flex');
+      if (user && user.email) {
+        userEmailSpan.textContent = user.email;
+      }
+    }
+
+    // Initialize Auth State on load
+    checkAuth();
+
+    // Listen to Auth changes
+    supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+        showDashboard(session.user);
+      } else if (event === 'SIGNED_OUT') {
+        showLogin();
+      }
+    });
+
+    // Handle Login
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      
+      const originalText = loginBtn.innerHTML;
+      loginBtn.innerHTML = '<span>Logging in...</span>';
+      loginBtn.disabled = true;
+
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password,
+      });
+
+      loginBtn.innerHTML = originalText;
+      loginBtn.disabled = false;
+
+      if (error) {
+        showToast(error.message, 'error');
+      } else {
+        showToast('Successfully logged in!', 'success');
+        loginForm.reset();
+      }
+    });
+
+    // Handle Logout
+    logoutBtn.addEventListener('click', async () => {
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        showToast('Error signing out', 'error');
+      } else {
+        showToast('Signed out successfully', 'success');
+      }
+    });
+
+    // Display selected file name
+    fileInput.addEventListener('change', (e) => {
+      if (e.target.files.length > 0) {
+        fileNameDisplay.textContent = `Selected File: ${e.target.files[0].name}`;
+        fileNameDisplay.classList.remove('hidden');
+      } else {
+        fileNameDisplay.classList.add('hidden');
+      }
+    });
+
+    // Handle Content Submission (Text + Image Upload)
+    contentForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const contentKey = document.getElementById('content-key').value.trim();
+      const contentText = document.getElementById('content-text').value.trim();
+      const file = fileInput.files[0];
+
+      if (!contentKey) {
+        showToast('Content Key is required', 'error');
+        return;
+      }
+
+      const originalText = saveBtn.innerHTML;
+      saveBtn.innerHTML = '<span>Uploading...</span>';
+      saveBtn.disabled = true;
+      saveBtn.classList.add('opacity-70');
+      
+      showToast('Uploading...', 'loading');
+
+      let publicImageUrl = null;
+
+      try {
+        // 1. Upload Image if selected
+        if (file) {
+          const fileExt = file.name.split('.').pop();
+          const fileName = `${Math.random().toString(36).substring(2, 15)}_${Date.now()}.${fileExt}`;
+          const filePath = `${contentKey}/${fileName}`;
+
+          const { data: uploadData, error: uploadError } = await supabase.storage
+            .from('website-images')
+            .upload(filePath, file, {
+              cacheControl: '3600',
+              upsert: true
+            });
+
+          if (uploadError) throw uploadError;
+
+          // 2. Get Public URL
+          const { data: { publicUrl } } = supabase.storage
+            .from('website-images')
+            .getPublicUrl(filePath);
+
+          publicImageUrl = publicUrl;
+        }
+
+        // 3. Save to Database (site_content table)
+        // Upsert record matching the contentKey
+        const record = {
+          key: contentKey,
+          content: contentText,
+          updated_at: new Date().toISOString()
+        };
+
+        if (publicImageUrl) {
+          record.image_url = publicImageUrl;
+        }
+
+        const { data: dbData, error: dbError } = await supabase
+          .from('site_content')
+          .upsert(record, { onConflict: 'key' });
+
+        if (dbError) throw dbError;
+
+        showToast('Changes Saved Successfully!', 'success');
+        
+        // Reset form completely
+        contentForm.reset();
+        fileNameDisplay.classList.add('hidden');
+
+      } catch (err) {
+        console.error(err);
+        showToast(err.message || 'An error occurred during save.', 'error');
+      } finally {
+        // Restore button state
+        saveBtn.innerHTML = originalText;
+        saveBtn.disabled = false;
+        saveBtn.classList.remove('opacity-70');
+      }
+    });
+  </script>
+</body>
+</html>
