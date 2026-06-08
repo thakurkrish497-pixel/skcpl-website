@@ -34,19 +34,19 @@
       <p class="text-gray-500 text-sm">Sign in to manage website content and images.</p>
     </div>
     
-    <form id="login-form" class="space-y-5">
+    <div id="login-form" class="space-y-5">
       <div>
         <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-        <input type="email" id="email" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
+        <input type="email" id="email" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
       </div>
       <div>
         <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-        <input type="password" id="password" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
+        <input type="password" id="password" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
       </div>
-      <button type="submit" id="login-btn" class="w-full bg-blue-600 text-white font-semibold py-2.5 rounded-lg hover:bg-blue-700 transition-colors flex justify-center items-center gap-2">
+      <button type="button" id="login-btn" onclick="attemptLogin()" class="w-full bg-blue-600 text-white font-semibold py-2.5 rounded-lg hover:bg-blue-700 transition-colors flex justify-center items-center gap-2">
         <span>Sign In</span>
       </button>
-    </form>
+    </div>
   </div>
 
   <!-- DASHBOARD VIEW -->
@@ -213,16 +213,21 @@
     }
 
     // Handle Login
-    loginForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      
+    async function attemptLogin() {
       if (!supabase) {
         showToast("System error: Supabase is not connected. Please disable adblockers or check your connection.", "error");
         return;
       }
       
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
+      const emailInput = document.getElementById('email');
+      const passwordInput = document.getElementById('password');
+      const email = emailInput.value;
+      const password = passwordInput.value;
+      
+      if (!email || !password) {
+        showToast("Please enter both email and password.", "error");
+        return;
+      }
       
       const originalText = loginBtn.innerHTML;
       loginBtn.innerHTML = '<span>Logging in...</span>';
@@ -238,7 +243,8 @@
           showToast(error.message, 'error');
         } else {
           showToast('Successfully logged in!', 'success');
-          loginForm.reset();
+          emailInput.value = '';
+          passwordInput.value = '';
         }
       } catch (err) {
         console.error("Login Error:", err);
@@ -247,7 +253,7 @@
         loginBtn.innerHTML = originalText;
         loginBtn.disabled = false;
       }
-    });
+    }
 
     // Handle Logout
     logoutBtn.addEventListener('click', async () => {
