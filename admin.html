@@ -134,6 +134,10 @@
 
     // Utility: Show Toast Notification
     function showToast(message, type = 'info') {
+      if (type === 'error') {
+        alert("Notice: " + message); // Fallback so user definitely sees it
+      }
+      
       statusMessage.textContent = message;
       statusToast.className = `fixed top-4 right-4 max-w-sm w-full p-4 rounded-lg shadow-lg transition-opacity duration-300 z-50 text-white font-medium`;
       
@@ -211,6 +215,12 @@
     // Handle Login
     loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
+      
+      if (!supabase) {
+        showToast("System error: Supabase is not connected. Please disable adblockers or check your connection.", "error");
+        return;
+      }
+      
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
       
@@ -218,19 +228,24 @@
       loginBtn.innerHTML = '<span>Logging in...</span>';
       loginBtn.disabled = true;
 
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: email,
-        password: password,
-      });
+      try {
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email: email,
+          password: password,
+        });
 
-      loginBtn.innerHTML = originalText;
-      loginBtn.disabled = false;
-
-      if (error) {
-        showToast(error.message, 'error');
-      } else {
-        showToast('Successfully logged in!', 'success');
-        loginForm.reset();
+        if (error) {
+          showToast(error.message, 'error');
+        } else {
+          showToast('Successfully logged in!', 'success');
+          loginForm.reset();
+        }
+      } catch (err) {
+        console.error("Login Error:", err);
+        showToast(err.message || "Failed to log in", "error");
+      } finally {
+        loginBtn.innerHTML = originalText;
+        loginBtn.disabled = false;
       }
     });
 
