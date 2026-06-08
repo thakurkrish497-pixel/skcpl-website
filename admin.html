@@ -41,7 +41,7 @@
         <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
         <input type="password" id="password" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all" onkeypress="if(event.key === 'Enter') attemptLogin()">
       </div>
-      <button type="button" id="login-btn" onclick="alert('Button was clicked!'); attemptLogin && attemptLogin();" class="w-full bg-blue-600 text-white font-semibold py-2.5 rounded-lg hover:bg-blue-700 transition-colors flex justify-center items-center gap-2">
+      <button type="button" id="login-btn" onclick="if(window.attemptLogin) { window.attemptLogin(); } else { document.getElementById('debug-log').innerHTML += '\nCRITICAL FAILURE: The main Javascript block failed to load or crashed. Please tell the developer!'; alert('The main script is missing!'); }" class="w-full bg-blue-600 text-white font-semibold py-2.5 rounded-lg hover:bg-blue-700 transition-colors flex justify-center items-center gap-2">
         <span>Sign In</span>
       </button>
     </div>
