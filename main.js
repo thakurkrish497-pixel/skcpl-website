@@ -233,21 +233,18 @@
         const subject = isFunNFood ? "New Enquiry from Fun N Food Website" : "New Enquiry from SKCPL Website";
         
         try {
+          const formData = new FormData();
+          formData.append("access_key", "ae7c95a9-fadd-45f6-b602-ece95949d349");
+          formData.append("name", name);
+          formData.append("email", email);
+          formData.append("phone", phone);
+          formData.append("message", message);
+          formData.append("subject", subject);
+          formData.append("from_name", "SKCPL Automated System");
+
           const emailResponse = await fetch("https://api.web3forms.com/submit", {
               method: "POST",
-              headers: {
-                  "Content-Type": "application/json",
-                  Accept: "application/json",
-              },
-              body: JSON.stringify({
-                  access_key: "ae7c95a9-fadd-45f6-b602-ece95949d349",
-                  name: name,
-                  email: email,
-                  phone: phone,
-                  message: message,
-                  subject: subject,
-                  from_name: "SKCPL Automated System"
-              }),
+              body: formData
           });
 
           if (!emailResponse.ok) {
