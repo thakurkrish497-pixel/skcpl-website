@@ -667,29 +667,33 @@
           const supabaseKey = "sb_publishable_dkdAC8Q-78JEZmWm2B3IEg_frXP3JdH";
           const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
           
-          await supabase.from("enquiries").insert([{ name, phone, email, message, source: 'Solar' }]);
+          await supabase.from("enquiries").insert([{ name, phone, email, message }]);
         }
 
-        // Automated Background Email via Web3Forms
-        const emailResponse = await fetch("https://api.web3forms.com/submit", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-            },
-            body: JSON.stringify({
-                access_key: "ae7c95a9-fadd-45f6-b602-ece95949d349",
-                name: name,
-                email: email,
-                phone: phone,
-                message: message,
-                subject: "New Enquiry from SKumar Solar Website",
-                from_name: "SKCPL Automated System"
-            }),
-        });
+        // Automated Background Email via Web3Forms (wrapped in try/catch to prevent form failure if blocked)
+        try {
+          const emailResponse = await fetch("https://api.web3forms.com/submit", {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+                  Accept: "application/json",
+              },
+              body: JSON.stringify({
+                  access_key: "ae7c95a9-fadd-45f6-b602-ece95949d349",
+                  name: name,
+                  email: email,
+                  phone: phone,
+                  message: message,
+                  subject: "New Enquiry from SKumar Solar Website",
+                  from_name: "SKCPL Automated System"
+              }),
+          });
 
-        if (!emailResponse.ok) {
-            console.warn("Web3Forms Email API failed, but data was saved to Supabase.");
+          if (!emailResponse.ok) {
+              console.warn("Web3Forms Email API failed, but data was saved to Supabase.");
+          }
+        } catch (emailErr) {
+          console.warn("Web3Forms blocked or failed:", emailErr);
         }
 
         // WhatsApp Redirect (Since WhatsApp cannot be automated in the background for free)

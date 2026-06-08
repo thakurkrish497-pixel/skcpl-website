@@ -232,25 +232,29 @@
         const isFunNFood = window.location.pathname.includes('fun-n-food');
         const subject = isFunNFood ? "New Enquiry from Fun N Food Website" : "New Enquiry from SKCPL Website";
         
-        const emailResponse = await fetch("https://api.web3forms.com/submit", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-            },
-            body: JSON.stringify({
-                access_key: "ae7c95a9-fadd-45f6-b602-ece95949d349",
-                name: name,
-                email: email,
-                phone: phone,
-                message: message,
-                subject: subject,
-                from_name: "SKCPL Automated System"
-            }),
-        });
+        try {
+          const emailResponse = await fetch("https://api.web3forms.com/submit", {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+                  Accept: "application/json",
+              },
+              body: JSON.stringify({
+                  access_key: "ae7c95a9-fadd-45f6-b602-ece95949d349",
+                  name: name,
+                  email: email,
+                  phone: phone,
+                  message: message,
+                  subject: subject,
+                  from_name: "SKCPL Automated System"
+              }),
+          });
 
-        if (!emailResponse.ok) {
-            console.warn("Web3Forms Email API failed, but data was saved to Supabase.");
+          if (!emailResponse.ok) {
+              console.warn("Web3Forms Email API failed, but data was saved to Supabase.");
+          }
+        } catch (emailErr) {
+          console.warn("Web3Forms blocked or failed:", emailErr);
         }
         
         // WhatsApp Redirect (Only if Fun N Food, since WhatsApp cannot be automated in the background for free)
