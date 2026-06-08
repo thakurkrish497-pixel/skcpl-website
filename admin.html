@@ -111,7 +111,11 @@
     // Supabase Initialization
     const SUPABASE_URL = "https://shemnvgjpwetoljxrkjw.supabase.co";
     const SUPABASE_ANON_KEY = "sb_publishable_dkdAC8Q-78JEZmWm2B3IEg_frXP3JdH";
-    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    let supabase = null;
+    
+    if (window.supabase) {
+      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    }
 
     // DOM Elements
     const authView = document.getElementById('auth-view');
@@ -157,11 +161,22 @@
 
     // State Management
     async function checkAuth() {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session) {
-        showDashboard(session.user);
-      } else {
-        showLogin();
+      try {
+        if (!window.supabase) {
+          throw new Error("Supabase library failed to load. Please check your internet connection or disable ad-blockers.");
+        }
+        const { data: { session }, error } = await supabase.auth.getSession();
+        if (error) throw error;
+        
+        if (session) {
+          showDashboard(session.user);
+        } else {
+          showLogin();
+        }
+      } catch (err) {
+        console.error("Auth check error:", err);
+        showToast(err.message || "Authentication error. Please try again.", "error");
+        showLogin(); // Fallback to show login so it's not a blank page
       }
     }
 
@@ -183,13 +198,15 @@
     checkAuth();
 
     // Listen to Auth changes
-    supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
-        showDashboard(session.user);
-      } else if (event === 'SIGNED_OUT') {
-        showLogin();
-      }
-    });
+    if (supabase) {
+      supabase.auth.onAuthStateChange((event, session) => {
+        if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+          showDashboard(session.user);
+        } else if (event === 'SIGNED_OUT') {
+          showLogin();
+        }
+      });
+    }
 
     // Handle Login
     loginForm.addEventListener('submit', async (e) => {
