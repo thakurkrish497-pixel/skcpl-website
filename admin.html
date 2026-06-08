@@ -4,6 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard | SKCPL Website</title>
+  <script>
+    // PURE ES5 TEST - NO CONST, LET, ARROW FUNCTIONS, OR ASYNC
+    try {
+      alert("ES5 Test Script Executed!");
+      window.es5_test_passed = true;
+    } catch (e) {
+      alert("ES5 Error: " + e.message);
+    }
+  </script>
+  <script>
+    // ES6 TEST
+    const testAsync = async () => { return "hello"; };
+    alert("ES6 Test Script Executed!");
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
