@@ -228,37 +228,19 @@
           
         if (error) throw error;
         
-        // Automated Background Email via Web3Forms
+        // Smart Redirect Logic
+        const textMessage = `New Enquiry!\nName: ${name}\nPhone: ${phone}\nEmail: ${email}\nMessage: ${message}`;
         const isFunNFood = window.location.pathname.includes('fun-n-food');
-        const subject = isFunNFood ? "New Enquiry from Fun N Food Website" : "New Enquiry from SKCPL Website";
         
-        try {
-          const formData = new FormData();
-          formData.append("access_key", "ae7c95a9-fadd-45f6-b602-ece95949d349");
-          formData.append("name", name);
-          formData.append("email", email);
-          formData.append("phone", phone);
-          formData.append("message", message);
-          formData.append("subject", subject);
-          formData.append("from_name", "SKCPL Automated System");
-
-          const emailResponse = await fetch("https://api.web3forms.com/submit", {
-              method: "POST",
-              body: formData
-          });
-
-          if (!emailResponse.ok) {
-              console.warn("Web3Forms Email API failed, but data was saved to Supabase.");
-          }
-        } catch (emailErr) {
-          console.warn("Web3Forms blocked or failed:", emailErr);
-        }
-        
-        // WhatsApp Redirect (Only if Fun N Food, since WhatsApp cannot be automated in the background for free)
         if (isFunNFood) {
-          const textMessage = `New Enquiry!\nName: ${name}\nPhone: ${phone}\nEmail: ${email}\nMessage: ${message}`;
           const waUrl = `https://wa.me/919479800333?text=${encodeURIComponent(textMessage)}`;
+          const mailUrl = `mailto:funandfoodresort@gmail.com?subject=New Enquiry from ${encodeURIComponent(name)}&body=${encodeURIComponent(textMessage)}`;
+          // Try opening email in background, redirect main window to WhatsApp
+          window.open(mailUrl, '_blank');
           window.location.href = waUrl;
+        } else {
+          const mailUrl = `mailto:s.kumarcreation@yahoo.com?subject=New Enquiry from ${encodeURIComponent(name)}&body=${encodeURIComponent(textMessage)}`;
+          window.location.href = mailUrl;
         }
         
         // Success
