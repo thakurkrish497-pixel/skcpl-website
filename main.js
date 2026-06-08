@@ -1,7 +1,8 @@
 (() => {
   /* ── Config ── */
-  const TOTAL = 157;
-  const src = (i) => `/public/frames/ezgif-frame-${String(i).padStart(3, "0")}.jpg`;
+  const START = 160;
+  const TOTAL = 81;
+  const src = (i) => `/public/frames/ezgif-frame-${String(START + i)}.jpg`;
 
   /* ── DOM ── */
   const canvas = document.getElementById("canvas");
