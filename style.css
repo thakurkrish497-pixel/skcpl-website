@@ -826,4 +826,43 @@ html, body {
     grid-row: span 1;
     grid-column: span 1;
   }
+
+  /* --- Global Mobile Overrides for Custom Theme Values --- */
+  .px-margin {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  .py-xl {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+  .py-lg {
+    padding-top: 32px !important;
+    padding-bottom: 32px !important;
+  }
+  .gap-xl {
+    gap: 24px !important;
+  }
+  .gap-lg {
+    gap: 16px !important;
+  }
+  .text-headline-xl {
+    font-size: 36px !important;
+    line-height: 1.2 !important;
+  }
+  .text-headline-lg {
+    font-size: 28px !important;
+    line-height: 1.3 !important;
+  }
+  .text-headline-md {
+    font-size: 22px !important;
+  }
+  .text-body-lg {
+    font-size: 16px !important;
+  }
+  /* Prevent any horizontal scrolling issues */
+  html, body {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
 }
