@@ -199,11 +199,13 @@ html, body {
 }
 
 #canvas.hidden-canvas {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
 }
 
 .hero-overlay.hidden-canvas {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
 }
 
 /* ── Scroll Down Indicator ── */
