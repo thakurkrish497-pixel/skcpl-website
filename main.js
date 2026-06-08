@@ -17,17 +17,23 @@
   let drawn = -1;
   let scrollY = 0;
   let targetY = 0;
-
   /* ── Cached Layout Metrics (prevent layout thrashing) ── */
   let cachedSpacerHeight = 0;
   let cachedSpacerTop = 0;
   let cachedMaxScroll = 0;
 
   /* ── Resize (retina-aware) ── */
+  let lastWidth = -1;
   function resize() {
+    // Prevent massive layout jank on mobile when URL bar expands/collapses during scroll
+    if (window.innerWidth === lastWidth) return;
+    lastWidth = window.innerWidth;
+
     const dpr = window.devicePixelRatio || 1;
     canvas.width = window.innerWidth * dpr;
-    canvas.height = window.innerHeight * dpr;
+    // Use screen height on mobile to ensure canvas is always large enough regardless of URL bar
+    const isMobile = window.innerWidth < 768;
+    canvas.height = (isMobile ? window.screen.height : window.innerHeight) * dpr;
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = "high";
     
@@ -38,7 +44,7 @@
     drawn = -1;
   }
 
-  /* ── Draw one frame (cover-fit, centred — fills full viewport, no grey bars) ── */
+  /* ── Draw one frame (cover-fit on desktop, contain-fit on mobile) ── */
   function paint(idx) {
     if (idx === drawn) return;
     drawn = idx;
@@ -49,8 +55,10 @@
     const cw = canvas.width, ch = canvas.height;
     const iw = img.naturalWidth, ih = img.naturalHeight;
 
-    // cover: scale so the image fills the canvas entirely (crops if needed)
-    const s = Math.max(cw / iw, ch / ih);
+    // Use contain on mobile (to prevent extreme cropping) and cover on desktop
+    const isMobile = window.innerWidth < 768;
+    const s = isMobile ? Math.min(cw / iw, ch / ih) : Math.max(cw / iw, ch / ih);
+    
     const dw = iw * s, dh = ih * s;
     const dx = (cw - dw) / 2;
     const dy = (ch - dh) / 2;
