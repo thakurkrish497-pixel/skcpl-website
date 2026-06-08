@@ -229,4 +229,33 @@
       }
     });
   }
+
+  /* ── Dynamic Content Fetching ── */
+  async function loadDynamicContent() {
+    if (!supabase) return;
+    try {
+      const { data, error } = await supabase.from('site_content').select('key, image_url, content');
+      if (error) throw error;
+      if (!data) return;
+
+      data.forEach(record => {
+        // Find elements that map to this key
+        const els = document.querySelectorAll(`[data-dynamic-image="${record.key}"]`);
+        els.forEach(el => {
+          if (record.image_url && el.tagName === 'IMG') {
+            el.src = record.image_url;
+          } else if (record.image_url) {
+            // Background image replacement for any block element (e.g., DIV, HEADER, SECTION)
+            el.style.backgroundImage = `url('${record.image_url}')`;
+          }
+        });
+      });
+    } catch (err) {
+      console.error("Error loading dynamic content:", err);
+    }
+  }
+
+  // Load dynamic content right away
+  loadDynamicContent();
+
 })();

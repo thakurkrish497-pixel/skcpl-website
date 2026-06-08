@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard | SKCPL Website</title>
-  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
@@ -15,23 +15,21 @@
     h1, h2, h3 {
       font-family: 'Montserrat', sans-serif;
     }
-    .hidden {
-      display: none !important;
-    }
+    .hidden { display: none !important; }
   </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4">
+<body class="min-h-screen flex flex-col items-center p-4 sm:p-8">
 
   <!-- Status Notification Container -->
   <div id="status-toast" class="fixed top-4 right-4 max-w-sm w-full p-4 rounded-lg shadow-lg hidden transition-opacity duration-300 z-50 text-white font-medium">
     <span id="status-message"></span>
   </div>
 
-  <!-- AUTHENTICATION VIEW -->
-  <div id="auth-view" class="w-full max-w-md bg-white p-8 rounded-xl shadow-md border border-gray-100">
+  <!-- AUTHENTICATION VIEW (Visible by default) -->
+  <div id="auth-view" class="w-full max-w-md bg-white p-8 rounded-xl shadow-md border border-gray-100 mt-10">
     <div class="text-center mb-8">
       <h2 class="text-2xl font-bold text-gray-900 mb-2">Admin Access</h2>
-      <p class="text-gray-500 text-sm">Sign in to manage website content and images.</p>
+      <p class="text-gray-500 text-sm">Sign in to manage website images.</p>
     </div>
     
     <div id="login-form" class="space-y-5">
@@ -41,146 +39,126 @@
       </div>
       <div>
         <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-        <input type="password" id="password" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
+        <input type="password" id="password" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all" onkeypress="if(event.key === 'Enter') attemptLogin()">
       </div>
       <button type="button" id="login-btn" onclick="attemptLogin()" class="w-full bg-blue-600 text-white font-semibold py-2.5 rounded-lg hover:bg-blue-700 transition-colors flex justify-center items-center gap-2">
         <span>Sign In</span>
       </button>
     </div>
+
+    <!-- On-screen debug log to help figure out why login might fail -->
+    <div class="mt-8 pt-4 border-t border-gray-200">
+      <p class="text-xs text-gray-400 font-semibold mb-2 uppercase tracking-wider">System Logs</p>
+      <div id="debug-log" class="bg-gray-50 p-3 rounded-lg border border-gray-200 text-xs text-gray-600 font-mono h-32 overflow-y-auto whitespace-pre-wrap">Waiting for action...</div>
+    </div>
   </div>
 
   <!-- DASHBOARD VIEW -->
-  <div id="dashboard-view" class="w-full max-w-2xl bg-white rounded-xl shadow-md border border-gray-100 hidden flex-col overflow-hidden">
+  <div id="dashboard-view" class="w-full max-w-5xl bg-white rounded-xl shadow-md border border-gray-100 hidden flex-col overflow-hidden mb-10 mt-6">
     <!-- Header -->
     <div class="bg-gray-900 text-white px-6 py-4 flex justify-between items-center">
-      <h1 class="text-xl font-bold">Content Dashboard</h1>
+      <h1 class="text-xl font-bold">Image Manager</h1>
       <div class="flex items-center gap-4">
         <span id="user-email" class="text-sm text-gray-300 hidden sm:block"></span>
-        <button id="logout-btn" class="text-sm bg-gray-800 hover:bg-gray-700 border border-gray-700 px-4 py-1.5 rounded-md transition-colors">Sign Out</button>
+        <button id="logout-btn" onclick="attemptLogout()" class="text-sm bg-gray-800 hover:bg-gray-700 border border-gray-700 px-4 py-1.5 rounded-md transition-colors">Sign Out</button>
       </div>
     </div>
 
-    <!-- Main Form Content -->
+    <!-- Main Content -->
     <div class="p-6 sm:p-8">
-      <h2 class="text-lg font-bold text-gray-800 mb-1">Update Website Content</h2>
-      <p class="text-sm text-gray-500 mb-8">Update text fields or upload new banners/product photos to the website.</p>
+      <p class="text-sm text-gray-500 mb-8">Upload a new photo to instantly replace the current one on the live website.</p>
 
-      <form id="content-form" class="space-y-6">
-        
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div class="sm:col-span-2">
-            <label for="content-key" class="block text-sm font-medium text-gray-700 mb-1">Content Key / Identifier <span class="text-red-500">*</span></label>
-            <input type="text" id="content-key" placeholder="e.g., hero_banner, about_us_text" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all text-sm">
-            <p class="text-xs text-gray-400 mt-1">The unique identifier used on the website to fetch this content.</p>
-          </div>
-        </div>
-
-        <div>
-          <label for="content-text" class="block text-sm font-medium text-gray-700 mb-1">Text Content</label>
-          <textarea id="content-text" rows="4" placeholder="Enter the text to display on the website..." class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all text-sm"></textarea>
-        </div>
-
-        <div class="border border-dashed border-gray-300 rounded-xl p-6 bg-gray-50">
-          <label class="block text-sm font-medium text-gray-700 mb-3">Upload Image (Banner or Product Photo)</label>
-          <div class="flex items-center justify-center w-full">
-            <label for="image-upload" class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white hover:bg-gray-50 transition-colors">
-              <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                <svg class="w-8 h-8 mb-3 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-                </svg>
-                <p class="mb-1 text-sm text-gray-500"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                <p class="text-xs text-gray-400">PNG, JPG, WEBP, AVIF (MAX. 5MB)</p>
-              </div>
-              <input id="image-upload" type="file" accept="image/*" class="hidden" />
-            </label>
-          </div>
-          <p id="file-name-display" class="text-sm text-blue-600 mt-2 font-medium hidden text-center truncate"></p>
-        </div>
-
-        <div class="pt-2">
-          <button type="submit" id="save-btn" class="w-full bg-green-600 text-white font-bold py-3 rounded-lg hover:bg-green-700 transition-colors shadow-sm flex justify-center items-center gap-2">
-            <span>Save Content</span>
-          </button>
-        </div>
-
-      </form>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="image-grid">
+        <!-- Javascript will inject the image cards here -->
+        <div class="col-span-full text-center py-10 text-gray-500">Loading images...</div>
+      </div>
     </div>
   </div>
 
   <script>
-    // Supabase Initialization
+    // --- DEBUG LOGGING UTILITY ---
+    const debugEl = document.getElementById('debug-log');
+    function logDebug(msg) {
+      console.log(msg);
+      if(debugEl) {
+        const time = new Date().toLocaleTimeString();
+        debugEl.innerHTML += `\n[${time}] ${msg}`;
+        debugEl.scrollTop = debugEl.scrollHeight;
+      }
+    }
+
+    // --- SUPABASE INITIALIZATION ---
+    logDebug("Initializing Supabase...");
     const SUPABASE_URL = "https://shemnvgjpwetoljxrkjw.supabase.co";
     const SUPABASE_ANON_KEY = "sb_publishable_dkdAC8Q-78JEZmWm2B3IEg_frXP3JdH";
     let supabase = null;
     
     if (window.supabase) {
       supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      logDebug("Supabase client created successfully.");
+    } else {
+      logDebug("ERROR: window.supabase is undefined. Library failed to load from CDN.");
     }
 
-    // DOM Elements
+    // --- DOM ELEMENTS ---
     const authView = document.getElementById('auth-view');
     const dashboardView = document.getElementById('dashboard-view');
-    const loginForm = document.getElementById('login-form');
     const loginBtn = document.getElementById('login-btn');
-    const logoutBtn = document.getElementById('logout-btn');
     const userEmailSpan = document.getElementById('user-email');
-    
-    const contentForm = document.getElementById('content-form');
-    const saveBtn = document.getElementById('save-btn');
-    const fileInput = document.getElementById('image-upload');
-    const fileNameDisplay = document.getElementById('file-name-display');
     const statusToast = document.getElementById('status-toast');
     const statusMessage = document.getElementById('status-message');
+    const imageGrid = document.getElementById('image-grid');
 
-    // Utility: Show Toast Notification
+    // --- IMAGE KEYS DEFINITION ---
+    // These are the specific spots on the website that the father is allowed to edit.
+    const editableImages = [
+      { key: "index_about", label: "Main Home Page - About Us Image" },
+      { key: "resort_hero", label: "Fun N Food - Top Hero Banner" },
+      { key: "resort_about", label: "Fun N Food - About Us Photo" },
+      { key: "resort_gallery_1", label: "Resort Gallery Image 1" },
+      { key: "resort_gallery_2", label: "Resort Gallery Image 2" },
+      { key: "resort_gallery_3", label: "Resort Gallery Image 3" },
+      { key: "resort_gallery_4", label: "Resort Gallery Image 4" },
+      { key: "resort_gallery_5", label: "Resort Gallery Image 5" },
+      { key: "resort_gallery_6", label: "Resort Gallery Image 6" }
+    ];
+
+    // --- TOAST NOTIFICATION ---
     function showToast(message, type = 'info') {
       if (type === 'error') {
-        alert("Notice: " + message); // Fallback so user definitely sees it
+        alert("Notice: " + message);
       }
-      
       statusMessage.textContent = message;
       statusToast.className = `fixed top-4 right-4 max-w-sm w-full p-4 rounded-lg shadow-lg transition-opacity duration-300 z-50 text-white font-medium`;
       
-      if (type === 'error') {
-        statusToast.classList.add('bg-red-500');
-      } else if (type === 'success') {
-        statusToast.classList.add('bg-green-500');
-      } else {
-        statusToast.classList.add('bg-blue-500');
-      }
+      if (type === 'error') statusToast.classList.add('bg-red-500');
+      else if (type === 'success') statusToast.classList.add('bg-green-500');
+      else statusToast.classList.add('bg-blue-500');
       
       statusToast.classList.remove('hidden');
-      
-      // Auto hide after 4 seconds if not explicitly loading
       if (type !== 'loading') {
-        setTimeout(() => {
-          statusToast.classList.add('hidden');
-        }, 4000);
+        setTimeout(() => statusToast.classList.add('hidden'), 4000);
       }
     }
 
-    function hideToast() {
-      statusToast.classList.add('hidden');
-    }
-
-    // State Management
+    // --- AUTHENTICATION FLOW ---
     async function checkAuth() {
+      if (!supabase) return;
+      logDebug("Checking current authentication session...");
       try {
-        if (!window.supabase) {
-          throw new Error("Supabase library failed to load. Please check your internet connection or disable ad-blockers.");
-        }
         const { data: { session }, error } = await supabase.auth.getSession();
         if (error) throw error;
         
         if (session) {
+          logDebug(`Session found for: ${session.user.email}`);
           showDashboard(session.user);
         } else {
+          logDebug("No active session. Waiting for user login.");
           showLogin();
         }
       } catch (err) {
-        console.error("Auth check error:", err);
-        showToast(err.message || "Authentication error. Please try again.", "error");
-        showLogin(); // Fallback to show login so it's not a blank page
+        logDebug(`Auth check error: ${err.message}`);
+        showLogin();
       }
     }
 
@@ -193,42 +171,44 @@
       authView.classList.add('hidden');
       dashboardView.classList.remove('hidden');
       dashboardView.classList.add('flex');
-      if (user && user.email) {
-        userEmailSpan.textContent = user.email;
-      }
+      if (user && user.email) userEmailSpan.textContent = user.email;
+      loadDashboardImages();
     }
 
-    // Initialize Auth State on load
-    checkAuth();
-
-    // Listen to Auth changes
+    // Auto-listen to state changes (so if they log in/out in another tab, it updates)
     if (supabase) {
       supabase.auth.onAuthStateChange((event, session) => {
+        logDebug(`Auth event triggered: ${event}`);
         if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
           showDashboard(session.user);
         } else if (event === 'SIGNED_OUT') {
           showLogin();
         }
       });
+      // Initial check
+      checkAuth();
     }
 
-    // Handle Login
     async function attemptLogin() {
+      logDebug("Login button clicked!");
       if (!supabase) {
-        showToast("System error: Supabase is not connected. Please disable adblockers or check your connection.", "error");
+        showToast("System error: Supabase is not connected.", "error");
+        logDebug("ERROR: Cannot login because supabase is null.");
         return;
       }
       
       const emailInput = document.getElementById('email');
       const passwordInput = document.getElementById('password');
-      const email = emailInput.value;
+      const email = emailInput.value.trim();
       const password = passwordInput.value;
       
       if (!email || !password) {
         showToast("Please enter both email and password.", "error");
+        logDebug("ERROR: Email or password field was empty.");
         return;
       }
       
+      logDebug(`Attempting to sign in with email: ${email}`);
       const originalText = loginBtn.innerHTML;
       loginBtn.innerHTML = '<span>Logging in...</span>';
       loginBtn.disabled = true;
@@ -240,14 +220,17 @@
         });
 
         if (error) {
+          logDebug(`Supabase login rejected: ${error.message}`);
           showToast(error.message, 'error');
         } else {
+          logDebug(`Login successful! User ID: ${data.user.id}`);
           showToast('Successfully logged in!', 'success');
           emailInput.value = '';
           passwordInput.value = '';
+          // The onAuthStateChange listener will automatically call showDashboard
         }
       } catch (err) {
-        console.error("Login Error:", err);
+        logDebug(`Unexpected login exception: ${err.message}`);
         showToast(err.message || "Failed to log in", "error");
       } finally {
         loginBtn.innerHTML = originalText;
@@ -255,106 +238,135 @@
       }
     }
 
-    // Handle Logout
-    logoutBtn.addEventListener('click', async () => {
+    async function attemptLogout() {
+      logDebug("Logging out...");
       const { error } = await supabase.auth.signOut();
       if (error) {
+        logDebug(`Logout error: ${error.message}`);
         showToast('Error signing out', 'error');
       } else {
+        logDebug("Logged out successfully.");
         showToast('Signed out successfully', 'success');
       }
-    });
+    }
 
-    // Display selected file name
-    fileInput.addEventListener('change', (e) => {
-      if (e.target.files.length > 0) {
-        fileNameDisplay.textContent = `Selected File: ${e.target.files[0].name}`;
-        fileNameDisplay.classList.remove('hidden');
-      } else {
-        fileNameDisplay.classList.add('hidden');
-      }
-    });
-
-    // Handle Content Submission (Text + Image Upload)
-    contentForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
+    // --- DASHBOARD IMAGE MANAGER ---
+    async function loadDashboardImages() {
+      logDebug("Fetching current website images from database...");
+      imageGrid.innerHTML = '<div class="col-span-full text-center py-10 text-gray-500">Loading images...</div>';
       
-      const contentKey = document.getElementById('content-key').value.trim();
-      const contentText = document.getElementById('content-text').value.trim();
-      const file = fileInput.files[0];
-
-      if (!contentKey) {
-        showToast('Content Key is required', 'error');
-        return;
-      }
-
-      const originalText = saveBtn.innerHTML;
-      saveBtn.innerHTML = '<span>Uploading...</span>';
-      saveBtn.disabled = true;
-      saveBtn.classList.add('opacity-70');
-      
-      showToast('Uploading...', 'loading');
-
-      let publicImageUrl = null;
-
       try {
-        // 1. Upload Image if selected
-        if (file) {
-          const fileExt = file.name.split('.').pop();
-          const fileName = `${Math.random().toString(36).substring(2, 15)}_${Date.now()}.${fileExt}`;
-          const filePath = `${contentKey}/${fileName}`;
-
-          const { data: uploadData, error: uploadError } = await supabase.storage
-            .from('website-images')
-            .upload(filePath, file, {
-              cacheControl: '3600',
-              upsert: true
-            });
-
-          if (uploadError) throw uploadError;
-
-          // 2. Get Public URL
-          const { data: { publicUrl } } = supabase.storage
-            .from('website-images')
-            .getPublicUrl(filePath);
-
-          publicImageUrl = publicUrl;
+        // Fetch all existing images
+        const { data: records, error } = await supabase.from('site_content').select('*');
+        if (error) throw error;
+        
+        // Map them by key for easy lookup
+        const recordMap = {};
+        if (records) {
+          records.forEach(r => recordMap[r.key] = r);
         }
 
-        // 3. Save to Database (site_content table)
-        // Upsert record matching the contentKey
+        imageGrid.innerHTML = '';
+        
+        // Render a card for each editable image
+        editableImages.forEach((imgObj) => {
+          const currentRecord = recordMap[imgObj.key];
+          const hasImage = currentRecord && currentRecord.image_url;
+          const displayUrl = hasImage ? currentRecord.image_url : 'https://placehold.co/600x400/e2e8f0/64748b?text=No+Photo+Yet';
+          
+          const cardHtml = `
+            <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col">
+              <!-- Image Preview -->
+              <div class="h-48 w-full bg-gray-100 relative group">
+                <img src="${displayUrl}" class="w-full h-full object-cover" alt="${imgObj.label}">
+                <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                   <button onclick="triggerFileInput('${imgObj.key}')" class="bg-white text-gray-900 px-4 py-2 rounded-lg font-semibold text-sm shadow-lg hover:bg-gray-50 transition-colors">
+                     Replace Photo
+                   </button>
+                </div>
+              </div>
+              
+              <!-- Details -->
+              <div class="p-4 border-t border-gray-100 flex-grow flex flex-col justify-between">
+                <div>
+                  <h3 class="font-bold text-gray-800 text-sm mb-1">${imgObj.label}</h3>
+                  <p class="text-xs text-gray-500 break-all mb-3">ID: ${imgObj.key}</p>
+                </div>
+                
+                <!-- Hidden file input triggered by the button -->
+                <input type="file" id="file-${imgObj.key}" accept="image/*" class="hidden" onchange="handleImageUpload(event, '${imgObj.key}')">
+                
+                <button onclick="triggerFileInput('${imgObj.key}')" class="w-full py-2 bg-gray-50 border border-gray-200 hover:bg-gray-100 text-gray-700 text-sm font-semibold rounded-lg transition-colors flex items-center justify-center gap-2">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                  Upload New Photo
+                </button>
+              </div>
+            </div>
+          `;
+          imageGrid.innerHTML += cardHtml;
+        });
+
+        logDebug("Image gallery rendered successfully.");
+
+      } catch (err) {
+        logDebug(`Error loading images: ${err.message}`);
+        imageGrid.innerHTML = `<div class="col-span-full text-center py-10 text-red-500 font-semibold">Failed to load images: ${err.message}</div>`;
+      }
+    }
+
+    function triggerFileInput(key) {
+      document.getElementById(`file-${key}`).click();
+    }
+
+    async function handleImageUpload(event, key) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      logDebug(`Uploading new file for ${key}...`);
+      showToast('Uploading new photo...', 'loading');
+
+      try {
+        // 1. Upload to Storage Bucket
+        const fileExt = file.name.split('.').pop();
+        const fileName = `${key}_${Date.now()}.${fileExt}`;
+        const filePath = `${key}/${fileName}`;
+
+        const { data: uploadData, error: uploadError } = await supabase.storage
+          .from('website-images')
+          .upload(filePath, file, { cacheControl: '3600', upsert: true });
+
+        if (uploadError) throw uploadError;
+
+        // 2. Get Public URL
+        const { data: { publicUrl } } = supabase.storage
+          .from('website-images')
+          .getPublicUrl(filePath);
+
+        // 3. Save to Database
         const record = {
-          key: contentKey,
-          content: contentText,
+          key: key,
+          image_url: publicUrl,
           updated_at: new Date().toISOString()
         };
 
-        if (publicImageUrl) {
-          record.image_url = publicImageUrl;
-        }
-
-        const { data: dbData, error: dbError } = await supabase
+        const { error: dbError } = await supabase
           .from('site_content')
           .upsert(record, { onConflict: 'key' });
 
         if (dbError) throw dbError;
 
-        showToast('Changes Saved Successfully!', 'success');
+        showToast('Photo updated successfully!', 'success');
+        logDebug(`Successfully updated ${key} with new photo URL.`);
         
-        // Reset form completely
-        contentForm.reset();
-        fileNameDisplay.classList.add('hidden');
+        // Reload dashboard to show the new image
+        loadDashboardImages();
 
       } catch (err) {
         console.error(err);
-        showToast(err.message || 'An error occurred during save.', 'error');
-      } finally {
-        // Restore button state
-        saveBtn.innerHTML = originalText;
-        saveBtn.disabled = false;
-        saveBtn.classList.remove('opacity-70');
+        logDebug(`Upload Error: ${err.message}`);
+        showToast(err.message || 'An error occurred during upload.', 'error');
       }
-    });
+    }
   </script>
 </body>
 </html>
