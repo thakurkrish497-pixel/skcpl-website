@@ -87,6 +87,12 @@
       // If we just scrolled back up (past is false), force a complete redraw of the canvas 
       // in case the mobile browser aggressively cleared its memory while hidden
       if (!past) {
+        // Hack for iOS Safari: rapidly altering width forces GPU memory reallocation
+        const w = canvas.width;
+        canvas.width = 1;
+        canvas.width = w;
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = "high";
         drawn = -1;
       }
     }
