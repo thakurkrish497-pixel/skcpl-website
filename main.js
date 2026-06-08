@@ -66,19 +66,26 @@
     return Math.round(t * (TOTAL - 1));
   }
 
-  /* ── Toggle canvas & hero visibility ── */
+  /* ── Toggle canvas & hero visibility + Main Content Fade ── */
   const heroOverlay = document.getElementById("hero-overlay");
+  const mainContent = document.querySelector("main");
 
   function updateCanvasVisibility() {
     const spacerBottom = cachedSpacerTop + cachedSpacerHeight;
     const startFadeY = spacerBottom - window.innerHeight;
 
-    // Smoothly fade out the canvas as the main content slides up
+    // Smoothly cross-fade: canvas fades out, main content fades in
     if (scrollY >= startFadeY && startFadeY > 0) {
-      const fadeFraction = Math.min(1, (scrollY - startFadeY) / window.innerHeight);
+      // Complete the fade over 60% of the viewport height for a smooth overlap
+      const fadeFraction = Math.min(1, (scrollY - startFadeY) / (window.innerHeight * 0.6));
       canvas.style.opacity = 1 - fadeFraction;
-    } else {
+      mainContent.style.opacity = fadeFraction;
+    } else if (scrollY < startFadeY) {
       canvas.style.opacity = 1;
+      mainContent.style.opacity = 0;
+    } else {
+      canvas.style.opacity = 0;
+      mainContent.style.opacity = 1;
     }
 
     const past = window.scrollY >= spacerBottom;
