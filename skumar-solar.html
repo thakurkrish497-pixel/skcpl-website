@@ -648,7 +648,7 @@
     const form = document.getElementById('solar-enquiry-form');
     const formMsg = document.getElementById('form-message');
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       
       const submitBtn = form.querySelector('button[type="submit"]');
@@ -656,21 +656,42 @@
       submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">refresh</span> SENDING...';
       submitBtn.disabled = true;
 
-      // Simulate API call delay
-      setTimeout(() => {
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      try {
+        if (window.supabase) {
+          const supabaseUrl = "https://shemnvgjpwetoljxrkjw.supabase.co";
+          const supabaseKey = "sb_publishable_dkdAC8Q-78JEZmWm2B3IEg_frXP3JdH";
+          const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+          
+          await supabase.from("enquiries").insert([{ name, phone, email, message, source: 'Solar' }]);
+        }
+
+        // Smart Redirect Logic
+        const textMessage = `New Solar Enquiry!\nName: ${name}\nPhone: ${phone}\nEmail: ${email}\nMessage: ${message}`;
+        const waUrl = `https://wa.me/919109016418?text=${encodeURIComponent(textMessage)}`;
+        window.location.href = waUrl;
+
         formMsg.classList.remove('hidden', 'bg-red-100', 'text-red-700');
         formMsg.classList.add('bg-green-100', 'text-green-700');
         formMsg.innerHTML = '<div class="flex items-center justify-center gap-2"><span class="material-symbols-outlined">check_circle</span> <strong>Success!</strong> Your solar enquiry has been submitted. Our team will contact you shortly.</div>';
         
         form.reset();
+      } catch (err) {
+        console.error("Submission error:", err);
+        formMsg.classList.remove('hidden', 'bg-green-100', 'text-green-700');
+        formMsg.classList.add('bg-red-100', 'text-red-700');
+        formMsg.innerHTML = '<div class="flex items-center justify-center gap-2"><span class="material-symbols-outlined">error</span> <strong>Error!</strong> Something went wrong. Please try again.</div>';
+      } finally {
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
-        
-        // Hide message after 5 seconds
         setTimeout(() => {
           formMsg.classList.add('hidden');
         }, 5000);
-      }, 1500);
+      }
     });
   </script>
 </body>

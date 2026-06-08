@@ -228,6 +228,21 @@
           
         if (error) throw error;
         
+        // Smart Redirect Logic
+        const textMessage = `New Enquiry!\nName: ${name}\nPhone: ${phone}\nEmail: ${email}\nMessage: ${message}`;
+        const isFunNFood = window.location.pathname.includes('fun-n-food');
+        
+        if (isFunNFood) {
+          const waUrl = `https://wa.me/919479800333?text=${encodeURIComponent(textMessage)}`;
+          const mailUrl = `mailto:funandfoodresort@gmail.com?subject=New Enquiry from ${encodeURIComponent(name)}&body=${encodeURIComponent(textMessage)}`;
+          // Try opening email in background, redirect main window to WhatsApp
+          window.open(mailUrl, '_blank');
+          window.location.href = waUrl;
+        } else {
+          const mailUrl = `mailto:s.kumarcreation@yahoo.com?subject=New Enquiry from ${encodeURIComponent(name)}&body=${encodeURIComponent(textMessage)}`;
+          window.location.href = mailUrl;
+        }
+        
         // Success
         successMsg.classList.remove("hidden");
         form.reset();
