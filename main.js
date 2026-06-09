@@ -304,12 +304,11 @@
       });
 
       // 4. Render Infinite Gallery
-      galleryImages.sort((a, b) => a.key.localeCompare(b.key));
+      galleryImages.sort((a, b) => b.key.localeCompare(a.key)); // Sort newest first
       
       const galleryContainers = document.querySelectorAll('[data-dynamic-gallery]');
       galleryContainers.forEach(container => {
         if (galleryImages.length > 0) {
-          container.innerHTML = ''; // Remove hardcoded images
           galleryImages.forEach(img => {
             const div = document.createElement('div');
             // A hybrid responsive class that looks good on both pages
@@ -318,7 +317,7 @@
               <img src="${img.image_url}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
               <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
             `;
-            container.appendChild(div);
+            container.prepend(div);
           });
         }
       });
