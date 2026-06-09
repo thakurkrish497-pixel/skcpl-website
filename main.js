@@ -267,25 +267,62 @@
   async function loadDynamicContent() {
     if (!supabase) return;
     try {
-      const { data, error } = await supabase.from('site_content').select('key, image_url');
+      const { data, error } = await supabase.from('site_content').select('key, image_url, content');
       if (error) throw error;
       if (!data) return;
 
+      const galleryImages = [];
+
       data.forEach(record => {
-        // Find elements that map to this key
-        const els = document.querySelectorAll(`[data-dynamic-image="${record.key}"]`);
-        els.forEach(el => {
+        // 1. Handle Dynamic Images
+        const imgEls = document.querySelectorAll(`[data-dynamic-image="${record.key}"]`);
+        imgEls.forEach(el => {
           if (record.image_url && el.tagName === 'IMG') {
             el.src = record.image_url;
             if (!el.hasAttribute("loading")) {
               el.setAttribute("loading", "lazy");
             }
           } else if (record.image_url) {
-            // Background image replacement for any block element (e.g., DIV, HEADER, SECTION)
+            // Background image replacement
             el.style.backgroundImage = `url('${record.image_url}')`;
           }
         });
+
+        // 2. Handle Dynamic Text
+        const txtEls = document.querySelectorAll(`[data-dynamic-text="${record.key}"]`);
+        txtEls.forEach(el => {
+          if (record.content) {
+            // Convert newlines to breaks to preserve paragraphs
+            el.innerHTML = record.content.replace(/\n/g, '<br>');
+          }
+        });
+
+        // 3. Collect Infinite Gallery Images
+        if (record.key.startsWith('gallery_item_') && record.image_url) {
+          galleryImages.push(record);
+        }
       });
+
+      // 4. Render Infinite Gallery
+      galleryImages.sort((a, b) => a.key.localeCompare(b.key));
+      
+      const galleryContainers = document.querySelectorAll('[data-dynamic-gallery]');
+      galleryContainers.forEach(container => {
+        if (galleryImages.length > 0) {
+          container.innerHTML = ''; // Remove hardcoded images
+          galleryImages.forEach(img => {
+            const div = document.createElement('div');
+            // A hybrid responsive class that looks good on both pages
+            div.className = "group relative rounded-xl overflow-hidden h-48 sm:h-64 cursor-pointer shadow-sm hover:shadow-md transition-shadow";
+            div.innerHTML = `
+              <img src="${img.image_url}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+              <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
+            `;
+            container.appendChild(div);
+          });
+        }
+      });
+
     } catch (err) {
       console.error("Error loading dynamic content:", err);
     }
