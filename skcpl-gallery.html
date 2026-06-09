@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKCPL Construction Gallery | SKCPL Group</title>
+  <meta name="description" content="Explore the dynamic gallery of S. Kumar Creation Pvt. Ltd. (SKCPL) projects.">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    @media (max-width: 900px) {
+      .hamburger { display: flex; }
+      .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: #021936;
+        flex-direction: column;
+        padding: 80px 32px 32px;
+        gap: 2rem;
+        transition: right 0.4s ease;
+        z-index: 200;
+        overflow-y: auto;
+      }
+      .nav-menu.open { right: 0; }
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md">
+
+  <!-- NAVIGATION BAR -->
+  <nav class="site-navbar scrolled" style="background: #021936;" id="site-navbar">
+    <a href="index.html" class="nav-brand">SKCPL</a>
+    <ul class="nav-menu" id="nav-menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#about">About Us</a></li>
+      <li><a href="index.html#expertise">Services</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#gallery">Gallery</a></li>
+      <li><a href="index.html#contact" class="bg-secondary-fixed text-on-secondary-fixed px-4 py-2 rounded-lg font-bold hover:shadow-lg transition-all ml-2">Enquiry</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <main class="pt-32 pb-xl px-margin min-h-screen">
+    <div class="container mx-auto">
+      <div class="text-center mb-12">
+        <span class="inline-block py-2 px-5 bg-primary/5 text-primary font-label-md text-label-md mb-md rounded-lg tracking-widest">PORTFOLIO</span>
+        <h1 class="font-headline-xl text-headline-xl text-primary">SKCPL Gallery</h1>
+        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mx-auto mt-2">A showcase of our recent projects and operations.</p>
+      </div>
+
+      <!-- Dynamic Gallery Container -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4" data-dynamic-gallery="skcpl">
+        <!-- Main.js will dynamically inject images here -->
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-primary py-lg px-margin">
+    <div class="container mx-auto border-t border-white/10 pt-md flex flex-col md:flex-row justify-between items-center gap-2 text-white/30">
+      <p class="font-caption text-caption">Copyright &copy; S. Kumar Creation Pvt. Ltd. All rights reserved.</p>
+      <div class="flex gap-4">
+        <a href="privacy-policy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+        <a href="terms-of-service.html" class="hover:text-white transition-colors">Terms of Service</a>
+        <a href="faq.html" class="hover:text-white transition-colors">FAQ</a>
+        <a href="admin.html" class="hover:text-white transition-colors">Admin</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./main.js"></script>
+  <script>
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+    if (hamburger && navMenu) {
+      hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('open');
+      });
+      navMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => navMenu.classList.remove('open'));
+      });
+    }
+  </script>
+</body>
+</html>

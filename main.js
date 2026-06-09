@@ -298,8 +298,10 @@
         });
 
         // 3. Collect Infinite Gallery Images
-        if (record.key.startsWith('gallery_item_') && record.image_url) {
-          galleryImages.push(record);
+        if (record.key.startsWith('skcpl_gallery_item_') || record.key.startsWith('resort_gallery_item_')) {
+          if (record.image_url) {
+            galleryImages.push(record);
+          }
         }
       });
 
@@ -308,8 +310,11 @@
       
       const galleryContainers = document.querySelectorAll('[data-dynamic-gallery]');
       galleryContainers.forEach(container => {
-        if (galleryImages.length > 0) {
-          galleryImages.forEach(img => {
+        const galleryType = container.getAttribute('data-dynamic-gallery'); // 'skcpl' or 'resort'
+        const relevantImages = galleryImages.filter(img => img.key.startsWith(`${galleryType}_gallery_item_`));
+
+        if (relevantImages.length > 0) {
+          relevantImages.forEach(img => {
             const div = document.createElement('div');
             // A hybrid responsive class that looks good on both pages
             div.className = "group relative rounded-xl overflow-hidden h-48 sm:h-64 cursor-pointer shadow-sm hover:shadow-md transition-shadow";
@@ -317,7 +322,8 @@
               <img src="${img.image_url}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
               <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
             `;
-            container.prepend(div);
+            // Since it's a dedicated page now, we can use appendChild (or prepend, doesn't matter, it starts empty)
+            container.appendChild(div);
           });
         }
       });

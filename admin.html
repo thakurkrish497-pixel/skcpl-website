@@ -105,16 +105,43 @@
 
       <!-- Dynamic Gallery Tab -->
       <div id="tab-gallery" class="tab-content hidden">
-        <div class="flex justify-between items-center mb-6">
-          <p class="text-sm text-gray-500">Manage the dynamically growing image gallery.</p>
-          <button onclick="triggerNewGalleryUpload()" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold text-sm hover:bg-blue-700 transition-colors shadow-sm">
-            + Upload New Photo
-          </button>
-          <input type="file" id="new-gallery-upload" accept="image/*" class="hidden" onchange="handleNewGalleryUpload(event)">
+        
+        <!-- SKCPL Gallery -->
+        <div class="mb-10">
+          <div class="flex justify-between items-center mb-6">
+            <div>
+              <h2 class="text-lg font-bold text-gray-800">SKCPL Construction Gallery</h2>
+              <p class="text-sm text-gray-500">Images shown on the SKCPL gallery page.</p>
+            </div>
+            <button onclick="triggerNewGalleryUpload('skcpl')" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold text-sm hover:bg-blue-700 transition-colors shadow-sm">
+              + Upload SKCPL Photo
+            </button>
+            <input type="file" id="new-gallery-upload-skcpl" accept="image/*" class="hidden" onchange="handleNewGalleryUpload(event, 'skcpl')">
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="dynamic-gallery-grid-skcpl">
+            <div class="col-span-full text-center py-10 text-gray-500">Loading gallery...</div>
+          </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="dynamic-gallery-grid">
-          <div class="col-span-full text-center py-10 text-gray-500">Loading gallery...</div>
+
+        <hr class="mb-10">
+
+        <!-- Resort Gallery -->
+        <div>
+          <div class="flex justify-between items-center mb-6">
+            <div>
+              <h2 class="text-lg font-bold text-gray-800">Fun N Food Resort Gallery</h2>
+              <p class="text-sm text-gray-500">Images shown on the Resort gallery page.</p>
+            </div>
+            <button onclick="triggerNewGalleryUpload('resort')" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold text-sm hover:bg-blue-700 transition-colors shadow-sm">
+              + Upload Resort Photo
+            </button>
+            <input type="file" id="new-gallery-upload-resort" accept="image/*" class="hidden" onchange="handleNewGalleryUpload(event, 'resort')">
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="dynamic-gallery-grid-resort">
+            <div class="col-span-full text-center py-10 text-gray-500">Loading gallery...</div>
+          </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -181,9 +208,27 @@ try {
   
   // --- IMAGE KEYS DEFINITION ---
   const editableImages = [
-    { key: "index_about", label: "Main Home Page - About Us Image" },
+    { key: "index_about", label: "Home Page - About Us Image 1" },
+    { key: "index_about_2", label: "Home Page - About Us Image 2" },
+    { key: "proj_telecom", label: "Home Page - Project Telecom" },
+    { key: "proj_infrastructure", label: "Home Page - Project Infrastructure" },
+    { key: "proj_real_estate", label: "Home Page - Project Real Estate" },
+    { key: "proj_parshav", label: "Home Page - Project Parshav Nath City" },
+    { key: "proj_hospitality", label: "Home Page - Project Hospitality" },
+    { key: "proj_bhel", label: "Home Page - Project BHEL" },
+    { key: "index_gallery_1", label: "Home Page - Base Gallery 1" },
+    { key: "index_gallery_2", label: "Home Page - Base Gallery 2" },
+    { key: "index_gallery_3", label: "Home Page - Base Gallery 3" },
+    { key: "index_gallery_4", label: "Home Page - Base Gallery 4" },
     { key: "resort_hero", label: "Fun N Food - Top Hero Banner" },
-    { key: "resort_about", label: "Fun N Food - About Us Photo" }
+    { key: "resort_about", label: "Fun N Food - About Us Image 1" },
+    { key: "resort_about_2", label: "Fun N Food - About Us Image 2" },
+    { key: "resort_gallery_1", label: "Fun N Food - Base Gallery 1" },
+    { key: "resort_gallery_2", label: "Fun N Food - Base Gallery 2" },
+    { key: "resort_gallery_3", label: "Fun N Food - Base Gallery 3" },
+    { key: "resort_gallery_4", label: "Fun N Food - Base Gallery 4" },
+    { key: "resort_gallery_5", label: "Fun N Food - Base Gallery 5" },
+    { key: "resort_gallery_6", label: "Fun N Food - Base Gallery 6" }
   ];
 
   // --- TEXT KEYS DEFINITION ---
@@ -354,7 +399,7 @@ try {
       if (records) {
         records.forEach(r => {
           recordMap[r.key] = r;
-          if (r.key.startsWith('gallery_item_')) {
+          if (r.key.startsWith('skcpl_gallery_item_') || r.key.startsWith('resort_gallery_item_')) {
             galleryRecords.push(r);
           }
         });
@@ -412,27 +457,39 @@ try {
       });
 
       // Render Dynamic Gallery
-      const dynamicGalleryGrid = document.getElementById('dynamic-gallery-grid');
-      dynamicGalleryGrid.innerHTML = '';
-      if (galleryRecords.length === 0) {
-        dynamicGalleryGrid.innerHTML = '<div class="col-span-full text-center py-10 text-gray-500">No images in dynamic gallery yet.</div>';
-      } else {
-        galleryRecords.sort((a,b) => b.key.localeCompare(a.key)); // newest first since key uses timestamp
-        galleryRecords.forEach(img => {
-          dynamicGalleryGrid.innerHTML += `
-            <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm flex flex-col">
-              <div class="h-48 w-full bg-gray-100 relative">
-                <img src="${img.image_url}" class="w-full h-full object-cover">
+      const skcplGalleryGrid = document.getElementById('dynamic-gallery-grid-skcpl');
+      const resortGalleryGrid = document.getElementById('dynamic-gallery-grid-resort');
+      skcplGalleryGrid.innerHTML = '';
+      resortGalleryGrid.innerHTML = '';
+      
+      const skcplImages = galleryRecords.filter(r => r.key.startsWith('skcpl_gallery_item_'));
+      const resortImages = galleryRecords.filter(r => r.key.startsWith('resort_gallery_item_'));
+
+      function renderDynamicGallery(gridEl, images) {
+        if (images.length === 0) {
+          gridEl.innerHTML = '<div class="col-span-full text-center py-10 text-gray-500">No images yet.</div>';
+        } else {
+          images.sort((a,b) => b.key.localeCompare(a.key)); // newest first
+          images.forEach(img => {
+            gridEl.innerHTML += `
+              <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm flex flex-col">
+                <div class="h-48 w-full bg-gray-100 relative">
+                  <img src="${img.image_url}" class="w-full h-full object-cover">
+                </div>
+                <div class="p-4 border-t border-gray-100">
+                  <p class="text-xs text-gray-500 break-all mb-3">${img.key}</p>
+                  <button onclick="deleteGalleryItem('${img.key}')" class="w-full py-2 bg-red-50 text-red-600 hover:bg-red-100 font-semibold rounded-lg text-sm transition-colors">
+                    Delete Image
+                  </button>
+                </div>
               </div>
-              <div class="p-4 border-t border-gray-100">
-                <button onclick="deleteGalleryItem('${img.key}')" class="w-full py-2 bg-red-50 text-red-600 hover:bg-red-100 font-semibold rounded-lg text-sm transition-colors">
-                  Delete Image
-                </button>
-              </div>
-            </div>
-          `;
-        });
+            `;
+          });
+        }
       }
+
+      renderDynamicGallery(skcplGalleryGrid, skcplImages);
+      renderDynamicGallery(resortGalleryGrid, resortImages);
 
       logDebug("Dashboard data rendered successfully.");
     } catch (err) {
@@ -511,16 +568,16 @@ try {
     }
   }
 
-  window.triggerNewGalleryUpload = function() {
-    document.getElementById('new-gallery-upload').click();
+  window.triggerNewGalleryUpload = function(type) {
+    document.getElementById(`new-gallery-upload-${type}`).click();
   }
 
-  window.handleNewGalleryUpload = async function(event) {
+  window.handleNewGalleryUpload = async function(event, type) {
     const file = event.target.files[0];
     if (!file) return;
     
     // Generate a unique ID for the new gallery item
-    const newKey = `gallery_item_${Date.now()}`;
+    const newKey = `${type}_gallery_item_${Date.now()}`;
     await window.handleImageUpload(event, newKey);
   }
 
