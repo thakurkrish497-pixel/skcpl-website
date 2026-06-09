@@ -6,7 +6,7 @@
 
   /* ── DOM ── */
   const canvas = document.getElementById("canvas");
-  const ctx = canvas.getContext("2d");
+  const ctx = canvas ? canvas.getContext("2d") : null;
   const spacer = document.getElementById("scroll-spacer");
   const preloader = document.getElementById("preloader");
   const pctEl = document.getElementById("loader-percent");
@@ -24,6 +24,7 @@
 
   /* ── Resize (retina-aware) ── */
   function resize() {
+    if (!canvas || !spacer) return;
     const dpr = window.devicePixelRatio || 1;
     canvas.width = window.innerWidth * dpr;
     canvas.height = window.innerHeight * dpr;
@@ -39,7 +40,7 @@
 
   /* ── Draw one frame (cover-fit, centred — fills full viewport, no grey bars) ── */
   function paint(idx) {
-    if (idx === drawn) return;
+    if (!canvas || idx === drawn) return;
     drawn = idx;
 
     const img = imgs[idx];
@@ -69,6 +70,7 @@
   const heroOverlay = document.getElementById("hero-overlay");
 
   function updateCanvasVisibility() {
+    if (!canvas || !heroOverlay) return;
     const spacerBottom = cachedSpacerTop + cachedSpacerHeight;
     const startFadeY = spacerBottom - window.innerHeight;
 
@@ -100,6 +102,7 @@
 
   /* ── Fade hero text: fully visible at 0%, gone by 45% ── */
   function updateHeroFade(y) {
+    if (!heroOverlay) return;
     const fraction = cachedMaxScroll > 0 ? Math.min(1, Math.max(0, y / cachedMaxScroll)) : 0;
 
     // Map 0–0.45 → 1–0 opacity (stay visible longer into animation)
@@ -125,6 +128,7 @@
   /* ── Navbar scroll state ── */
   const navbar = document.getElementById("site-navbar");
   function updateNavbar() {
+    if (!navbar) return;
     if (window.scrollY > 80) {
       navbar.classList.add("scrolled");
     } else {
@@ -170,6 +174,7 @@
 
   /* ── Boot ── */
   async function init() {
+    if (!canvas) return;
     resize();
     await preload();
 
@@ -262,7 +267,7 @@
   async function loadDynamicContent() {
     if (!supabase) return;
     try {
-      const { data, error } = await supabase.from('site_content').select('key, image_url, content');
+      const { data, error } = await supabase.from('site_content').select('key, image_url');
       if (error) throw error;
       if (!data) return;
 
