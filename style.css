@@ -846,6 +846,10 @@ footer {
     grid-row: span 1;
     grid-column: span 1;
   }
+  
+  #scroll-spacer {
+    height: 150vh;
+  }
 
   /* --- Global Mobile Overrides for Custom Theme Values --- */
   .px-margin {
