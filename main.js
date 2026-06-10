@@ -1,11 +1,14 @@
 (() => {
   /* ── Config ── */
-  const START = 160;
-  const TOTAL = 81;
   const isMobile = window.innerWidth <= 768;
-  const src = (i) => isMobile 
-    ? `/public/frames/mobile/ezgif-frame-${String(START + i)}.jpg`
-    : `/public/frames/ezgif-frame-${String(START + i)}.jpg`;
+  const START = isMobile ? 1 : 160;
+  const TOTAL = isMobile ? 64 : 81;
+  const src = (i) => {
+    const frameNum = String(START + i).padStart(3, '0');
+    return isMobile 
+      ? `/public/frames/mobile/ezgif-frame-${frameNum}.jpg`
+      : `/public/frames/ezgif-frame-${frameNum}.jpg`;
+  };
 
   /* ── DOM ── */
   const canvas = document.getElementById("canvas");
