@@ -2,7 +2,10 @@
   /* ── Config ── */
   const START = 160;
   const TOTAL = 81;
-  const src = (i) => `/public/frames/ezgif-frame-${String(START + i)}.jpg`;
+  const isMobile = window.innerWidth <= 768;
+  const src = (i) => isMobile 
+    ? `/public/frames/mobile/ezgif-frame-${String(START + i)}.jpg`
+    : `/public/frames/ezgif-frame-${String(START + i)}.jpg`;
 
   /* ── DOM ── */
   const canvas = document.getElementById("canvas");
