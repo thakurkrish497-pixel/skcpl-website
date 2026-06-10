@@ -61,8 +61,9 @@
     const cw = canvas.width, ch = canvas.height;
     const iw = img.naturalWidth, ih = img.naturalHeight;
 
-    // cover: scale so the image fills the canvas entirely (crops if needed)
-    const s = Math.max(cw / iw, ch / ih);
+    // On mobile, fit the whole image (contain). On desktop, cover the screen.
+    const isMobile = window.innerWidth <= 768;
+    const s = isMobile ? Math.min(cw / iw, ch / ih) : Math.max(cw / iw, ch / ih);
     const dw = iw * s, dh = ih * s;
     const dx = (cw - dw) / 2;
     const dy = (ch - dh) / 2;
