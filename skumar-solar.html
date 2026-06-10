@@ -202,6 +202,28 @@
       }
       .nav-menu.open { right: 0; }
     }
+
+    /* ── Hero Slideshow ── */
+    @keyframes heroSlideshow {
+      0% { opacity: 0; transform: scale(1.05); }
+      6.25% { opacity: 1; transform: scale(1); }
+      25% { opacity: 1; transform: scale(1); }
+      31.25% { opacity: 0; transform: scale(1.05); }
+      100% { opacity: 0; transform: scale(1.05); }
+    }
+    .slideshow-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      animation: heroSlideshow 20s infinite;
+    }
+    .slideshow-bg:nth-child(1) { animation-delay: 0s; }
+    .slideshow-bg:nth-child(2) { animation-delay: 5s; }
+    .slideshow-bg:nth-child(3) { animation-delay: 10s; }
+    .slideshow-bg:nth-child(4) { animation-delay: 15s; }
   </style>
 </head>
 <body class="bg-background text-on-surface font-body-md selection:bg-green-500 selection:text-white">
@@ -228,8 +250,15 @@
   <!-- ══════════════════════════════════════════════ -->
   <!-- HERO SECTION                                  -->
   <!-- ══════════════════════════════════════════════ -->
-  <header class="solar-hero h-screen flex items-center justify-center text-center px-margin pt-20" id="top">
-    <div>
+  <header class="relative h-screen flex items-center justify-center text-center px-margin pt-20 overflow-hidden bg-primary" id="top">
+    <div class="absolute inset-0 z-0 bg-black">
+      <img data-dynamic-image="solar_gallery_1" src="./public/brands/skumar_solar_hero.png" alt="Slideshow Image 1" class="slideshow-bg">
+      <img data-dynamic-image="solar_gallery_2" src="./public/brands/skumar_solar_hero.png" alt="Slideshow Image 2" class="slideshow-bg">
+      <img data-dynamic-image="solar_gallery_3" src="./public/brands/skumar_solar_hero.png" alt="Slideshow Image 3" class="slideshow-bg">
+      <img data-dynamic-image="solar_gallery_4" src="./public/brands/skumar_solar_hero.png" alt="Slideshow Image 4" class="slideshow-bg">
+      <div class="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/60 to-primary/40"></div>
+    </div>
+    <div class="relative z-10 w-full">
       <span class="inline-block py-2 px-5 bg-green-500 text-white font-label-md text-label-md mb-md rounded-lg tracking-widest">A SKCPL GROUP PROPERTY</span>
       <h1 class="font-headline-xl text-headline-xl text-white mb-base lg:text-7xl">SKumar Solar</h1>
       <p class="font-body-lg text-body-lg text-white/90 max-w-2xl mx-auto mb-sm">Premium Solar Energy System Manufacturers & Installers in Indore</p>
