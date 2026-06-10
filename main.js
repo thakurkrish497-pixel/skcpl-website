@@ -21,21 +21,29 @@
   let cachedSpacerHeight = 0;
   let cachedSpacerTop = 0;
   let cachedMaxScroll = 0;
+  let lastWindowWidth = 0;
 
   /* ── Resize (retina-aware) ── */
   function resize() {
     if (!canvas || !spacer) return;
-    const dpr = window.devicePixelRatio || 1;
-    canvas.width = window.innerWidth * dpr;
-    canvas.height = window.innerHeight * dpr;
-    ctx.imageSmoothingEnabled = true;
-    ctx.imageSmoothingQuality = "high";
+    
+    // On mobile, vertical scrolling triggers resize due to address bar hiding/showing.
+    // Avoid clearing the canvas buffer if only the height changed.
+    const isWidthChange = window.innerWidth !== lastWindowWidth;
+    lastWindowWidth = window.innerWidth;
+    
+    if (isWidthChange || canvas.width === 0) {
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
+      drawn = -1;
+    }
     
     cachedSpacerHeight = spacer.offsetHeight;
     cachedSpacerTop = spacer.offsetTop;
     cachedMaxScroll = cachedSpacerHeight - window.innerHeight;
-    
-    drawn = -1;
   }
 
   /* ── Draw one frame (cover-fit, centred — fills full viewport, no grey bars) ── */
@@ -89,12 +97,6 @@
       // If we just scrolled back up (past is false), force a complete redraw of the canvas 
       // in case the mobile browser aggressively cleared its memory while hidden
       if (!past) {
-        // Hack for iOS Safari: rapidly altering width forces GPU memory reallocation
-        const w = canvas.width;
-        canvas.width = 1;
-        canvas.width = w;
-        ctx.imageSmoothingEnabled = true;
-        ctx.imageSmoothingQuality = "high";
         drawn = -1;
       }
     }
