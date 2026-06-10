@@ -251,529 +251,231 @@
 </head>
 <body class="bg-background text-on-surface font-body-md selection:bg-secondary-fixed selection:text-on-secondary-fixed">
 
-  <!-- ══════════════════════════════════════════════ -->
-  <!-- TRANSPARENT NAVIGATION BAR                    -->
-  <!-- ══════════════════════════════════════════════ -->
+  <!-- TRANSPARENT NAVIGATION BAR -->
   <nav class="site-navbar" id="site-navbar">
-    <a href="#animation" class="nav-brand">SKCPL</a>
+    <a href="index.html" class="nav-brand">SKCPL</a>
     <ul class="nav-menu" id="nav-menu">
-      <li><a href="#animation">Home</a></li>
-      <li><a href="#about">About Us</a></li>
-      <li><a href="#expertise">Services</a></li>
-      <li><a href="#projects">Projects</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#vision">Visions & Goals</a></li>
+      <li><a href="#ongoing">Ongoing Projects</a></li>
+      <li><a href="#completed">Completed Projects</a></li>
       <li><a href="#gallery">Gallery</a></li>
-      <li><a href="#group">SKCPL Group</a></li>
-      <li><a href="#clients">Clients</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><a href="#contact" class="bg-secondary-fixed text-on-secondary-fixed px-4 py-2 rounded-lg font-bold hover:shadow-lg transition-all ml-2">Enquiry</a></li>
     </ul>
     <div class="hamburger" id="hamburger" aria-label="Toggle menu">
       <span></span><span></span><span></span>
     </div>
   </nav>
 
-  <!-- Preloader -->
-  <div id="preloader">
-    <div class="loader-ring"></div>
-    <div class="loader-percent" id="loader-percent">0%</div>
-  </div>
-
-  <!-- ══════════════════════════════════════════════ -->
-  <!-- SCROLL ANIMATION SECTION                      -->
-  <!-- ══════════════════════════════════════════════ -->
-  <div id="scroll-spacer"></div>
-  <div id="animation"></div>
-  <canvas id="canvas"></canvas>
-
-  <!-- Hero text overlay on top of the animation -->
-  <div class="hero-overlay" id="hero-overlay">
-    <h1 class="hero-heading">SKCPL</h1>
-    <p class="hero-subheading">Connect To Waves</p>
-    <div class="scroll-indicator flex flex-col items-center gap-2" id="scroll-indicator">
-      <div class="w-10 h-16 rounded-full border-2 border-white/50 flex justify-center p-2 mb-2 bg-black/20 backdrop-blur-sm">
-        <div class="w-1 h-3 bg-white/70 rounded-full animate-[bounce_1.5s_infinite]"></div>
-      </div>
-      <span class="font-label-md text-label-md text-white/70 uppercase tracking-[0.3em]">Scroll Down</span>
-      <span class="material-symbols-outlined text-white/50 animate-pulse text-3xl">keyboard_arrow_down</span>
+  <!-- STATIC HERO SECTION -->
+  <header class="relative pt-40 pb-32 bg-primary overflow-hidden" id="home">
+    <div class="absolute inset-0 z-0">
+      <img src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/site-photo.jpg" 
+           onerror="this.src='./public/gallery/gallery-8.jpg'" 
+           alt="Construction Site" class="w-full h-full object-cover opacity-30">
+      <div class="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/60 to-background"></div>
     </div>
-  </div>
+    <div class="container mx-auto px-margin relative z-10 text-center">
+      <span class="inline-block py-2 px-5 bg-secondary-fixed/20 text-secondary-fixed font-label-md text-label-md mb-md rounded-lg tracking-widest border border-secondary-fixed/30 backdrop-blur-sm">SKCPL GROUP</span>
+      <h1 class="font-headline-xl text-headline-xl text-white mb-6">S. Kumar Construction Pvt. Ltd.</h1>
+      <p class="font-body-lg text-body-lg text-white/80 max-w-2xl mx-auto mb-10">Building the Future with Precision. A dedicated division for world-class infrastructure and real estate development.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="#ongoing" class="bg-secondary-fixed text-on-secondary-fixed px-8 py-3 rounded-lg font-bold hover:shadow-[0_0_20px_rgba(255,224,136,0.4)] hover:-translate-y-1 transition-all">View Projects</a>
+        <a href="#contact" class="bg-white/10 text-white border border-white/20 px-8 py-3 rounded-lg font-bold hover:bg-white/20 transition-all">Contact Us</a>
+      </div>
+    </div>
+  </header>
 
-  <!-- ══════════════════════════════════════════════ -->
-  <!-- MAIN CONTENT SECTIONS                         -->
-  <!-- ══════════════════════════════════════════════ -->
   <main>
-
-    <!-- ────────────────────────────────────────── -->
-    <!-- STATS BAR                                  -->
-    <!-- ────────────────────────────────────────── -->
-    <div class="stats-bar" id="stats">
-      <div class="stats-grid">
-        <div class="stat-item">
-          <div class="stat-number">16+</div>
-          <div class="stat-label">Years of Experience</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">500+</div>
-          <div class="stat-label">Projects Completed</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">18+</div>
-          <div class="stat-label">Major Clients</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">4</div>
-          <div class="stat-label">Business Verticals</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ────────────────────────────────────────── -->
-    <!-- 1. ABOUT US & MISSION                      -->
-    <!-- ────────────────────────────────────────── -->
-    <section class="py-xl bg-white" id="about">
+    <!-- VISIONS & GOALS -->
+    <section class="py-xl bg-background" id="vision">
       <div class="container mx-auto px-margin">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-xl items-center">
           <div>
-            <span class="inline-block py-2 px-5 bg-primary/5 text-primary font-label-md text-label-md mb-md rounded-lg tracking-widest">ABOUT SKCPL</span>
-            <h2 class="font-headline-xl text-headline-xl text-primary mb-base">Total Turnkey Solution Provider</h2>
-            <div class="font-body-lg text-body-lg text-on-surface-variant mb-md" data-dynamic-text="home_about_text">We, S. Kumar Creation Pvt. Ltd., take the opportunity to introduce ourselves as a total turnkey solution provider since last 16 years in India in Telecom, Infrastructure, Real Estate &amp; Hospitality.<br><br>We are registered with MPPWD, MPEB Bhopal, A class electrical contractor registered with MSME &amp; NSIC, and registered with OHSAS. Our team of seasoned professionals, including architects, engineers and marketing specialists, deliver what they promise.</div>
-
-            <!-- Registrations -->
-            <div class="flex flex-wrap gap-3 mt-lg mb-md">
-              <span class="reg-badge"><span class="material-symbols-outlined text-base">verified</span>MPPWD Registered</span>
-              <span class="reg-badge"><span class="material-symbols-outlined text-base">verified</span>MPEB Bhopal</span>
-              <span class="reg-badge"><span class="material-symbols-outlined text-base">verified</span>MSME &amp; NSIC</span>
-              <span class="reg-badge"><span class="material-symbols-outlined text-base">verified</span>OHSAS Certified</span>
-            </div>
-
-            <h3 class="font-headline-md text-headline-md text-primary mt-lg mb-sm">Our Mission</h3>
-            <p class="font-body-md text-body-md text-on-surface-variant">Our Mission is to contribute to the country's development by providing the best Telecom, Infrastructure &amp; Real Estate services. Our company culture is based on openness and respect, empowering our team members to play a significant role in achieving individual and group goals.</p>
+            <span class="inline-block py-2 px-5 bg-primary/5 text-primary font-label-md text-label-md mb-md rounded-lg tracking-widest">OUR PURPOSE</span>
+            <h2 class="font-headline-xl text-headline-xl text-primary mb-base">Visions & Goals</h2>
+            <div class="w-20 h-1 bg-secondary-fixed mb-8 rounded-full"></div>
+            
+            <h3 class="font-headline-md text-headline-md text-primary mb-3">Our Vision</h3>
+            <p class="font-body-lg text-body-lg text-on-surface-variant mb-8">To be the most trusted and innovative construction partner in India, transforming landscapes with sustainable infrastructure and premium real estate that stands the test of time.</p>
+            
+            <h3 class="font-headline-md text-headline-md text-primary mb-3">Our Goals</h3>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-4">
+                <span class="material-symbols-outlined text-secondary-fixed text-2xl mt-1">architecture</span>
+                <div>
+                  <h4 class="font-label-md text-label-md font-bold text-primary">Uncompromising Quality</h4>
+                  <p class="font-body-md text-body-md text-on-surface-variant">Delivering every project with the highest standards of structural integrity and premium finishes.</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-4">
+                <span class="material-symbols-outlined text-secondary-fixed text-2xl mt-1">handshake</span>
+                <div>
+                  <h4 class="font-label-md text-label-md font-bold text-primary">Client Trust & Transparency</h4>
+                  <p class="font-body-md text-body-md text-on-surface-variant">Building long-lasting relationships through honest communication and dependable project delivery.</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-4">
+                <span class="material-symbols-outlined text-secondary-fixed text-2xl mt-1">eco</span>
+                <div>
+                  <h4 class="font-label-md text-label-md font-bold text-primary">Sustainable Development</h4>
+                  <p class="font-body-md text-body-md text-on-surface-variant">Implementing eco-friendly practices and modern engineering to minimize environmental impact.</p>
+                </div>
+              </li>
+            </ul>
           </div>
-          <div class="grid grid-cols-2 gap-4">
-            <img data-dynamic-image="index_about" src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/office-1.jpg" 
-                 onerror="this.src='./public/gallery/gallery-2.jpg'" 
-                 alt="SKCPL Office" class="rounded-xl w-full h-full object-cover shadow-lg">
-            <img data-dynamic-image="index_about_2" src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/office.jpg" 
-                 onerror="this.src='./public/gallery/gallery-6.jpg'" 
-                 alt="SKCPL Real Estate Project" class="rounded-xl w-full h-full object-cover shadow-lg mt-8">
+          <div class="relative">
+            <div class="absolute inset-0 bg-primary rounded-xl translate-x-4 translate-y-4 -z-10"></div>
+            <img src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/real-state.jpg" 
+                 onerror="this.src='./public/gallery/gallery-7.jpg'" 
+                 alt="Construction Vision" class="rounded-xl w-full h-auto object-cover shadow-xl border border-surface-variant">
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ────────────────────────────────────────── -->
-    <!-- 2. OUR EXPERTISE / SERVICES                -->
-    <!-- ────────────────────────────────────────── -->
-    <section class="py-xl bg-surface" id="expertise">
+    <!-- ONGOING PROJECTS -->
+    <section class="py-xl bg-surface-container-lowest" id="ongoing">
       <div class="container mx-auto px-margin">
         <div class="text-center mb-xl">
-          <span class="inline-block py-2 px-5 bg-secondary-fixed/20 text-secondary font-label-md text-label-md mb-md rounded-lg tracking-widest">WHAT WE DO</span>
-          <h2 class="font-headline-xl text-headline-xl text-primary mb-base">Our Services</h2>
-          <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">S. Kumar Creation mainly provides services in Telecom &amp; Infrastructure development, along with Real Estate and Hospitality.</p>
-        </div>
-
-        <!-- Top row: Main services -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md mb-lg">
-          <!-- Telecom -->
-          <div class="group p-lg bg-surface-container-lowest rounded-xl border border-transparent hover:border-secondary-fixed transition-all duration-500 shadow-[0px_10px_30px_rgba(26,46,76,0.05)] hover:shadow-[0px_20px_60px_rgba(26,46,76,0.12)] hover:-translate-y-1">
-            <div class="w-16 h-16 rounded-xl bg-primary/5 flex items-center justify-center mb-md group-hover:bg-primary transition-colors duration-300">
-              <span class="material-symbols-outlined text-primary group-hover:text-white text-4xl" data-icon="cell_tower">cell_tower</span>
-            </div>
-            <h3 class="font-headline-md text-headline-md text-primary mb-sm">Telecom Projects</h3>
-            <p class="font-body-md text-body-md text-on-surface-variant">Civil works, electrical jobs, Telecom implementation &amp; commissioning, RF planning &amp; survey, BTS installation for 4G, 3G, 2G &amp; Transmission Networks in India and overseas.</p>
-          </div>
-          <!-- Infrastructure -->
-          <div class="group p-lg bg-surface-container-lowest rounded-xl border border-transparent hover:border-secondary-fixed transition-all duration-500 shadow-[0px_10px_30px_rgba(26,46,76,0.05)] hover:shadow-[0px_20px_60px_rgba(26,46,76,0.12)] hover:-translate-y-1">
-            <div class="w-16 h-16 rounded-xl bg-primary/5 flex items-center justify-center mb-md group-hover:bg-primary transition-colors duration-300">
-              <span class="material-symbols-outlined text-primary group-hover:text-white text-4xl" data-icon="engineering">engineering</span>
-            </div>
-            <h3 class="font-headline-md text-headline-md text-primary mb-sm">Infrastructure</h3>
-            <p class="font-body-md text-body-md text-on-surface-variant">Roads, Power Transmission lines, Urban infrastructure, Water management, Airports. We also provide EB liaisoning, O&amp;M services, Soil Test Reports, and complete pollution control work.</p>
-          </div>
-          <!-- Real Estate -->
-          <div class="group p-lg bg-surface-container-lowest rounded-xl border border-transparent hover:border-secondary-fixed transition-all duration-500 shadow-[0px_10px_30px_rgba(26,46,76,0.05)] hover:shadow-[0px_20px_60px_rgba(26,46,76,0.12)] hover:-translate-y-1">
-            <div class="w-16 h-16 rounded-xl bg-primary/5 flex items-center justify-center mb-md group-hover:bg-primary transition-colors duration-300">
-              <span class="material-symbols-outlined text-primary group-hover:text-white text-4xl" data-icon="apartment">apartment</span>
-            </div>
-            <h3 class="font-headline-md text-headline-md text-primary mb-sm">Real Estate</h3>
-            <p class="font-body-md text-body-md text-on-surface-variant">Private/Public Building Construction, Renovation, Maintenance, and Architecture Design. Led by a seasoned team of architects, engineers and marketing specialists.</p>
-          </div>
-          <!-- Hospitality -->
-          <div class="group p-lg bg-surface-container-lowest rounded-xl border border-transparent hover:border-secondary-fixed transition-all duration-500 shadow-[0px_10px_30px_rgba(26,46,76,0.05)] hover:shadow-[0px_20px_60px_rgba(26,46,76,0.12)] hover:-translate-y-1">
-            <div class="w-16 h-16 rounded-xl bg-primary/5 flex items-center justify-center mb-md group-hover:bg-primary transition-colors duration-300">
-              <span class="material-symbols-outlined text-primary group-hover:text-white text-4xl" data-icon="pool">pool</span>
-            </div>
-            <h3 class="font-headline-md text-headline-md text-primary mb-sm">Hospitality</h3>
-            <p class="font-body-md text-body-md text-on-surface-variant">Fun &amp; Food Family Restaurant Resort, Indore — offering Indian families fun-filled and affordable vacations with water sports, swimming pool, rain dance, sports facilities and more.</p>
-          </div>
-        </div>
-
-        <!-- Additional Services strip -->
-        <div class="bg-primary/5 rounded-xl p-lg border border-primary/10">
-          <h3 class="font-headline-md text-headline-md text-primary mb-md">Our Additional Capabilities</h3>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div class="flex items-start gap-3">
-              <span class="material-symbols-outlined text-secondary text-xl mt-1">check_circle</span>
-              <p class="font-body-md text-body-md text-on-surface-variant">Telecom Tower &amp; BTS Site Acquisition &amp; Liaisoning with PMC &amp; Project Implementation Teams</p>
-            </div>
-            <div class="flex items-start gap-3">
-              <span class="material-symbols-outlined text-secondary text-xl mt-1">check_circle</span>
-              <p class="font-body-md text-body-md text-on-surface-variant">Networking work &amp; IT support in offices — stable and economical design and drawings with SBC</p>
-            </div>
-            <div class="flex items-start gap-3">
-              <span class="material-symbols-outlined text-secondary text-xl mt-1">check_circle</span>
-              <p class="font-body-md text-body-md text-on-surface-variant">O&amp;M services: Regular PM, Utilities maintenance, DG, PIU, AC and indoor/outdoor electrical</p>
-            </div>
-            <div class="flex items-start gap-3">
-              <span class="material-symbols-outlined text-secondary text-xl mt-1">check_circle</span>
-              <p class="font-body-md text-body-md text-on-surface-variant">Pollution control liaisoning with Pollution Control Board</p>
-            </div>
-            <div class="flex items-start gap-3">
-              <span class="material-symbols-outlined text-secondary text-xl mt-1">check_circle</span>
-              <p class="font-body-md text-body-md text-on-surface-variant">MW Link Maintenance &amp; Availability for Quality Network Maintenance</p>
-            </div>
-            <div class="flex items-start gap-3">
-              <span class="material-symbols-outlined text-secondary text-xl mt-1">check_circle</span>
-              <p class="font-body-md text-body-md text-on-surface-variant">Manpower supply for any level of requirement in the industry</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ────────────────────────────────────────── -->
-    <!-- 3. OUR PROJECTS                            -->
-    <!-- ────────────────────────────────────────── -->
-    <section class="py-xl bg-white relative overflow-hidden" id="projects">
-      <div class="perspective-grid absolute inset-0 opacity-40"></div>
-      <div class="container mx-auto px-margin relative z-10">
-        <div class="text-center mb-xl">
-          <span class="inline-block py-2 px-5 bg-primary/5 text-primary font-label-md text-label-md mb-md rounded-lg tracking-widest">PORTFOLIO</span>
-          <h2 class="font-headline-xl text-headline-xl text-primary mb-base">Our Projects</h2>
+          <span class="inline-block py-2 px-5 bg-primary/5 text-primary font-label-md text-label-md mb-md rounded-lg tracking-widest">IN PROGRESS</span>
+          <h2 class="font-headline-xl text-headline-xl text-primary mb-base">Ongoing Projects</h2>
           <div class="w-20 h-1 bg-secondary-fixed mx-auto rounded-full"></div>
         </div>
+        
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
-          <!-- Project 1: Telecom -->
-          <div class="bg-white rounded-xl overflow-hidden shadow-[0px_10px_30px_rgba(26,46,76,0.05)] group hover:shadow-[0px_20px_60px_rgba(26,46,76,0.15)] transition-all duration-500">
+          <div class="bg-surface rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group border border-surface-variant">
             <div class="relative h-64 overflow-hidden">
-              <img data-dynamic-image="proj_telecom" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
-                   alt="Telecom BTS Installation & Commissioning" 
+              <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                   alt="Telecom Infrastructure" 
                    src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/electricity-infrastructure-low-angle-shot-159218.jpg"
                    onerror="this.src='./public/gallery/gallery-1.jpg'"/>
-              <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div class="absolute top-4 right-4 bg-secondary-fixed text-on-secondary-fixed px-3 py-1 font-label-md text-label-md rounded-lg text-xs">ONGOING</div>
+              <div class="absolute top-4 right-4 bg-secondary-fixed text-on-secondary-fixed px-3 py-1 font-label-md text-label-md rounded-lg text-xs font-bold shadow-md">ONGOING</div>
             </div>
             <div class="p-lg">
-              <h4 class="font-headline-md text-headline-md text-primary mb-base">Telecom BTS Installation</h4>
-              <p class="font-body-md text-body-md text-on-surface-variant mb-md">Civil works, BTS installation &amp; commissioning, RF planning &amp; survey for 4G/3G/2G networks. Providing quality diesel filling for BTS sites and maintaining DG, PIU, AC utilities.</p>
-              <a class="inline-flex items-center gap-2 text-primary font-label-md text-label-md group-hover:gap-4 transition-all" href="#contact">
-                ENQUIRE <span class="material-symbols-outlined text-lg">arrow_forward</span>
-              </a>
+              <h4 class="font-headline-md text-headline-md text-primary mb-2">Telecom BTS Infrastructure</h4>
+              <p class="font-body-md text-body-md text-on-surface-variant mb-4">Civil works, BTS installation & commissioning for 4G/5G networks across Madhya Pradesh.</p>
             </div>
           </div>
-          <!-- Project 2: Infrastructure Roads -->
-          <div class="bg-white rounded-xl overflow-hidden shadow-[0px_10px_30px_rgba(26,46,76,0.05)] group hover:shadow-[0px_20px_60px_rgba(26,46,76,0.15)] transition-all duration-500">
+          <div class="bg-surface rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group border border-surface-variant">
             <div class="relative h-64 overflow-hidden">
-              <img data-dynamic-image="proj_infrastructure" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
-                   alt="Infrastructure & Road Development Project" 
-                   src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/site-photo.jpg"
-                   onerror="this.src='./public/gallery/gallery-8.jpg'"/>
-              <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div class="absolute top-4 right-4 bg-secondary-fixed text-on-secondary-fixed px-3 py-1 font-label-md text-label-md rounded-lg text-xs">COMPLETED</div>
-            </div>
-            <div class="p-lg">
-              <h4 class="font-headline-md text-headline-md text-primary mb-base">Infrastructure Development</h4>
-              <p class="font-body-md text-body-md text-on-surface-variant mb-md">Roads, Power Transmission Lines, and Urban Infrastructure projects. Well-equipped lab in Indore &amp; Jhabua for all types of civil quality testing. Experienced with asphalt and concrete works.</p>
-              <a class="inline-flex items-center gap-2 text-primary font-label-md text-label-md group-hover:gap-4 transition-all" href="#contact">
-                ENQUIRE <span class="material-symbols-outlined text-lg">arrow_forward</span>
-              </a>
-            </div>
-          </div>
-          <!-- Project 3: Real Estate -->
-          <div class="bg-white rounded-xl overflow-hidden shadow-[0px_10px_30px_rgba(26,46,76,0.05)] group hover:shadow-[0px_20px_60px_rgba(26,46,76,0.15)] transition-all duration-500">
-            <div class="relative h-64 overflow-hidden">
-              <img data-dynamic-image="proj_real_estate" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
-                   alt="Real Estate Building Project" 
-                   src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/real-state.jpg"
-                   onerror="this.src='./public/gallery/gallery-7.jpg'"/>
-              <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div class="absolute top-4 right-4 bg-secondary-fixed text-on-secondary-fixed px-3 py-1 font-label-md text-label-md rounded-lg text-xs">COMPLETED</div>
-            </div>
-            <div class="p-lg">
-              <h4 class="font-headline-md text-headline-md text-primary mb-base">Real Estate Construction</h4>
-              <p class="font-body-md text-body-md text-on-surface-variant mb-md">With years of experience, SKCPL has conceived, implemented and delivered many top-of-the-line real estate projects — Private/Public Building Construction, Renovation, Maintenance, and Architecture Design.</p>
-              <a class="inline-flex items-center gap-2 text-primary font-label-md text-label-md group-hover:gap-4 transition-all" href="#contact">
-                ENQUIRE <span class="material-symbols-outlined text-lg">arrow_forward</span>
-              </a>
-            </div>
-          </div>
-          <!-- Project 4: Parshav Nath City -->
-          <div class="bg-white rounded-xl overflow-hidden shadow-[0px_10px_30px_rgba(26,46,76,0.05)] group hover:shadow-[0px_20px_60px_rgba(26,46,76,0.15)] transition-all duration-500">
-            <div class="relative h-64 overflow-hidden">
-              <img data-dynamic-image="proj_parshav" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
-                   alt="Parshav Nath City Real Estate Project" 
-                   src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/real-state-2.jpg"
-                   onerror="this.src='./public/gallery/gallery-5.jpg'"/>
-              <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div class="absolute top-4 right-4 bg-secondary-fixed text-on-secondary-fixed px-3 py-1 font-label-md text-label-md rounded-lg text-xs">COMPLETED</div>
-            </div>
-            <div class="p-lg">
-              <h4 class="font-headline-md text-headline-md text-primary mb-base">Parshav Nath City</h4>
-              <p class="font-body-md text-body-md text-on-surface-variant mb-md">A flagship real estate development project delivered by SKCPL with architectural precision and exceptional quality standards, combining modern design with functional spaces.</p>
-              <a class="inline-flex items-center gap-2 text-primary font-label-md text-label-md group-hover:gap-4 transition-all" href="#contact">
-                ENQUIRE <span class="material-symbols-outlined text-lg">arrow_forward</span>
-              </a>
-            </div>
-          </div>
-          <!-- Project 5: Fun N Food Resort -->
-          <div class="bg-white rounded-xl overflow-hidden shadow-[0px_10px_30px_rgba(26,46,76,0.05)] group hover:shadow-[0px_20px_60px_rgba(26,46,76,0.15)] transition-all duration-500">
-            <div class="relative h-64 overflow-hidden">
-              <img data-dynamic-image="proj_hospitality" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
-                   alt="Fun N Food Resort Water Park Indore" 
-                   src="./public/resort/fun-and-food-resorts-and-holidays-pvt-ltd-khandwa-road-indore-resorts-in6u3cbwmq.avif"/>
-              <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div class="absolute top-4 right-4 bg-secondary-fixed text-on-secondary-fixed px-3 py-1 font-label-md text-label-md rounded-lg text-xs">OPERATIONAL</div>
-            </div>
-            <div class="p-lg">
-              <h4 class="font-headline-md text-headline-md text-primary mb-base">Fun N Food Resort, Indore</h4>
-              <p class="font-body-md text-body-md text-on-surface-variant mb-md">SKCPL's premier hospitality venture. Features a swimming pool, rain dance, sports grounds, indoor games, and event spaces for families, corporate events and celebrations.</p>
-              <a class="inline-flex items-center gap-2 text-primary font-label-md text-label-md group-hover:gap-4 transition-all" href="fun-n-food.html">
-                EXPLORE <span class="material-symbols-outlined text-lg">arrow_forward</span>
-              </a>
-            </div>
-          </div>
-          <!-- Project 6: Power Grid / BHEL -->
-          <div class="bg-white rounded-xl overflow-hidden shadow-[0px_10px_30px_rgba(26,46,76,0.05)] group hover:shadow-[0px_20px_60px_rgba(26,46,76,0.15)] transition-all duration-500">
-            <div class="relative h-64 overflow-hidden">
-              <img data-dynamic-image="proj_bhel" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
-                   alt="Office Infrastructure & MPRRDA Project" 
+              <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                   alt="MPRRDA Projects" 
                    src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/office3.jpg"
                    onerror="this.src='./public/gallery/gallery-4.jpg'"/>
-              <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div class="absolute top-4 right-4 bg-secondary-fixed text-on-secondary-fixed px-3 py-1 font-label-md text-label-md rounded-lg text-xs">ONGOING</div>
+              <div class="absolute top-4 right-4 bg-secondary-fixed text-on-secondary-fixed px-3 py-1 font-label-md text-label-md rounded-lg text-xs font-bold shadow-md">ONGOING</div>
             </div>
             <div class="p-lg">
-              <h4 class="font-headline-md text-headline-md text-primary mb-base">MPRRDA / MPPWD Projects</h4>
-              <p class="font-body-md text-body-md text-on-surface-variant mb-md">Road and infrastructure development projects for Madhya Pradesh Rural Roads Development Authority and MP Public Works Department — delivering quality on every specification.</p>
-              <a class="inline-flex items-center gap-2 text-primary font-label-md text-label-md group-hover:gap-4 transition-all" href="#contact">
-                ENQUIRE <span class="material-symbols-outlined text-lg">arrow_forward</span>
-              </a>
+              <h4 class="font-headline-md text-headline-md text-primary mb-2">MPRRDA Rural Roads</h4>
+              <p class="font-body-md text-body-md text-on-surface-variant mb-4">Extensive road and infrastructure development projects connecting rural Madhya Pradesh under MPRRDA specifications.</p>
+            </div>
+          </div>
+          <div class="bg-surface rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group border border-surface-variant">
+            <div class="relative h-64 overflow-hidden">
+              <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                   alt="Commercial Real Estate" 
+                   src="./public/gallery/gallery-6.jpg" />
+              <div class="absolute top-4 right-4 bg-secondary-fixed text-on-secondary-fixed px-3 py-1 font-label-md text-label-md rounded-lg text-xs font-bold shadow-md">ONGOING</div>
+            </div>
+            <div class="p-lg">
+              <h4 class="font-headline-md text-headline-md text-primary mb-2">Commercial Complex, Indore</h4>
+              <p class="font-body-md text-body-md text-on-surface-variant mb-4">A state-of-the-art commercial complex featuring modern architecture, energy-efficient systems, and premium retail spaces.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ────────────────────────────────────────── -->
-    <!-- 4. OUR CLIENTS                             -->
-    <!-- ────────────────────────────────────────── -->
-    <section class="py-xl bg-white border-y border-surface-container" id="clients">
+    <!-- COMPLETED PROJECTS -->
+    <section class="py-xl bg-surface-container-low" id="completed">
       <div class="container mx-auto px-margin">
-        <div class="text-center mb-lg">
-          <span class="inline-block py-2 px-5 bg-primary/5 text-primary font-label-md text-label-md mb-md rounded-lg tracking-widest">TRUSTED BY</span>
-          <h2 class="font-headline-md text-headline-md text-primary">Our Esteemed Clients</h2>
-          <p class="font-body-md text-body-md text-on-surface-variant mt-2 max-w-xl mx-auto">Over 16 years of trusted partnerships with India's leading government and private organizations.</p>
+        <div class="text-center mb-xl">
+          <span class="inline-block py-2 px-5 bg-primary/5 text-primary font-label-md text-label-md mb-md rounded-lg tracking-widest">SUCCESS STORIES</span>
+          <h2 class="font-headline-xl text-headline-xl text-primary mb-base">Completed Projects</h2>
+          <div class="w-20 h-1 bg-secondary-fixed mx-auto rounded-full"></div>
         </div>
         
-        <div class="clients-marquee-container">
-          <div class="clients-marquee">
-            <!-- Client Names from old website -->
-            <div class="client-logo">MPRRDA</div>
-            <div class="client-logo">MPPWD</div>
-            <div class="client-logo">Reliance Infrastructure</div>
-            <div class="client-logo">Bharti Infratel</div>
-            <div class="client-logo">Vodafone Essar</div>
-            <div class="client-logo">TATA (WTTIL)</div>
-            <div class="client-logo">BSNL / Alcatel-Lucent</div>
-            <div class="client-logo">Idea Cellular</div>
-            <div class="client-logo">Nokia</div>
-            <div class="client-logo">Reliance Jio</div>
-            <div class="client-logo">BHEL</div>
-            <div class="client-logo">GAIL</div>
-            <div class="client-logo">Power Grid Corp.</div>
-            <div class="client-logo">MP Housing Board</div>
-            <div class="client-logo">MP Warehousing Corp.</div>
-            <div class="client-logo">PWD-PIU</div>
-            <div class="client-logo">RES Solutions</div>
-            <div class="client-logo">Parshav Nath City</div>
-            <!-- Duplicated for infinite scroll effect -->
-            <div class="client-logo">MPRRDA</div>
-            <div class="client-logo">MPPWD</div>
-            <div class="client-logo">Reliance Infrastructure</div>
-            <div class="client-logo">Bharti Infratel</div>
-            <div class="client-logo">Vodafone Essar</div>
-            <div class="client-logo">TATA (WTTIL)</div>
-            <div class="client-logo">BSNL / Alcatel-Lucent</div>
-            <div class="client-logo">Idea Cellular</div>
-            <div class="client-logo">Nokia</div>
-            <div class="client-logo">Reliance Jio</div>
-            <div class="client-logo">BHEL</div>
-            <div class="client-logo">GAIL</div>
-            <div class="client-logo">Power Grid Corp.</div>
-            <div class="client-logo">MP Housing Board</div>
-            <div class="client-logo">MP Warehousing Corp.</div>
-            <div class="client-logo">PWD-PIU</div>
-            <div class="client-logo">RES Solutions</div>
-            <div class="client-logo">Parshav Nath City</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+          <div class="flex flex-col md:flex-row bg-white rounded-xl overflow-hidden shadow-md group">
+            <div class="w-full md:w-2/5 relative overflow-hidden">
+              <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                   alt="Parshav Nath City" 
+                   src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/real-state-2.jpg"
+                   onerror="this.src='./public/gallery/gallery-5.jpg'"/>
+            </div>
+            <div class="w-full md:w-3/5 p-8 flex flex-col justify-center">
+              <div class="inline-block bg-primary/10 text-primary px-3 py-1 font-label-md text-label-md rounded-lg text-xs font-bold mb-4 w-max">COMPLETED</div>
+              <h4 class="font-headline-md text-headline-md text-primary mb-2">Parshav Nath City</h4>
+              <p class="font-body-md text-body-md text-on-surface-variant mb-4">A flagship residential development delivered by SKCPL. Combining modern architectural design with functional community spaces and top-tier amenities.</p>
+              <ul class="space-y-2 mt-auto">
+                <li class="flex items-center gap-2 font-caption text-on-surface-variant"><span class="material-symbols-outlined text-secondary-fixed text-sm">check_circle</span> Premium Residential Units</li>
+                <li class="flex items-center gap-2 font-caption text-on-surface-variant"><span class="material-symbols-outlined text-secondary-fixed text-sm">check_circle</span> Modern Community Center</li>
+              </ul>
+            </div>
+          </div>
+          <div class="flex flex-col md:flex-row bg-white rounded-xl overflow-hidden shadow-md group">
+            <div class="w-full md:w-2/5 relative overflow-hidden">
+              <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                   alt="Highway Infrastructure" 
+                   src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/site-photo.jpg"
+                   onerror="this.src='./public/gallery/gallery-8.jpg'"/>
+            </div>
+            <div class="w-full md:w-3/5 p-8 flex flex-col justify-center">
+              <div class="inline-block bg-primary/10 text-primary px-3 py-1 font-label-md text-label-md rounded-lg text-xs font-bold mb-4 w-max">COMPLETED</div>
+              <h4 class="font-headline-md text-headline-md text-primary mb-2">Highway Infrastructure</h4>
+              <p class="font-body-md text-body-md text-on-surface-variant mb-4">Major road development project under MP Public Works Department. Delivered ahead of schedule with rigorous civil quality testing for asphalt and concrete.</p>
+              <ul class="space-y-2 mt-auto">
+                <li class="flex items-center gap-2 font-caption text-on-surface-variant"><span class="material-symbols-outlined text-secondary-fixed text-sm">check_circle</span> High-Grade Asphalt Paving</li>
+                <li class="flex items-center gap-2 font-caption text-on-surface-variant"><span class="material-symbols-outlined text-secondary-fixed text-sm">check_circle</span> Comprehensive Drainage Systems</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ────────────────────────────────────────── -->
-    <!-- 5. GALLERY SECTION                         -->
-    <!-- ────────────────────────────────────────── -->
-    <section class="py-xl bg-surface-container-low" id="gallery">
+    <!-- GALLERY SECTION -->
+    <section class="py-xl bg-surface-container-lowest" id="gallery">
       <div class="container mx-auto px-margin">
         <div class="text-center mb-xl">
           <span class="inline-block py-2 px-5 bg-primary/5 text-primary font-label-md text-label-md mb-md rounded-lg tracking-widest">VISUAL SHOWCASE</span>
-          <h2 class="font-headline-xl text-headline-xl text-primary mb-base">Gallery</h2>
-          <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">A glimpse into our world of precision engineering, quality infrastructure, and transformative real estate across Telecom, Infrastructure, Real Estate &amp; Hospitality sectors.</p>
+          <h2 class="font-headline-xl text-headline-xl text-primary mb-base">Construction Gallery</h2>
         </div>
-        <!-- Masonry-style Gallery Grid -->
         <div class="gallery-grid">
           <div class="gallery-item gallery-tall group">
-            <img data-dynamic-image="skcpl_masonry_1" src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/electricity-infrastructure-low-angle-shot-159218.jpg" 
+            <img src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/electricity-infrastructure-low-angle-shot-159218.jpg" 
                  onerror="this.src='./public/gallery/gallery-1.jpg'" 
-                 alt="Electricity Infrastructure Low Angle" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-            <div class="gallery-overlay">
-              <span class="font-label-md text-label-md text-white tracking-widest">INFRASTRUCTURE</span>
-            </div>
+                 alt="Infrastructure" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
           </div>
           <div class="gallery-item group">
-            <img data-dynamic-image="skcpl_masonry_2" src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/office-1.jpg" 
-                 onerror="this.src='./public/gallery/gallery-4.jpg'" 
-                 alt="SKCPL Office" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-            <div class="gallery-overlay">
-              <span class="font-label-md text-label-md text-white tracking-widest">OFFICES</span>
-            </div>
+            <img src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/real-state-2.jpg" 
+                 onerror="this.src='./public/gallery/gallery-8.jpg'" 
+                 alt="Construction" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
           </div>
           <div class="gallery-item group">
-            <img data-dynamic-image="skcpl_masonry_3" src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/office.jpg" 
+            <img src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/office.jpg" 
                  onerror="this.src='./public/gallery/gallery-3.jpg'" 
-                 alt="SKCPL Workspace" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-            <div class="gallery-overlay">
-              <span class="font-label-md text-label-md text-white tracking-widest">WORKSPACE</span>
-            </div>
+                 alt="Workspace" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
           </div>
           <div class="gallery-item gallery-wide group">
-            <img data-dynamic-image="skcpl_masonry_4" src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/real-state.jpg" 
+            <img src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/real-state.jpg" 
                  onerror="this.src='./public/gallery/gallery-7.jpg'" 
-                 alt="SKCPL Real Estate Project" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-            <div class="gallery-overlay">
-              <span class="font-label-md text-label-md text-white tracking-widest">REAL ESTATE</span>
-            </div>
-          </div>
-          <div class="gallery-item group">
-            <img data-dynamic-image="skcpl_masonry_5" src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/real-state-2.jpg" 
-                 onerror="this.src='./public/gallery/gallery-8.jpg'" 
-                 alt="Real Estate Project 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-            <div class="gallery-overlay">
-              <span class="font-label-md text-label-md text-white tracking-widest">CONSTRUCTION</span>
-            </div>
-          </div>
-          <div class="gallery-item group">
-            <img data-dynamic-image="skcpl_masonry_6" src="./public/resort/fun-and-food-resorts-and-holidays-pvt-ltd-khandwa-road-indore-resorts-in6u3cbwmq.avif" 
-                 alt="Fun N Food Resort" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-            <div class="gallery-overlay">
-              <span class="font-label-md text-label-md text-white tracking-widest">FUN N FOOD</span>
-            </div>
+                 alt="Real Estate" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
           </div>
         </div>
         <div class="text-center mt-8">
           <a href="skcpl-gallery.html" class="inline-block bg-primary text-white px-8 py-3 rounded-lg font-bold hover:bg-primary-container transition-colors shadow-sm">Show More Images →</a>
         </div>
-
-        </div>
-    </section>
-
-
-    <!-- ────────────────────────────────────────── -->
-    <!-- 7. REVIEWS SECTION                         -->
-    <!-- ────────────────────────────────────────── -->
-    <section class="py-xl bg-surface" id="reviews">
-      <div class="container mx-auto px-margin">
-        <div class="text-center mb-xl">
-          <span class="inline-block py-2 px-5 bg-secondary-fixed/20 text-secondary font-label-md text-label-md mb-md rounded-lg tracking-widest">TESTIMONIALS</span>
-          <h2 class="font-headline-xl text-headline-xl text-primary mb-base">What Our Clients Say</h2>
-          <div class="w-20 h-1 bg-secondary-fixed mx-auto rounded-full"></div>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
-          <!-- Review 1 -->
-          <div class="review-card">
-            <div class="flex gap-1 mb-md">
-              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
-              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
-              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
-              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
-              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
-            </div>
-            <blockquote class="font-body-md text-body-md text-on-surface-variant mb-lg italic leading-relaxed">"SKCPL has been our trusted partner for telecom infrastructure for years. Their BTS installation and commissioning work is exemplary — always on time and meeting every specification perfectly."</blockquote>
-            <div class="flex items-center gap-md">
-              <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-secondary-fixed/30 bg-primary flex items-center justify-center">
-                <span class="text-white font-bold text-lg">BI</span>
-              </div>
-              <div>
-                <p class="font-label-md text-label-md text-primary font-bold">Bharti Infratel</p>
-                <p class="font-caption text-caption text-on-surface-variant">Telecom Infrastructure, MP &amp; CG</p>
-              </div>
-            </div>
-          </div>
-          <!-- Review 2 -->
-          <div class="review-card">
-            <div class="flex gap-1 mb-md">
-              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
-              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
-              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
-              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
-              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
-            </div>
-            <blockquote class="font-body-md text-body-md text-on-surface-variant mb-lg italic leading-relaxed">"The Fun &amp; Food Resort project was built with exceptional quality by SKCPL. Their hospitality expertise is evident in every corner of the resort. Truly a premier family destination in Indore."</blockquote>
-            <div class="flex items-center gap-md">
-              <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-secondary-fixed/30 bg-primary flex items-center justify-center">
-                <span class="text-white font-bold text-lg">RP</span>
-              </div>
-              <div>
-                <p class="font-label-md text-label-md text-primary font-bold">Rajesh Patel</p>
-                <p class="font-caption text-caption text-on-surface-variant">Director, Hospitality Ventures</p>
-              </div>
-            </div>
-          </div>
-          <!-- Review 3 -->
-          <div class="review-card">
-            <div class="flex gap-1 mb-md">
-              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
-              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
-              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
-              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
-              <span class="material-symbols-outlined text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
-            </div>
-            <blockquote class="font-body-md text-body-md text-on-surface-variant mb-lg italic leading-relaxed">"Working with SKCPL on our infrastructure projects has been seamless. Their experienced team of supervisors and skilled labourers deliver asphalt and concrete works with higher efficiency than any other contractor we've worked with."</blockquote>
-            <div class="flex items-center gap-md">
-              <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-secondary-fixed/30 bg-tertiary-container flex items-center justify-center">
-                <span class="text-white font-bold text-lg">MP</span>
-              </div>
-              <div>
-                <p class="font-label-md text-label-md text-primary font-bold">MPRRDA</p>
-                <p class="font-caption text-caption text-on-surface-variant">MP Rural Roads Development Authority</p>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
-    <!-- ────────────────────────────────────────── -->
-    <!-- 8. CONTACT CTA & FORM                      -->
-    <!-- ────────────────────────────────────────── -->
+    <!-- CONTACT CTA & FORM -->
     <section class="py-xl bg-primary-container relative" id="contact">
       <div class="container mx-auto px-margin">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-xl items-center">
-          <!-- Left side: Contact Info -->
           <div>
-            <h2 class="font-headline-xl text-headline-xl text-white mb-md">Get In Touch With Us</h2>
-            <p class="font-body-lg text-body-lg text-white/60 mb-lg max-w-md">Get in touch with our specialist team for your next project in Telecom, Infrastructure, Real Estate, or Hospitality. Submit the form to request a callback.</p>
-            
+            <h2 class="font-headline-xl text-headline-xl text-white mb-md">Start Your Project</h2>
+            <p class="font-body-lg text-body-lg text-white/60 mb-lg max-w-md">Get in touch with our engineering and architecture team for your next infrastructure or real estate development.</p>
             <div class="flex flex-col gap-6 mb-8">
               <div class="flex items-start gap-4 text-white">
                 <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center border border-white/20 flex-shrink-0">
@@ -795,78 +497,57 @@
               </div>
               <div class="flex items-center gap-4 text-white">
                 <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center border border-white/20 flex-shrink-0">
-                  <span class="material-symbols-outlined text-secondary-fixed">call</span>
+                  <span class="material-symbols-outlined text-secondary-fixed">phone</span>
                 </div>
                 <div>
                   <p class="font-label-md text-label-md text-white/60">Phone</p>
-                  <a href="tel:+917314938668" class="font-body-md text-body-md hover:text-secondary-fixed transition-colors">0731-4938668</a>
+                  <div class="flex flex-col">
+                    <a href="tel:+919425904286" class="font-body-md text-body-md hover:text-secondary-fixed transition-colors">+91 9425904286</a>
+                    <a href="tel:+919425054333" class="font-body-md text-body-md hover:text-secondary-fixed transition-colors">+91 9425054333</a>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <!-- Quick Links for Services -->
-            <div class="flex flex-wrap gap-3">
-              <a href="#expertise" class="inline-flex items-center gap-2 bg-white/10 text-white border border-white/20 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-secondary-fixed hover:text-on-secondary-fixed transition-all">
-                <span class="material-symbols-outlined text-base">cell_tower</span>Telecom
-              </a>
-              <a href="#expertise" class="inline-flex items-center gap-2 bg-white/10 text-white border border-white/20 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-secondary-fixed hover:text-on-secondary-fixed transition-all">
-                <span class="material-symbols-outlined text-base">engineering</span>Infrastructure
-              </a>
-              <a href="#expertise" class="inline-flex items-center gap-2 bg-white/10 text-white border border-white/20 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-secondary-fixed hover:text-on-secondary-fixed transition-all">
-                <span class="material-symbols-outlined text-base">apartment</span>Real Estate
-              </a>
-              <a href="fun-n-food.html" class="inline-flex items-center gap-2 bg-white/10 text-white border border-white/20 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-secondary-fixed hover:text-on-secondary-fixed transition-all">
-                <span class="material-symbols-outlined text-base">pool</span>Hospitality
-              </a>
             </div>
           </div>
-          
-          <!-- Right side: Enquiry Form -->
-          <div class="bg-surface rounded-2xl p-8 shadow-2xl relative overflow-hidden border border-white/10">
-            <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-secondary-fixed to-secondary"></div>
-            <h3 class="font-headline-md text-headline-md text-primary mb-6">Send an Enquiry</h3>
-            <form id="enquiry-form" class="flex flex-col gap-5">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="bg-white rounded-2xl p-lg shadow-2xl relative">
+            <div class="absolute -top-6 -right-6 w-24 h-24 bg-secondary-fixed rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
+            <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-tertiary-fixed rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse" style="animation-delay: 1s"></div>
+            
+            <h3 class="font-headline-md text-headline-md text-primary mb-md relative z-10">Request a Quote</h3>
+            <form id="contactForm" class="space-y-4 relative z-10">
+              <div>
+                <label for="name" class="block font-label-md text-label-md text-on-surface-variant mb-1">Full Name</label>
+                <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface focus:ring-2 focus:ring-primary focus:border-primary transition-all font-body-md" placeholder="John Doe">
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label class="block font-label-md text-label-md text-primary mb-2" for="name">Full Name *</label>
-                  <input type="text" id="name" required class="w-full bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
+                  <label for="email" class="block font-label-md text-label-md text-on-surface-variant mb-1">Email Address</label>
+                  <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface focus:ring-2 focus:ring-primary focus:border-primary transition-all font-body-md" placeholder="john@example.com">
                 </div>
                 <div>
-                  <label class="block font-label-md text-label-md text-primary mb-2" for="phone">Phone Number</label>
-                  <input type="tel" id="phone" class="w-full bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
+                  <label for="phone" class="block font-label-md text-label-md text-on-surface-variant mb-1">Phone Number</label>
+                  <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface focus:ring-2 focus:ring-primary focus:border-primary transition-all font-body-md" placeholder="+91 98765 43210">
                 </div>
               </div>
               <div>
-                <label class="block font-label-md text-label-md text-primary mb-2" for="email">Email Address *</label>
-                <input type="email" id="email" required class="w-full bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
-              </div>
-              <div>
-                <label class="block font-label-md text-label-md text-primary mb-2" for="service">Service Required</label>
-                <select id="service" class="w-full bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
-                  <option value="">Select a service...</option>
-                  <option value="telecom">Telecom Projects</option>
-                  <option value="infrastructure">Infrastructure & Development</option>
-                  <option value="real-estate">Real Estate</option>
-                  <option value="hospitality">Hospitality / Fun N Food Resort</option>
-                  <option value="solar">Solar Energy</option>
+                <label for="service" class="block font-label-md text-label-md text-on-surface-variant mb-1">Project Type</label>
+                <select id="service" name="service" class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface focus:ring-2 focus:ring-primary focus:border-primary transition-all font-body-md text-on-surface">
+                  <option value="civil">Civil Construction</option>
+                  <option value="telecom">Telecom Infrastructure</option>
+                  <option value="realestate">Real Estate Development</option>
                   <option value="other">Other</option>
                 </select>
               </div>
               <div>
-                <label class="block font-label-md text-label-md text-primary mb-2" for="message">Message *</label>
-                <textarea id="message" required rows="4" class="w-full bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none"></textarea>
+                <label for="message" class="block font-label-md text-label-md text-on-surface-variant mb-1">Project Details</label>
+                <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface focus:ring-2 focus:ring-primary focus:border-primary transition-all font-body-md resize-none" placeholder="Tell us about your project requirements..."></textarea>
               </div>
-              <button type="submit" id="submit-btn" class="bg-primary text-white font-label-md text-label-md py-4 px-6 rounded-lg hover:bg-primary-container transition-colors mt-2 flex items-center justify-center gap-2 relative">
-                <span id="btn-text">SUBMIT ENQUIRY</span>
-                <span id="btn-spinner" class="material-symbols-outlined animate-spin hidden">progress_activity</span>
+              <button type="submit" class="w-full bg-primary text-white font-bold py-4 rounded-lg hover:bg-primary-container transition-colors shadow-md hover:shadow-xl flex items-center justify-center gap-2 group">
+                <span>Submit Request</span>
+                <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">send</span>
               </button>
-              <div id="form-success" class="hidden text-green-600 font-label-md mt-2 flex items-center gap-2">
-                <span class="material-symbols-outlined">check_circle</span> Message sent successfully! We will contact you soon.
-              </div>
-              <div id="form-error" class="hidden text-red-600 font-label-md mt-2 flex items-center gap-2">
-                <span class="material-symbols-outlined">error</span> Failed to send message. Please try again.
-              </div>
             </form>
+            <div id="formStatus" class="mt-4 hidden p-4 rounded-lg font-body-md text-center"></div>
           </div>
         </div>
       </div>
@@ -874,15 +555,15 @@
 
   </main>
 
-  <!-- Footer -->
-  <footer class="bg-primary py-lg px-margin">
-    <div class="container mx-auto">
+  <!-- FOOTER -->
+  <footer class="bg-primary py-xl border-t border-white/10">
+    <div class="container mx-auto px-margin">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-lg mb-lg">
         <!-- Column 1: Brand -->
         <div>
-          <h2 class="font-headline-md text-headline-md font-bold text-white mb-2">S. Kumar Creation Pvt. Ltd.</h2>
+          <h2 class="font-headline-md text-headline-md font-bold text-white mb-2">S. Kumar Construction Pvt. Ltd.</h2>
           <p class="font-caption text-caption text-white/40 mb-4">Connect To Waves</p>
-          <p class="font-body-md text-body-md text-white/50 mb-6">Total turnkey solution provider in Telecom, Infrastructure, Real Estate &amp; Hospitality. Indore, MP.</p>
+          <p class="font-body-md text-body-md text-white/50 mb-6">Total turnkey solution provider in Telecom, Infrastructure, Real Estate & Hospitality. Indore, MP.</p>
           <div class="flex flex-col items-start gap-4">
             <a href="https://www.instagram.com/skcpl_group_?igsh=MXQwZXF3NnRjYzZneg==" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white font-medium hover:shadow-[0_0_20px_rgba(225,48,108,0.6)] hover:scale-105 transition-all duration-300" title="Follow us on Instagram">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -903,46 +584,43 @@
         <div>
           <h3 class="font-label-md text-label-md text-white/70 uppercase tracking-widest mb-4">Quick Links</h3>
           <div class="flex flex-col gap-2">
-            <a class="text-white/50 hover:text-secondary-fixed transition-colors font-body-md text-body-md" href="#about">About Us</a>
-            <a class="text-white/50 hover:text-secondary-fixed transition-colors font-body-md text-body-md" href="#expertise">Services</a>
-            <a class="text-white/50 hover:text-secondary-fixed transition-colors font-body-md text-body-md" href="#projects">Projects</a>
+            <a class="text-white/50 hover:text-secondary-fixed transition-colors font-body-md text-body-md" href="index.html">Home</a>
+            <a class="text-white/50 hover:text-secondary-fixed transition-colors font-body-md text-body-md" href="#vision">Visions & Goals</a>
+            <a class="text-white/50 hover:text-secondary-fixed transition-colors font-body-md text-body-md" href="#ongoing">Ongoing Projects</a>
+            <a class="text-white/50 hover:text-secondary-fixed transition-colors font-body-md text-body-md" href="#completed">Completed Projects</a>
             <a class="text-white/50 hover:text-secondary-fixed transition-colors font-body-md text-body-md" href="#gallery">Gallery</a>
-            <a class="text-white/50 hover:text-secondary-fixed transition-colors font-body-md text-body-md" href="fun-n-food.html">Fun N Food Resort</a>
-            <a class="text-white/50 hover:text-secondary-fixed transition-colors font-body-md text-body-md" href="#contact">Contact</a>
           </div>
         </div>
-        <!-- Column 3: Contact -->
+        <!-- Column 3: Contact Info -->
         <div>
-          <h3 class="font-label-md text-label-md text-white/70 uppercase tracking-widest mb-4">Contact</h3>
-          <div class="flex flex-col gap-3">
-            <div class="flex items-start gap-2">
-              <span class="material-symbols-outlined text-secondary-fixed text-base mt-1 flex-shrink-0">location_on</span>
-              <p class="font-body-md text-body-md text-white/50">45, Maa Sharda Nagar, Kabit Khedi, MR-10, Indore, MP – 452010</p>
+          <h3 class="font-label-md text-label-md text-white/70 uppercase tracking-widest mb-4">Get in touch</h3>
+          <div class="flex flex-col gap-4">
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-secondary-fixed text-xl">location_on</span>
+              <p class="font-body-md text-body-md text-white/50">45, Maa Sharda Nagar, Near Bharat Public School, Indore</p>
             </div>
-            <div class="flex items-center gap-2">
-              <span class="material-symbols-outlined text-secondary-fixed text-base flex-shrink-0">call</span>
-              <a href="tel:+917314938668" class="font-body-md text-body-md text-white/50 hover:text-secondary-fixed">0731-4938668</a>
-            </div>
-            <div class="flex items-center gap-2">
-              <span class="material-symbols-outlined text-secondary-fixed text-base flex-shrink-0">mail</span>
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-secondary-fixed text-xl">mail</span>
               <a href="mailto:s.kumarcreation@yahoo.com" class="font-body-md text-body-md text-white/50 hover:text-secondary-fixed">s.kumarcreation@yahoo.com</a>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-secondary-fixed text-xl">phone</span>
+              <a href="tel:+919425904286" class="font-body-md text-body-md text-white/50 hover:text-secondary-fixed">+91 9425904286</a>
             </div>
           </div>
         </div>
       </div>
-      <div class="border-t border-white/10 pt-md flex flex-col md:flex-row justify-between items-center gap-2">
-        <p class="font-caption text-caption text-white/30">Copyright &copy; S. Kumar Creation Pvt. Ltd. All rights reserved.</p>
+      <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="font-caption text-caption text-white/30">Copyright &copy; S. Kumar Construction Pvt. Ltd. All rights reserved.</p>
         <div class="flex gap-4">
-          <a href="/privacy-policy" class="font-caption text-caption text-white/30 hover:text-white transition-colors">Privacy Policy</a>
-          <a href="/terms-of-service" class="font-caption text-caption text-white/30 hover:text-white transition-colors">Terms of Service</a>
-          <a href="/faq" class="font-caption text-caption text-white/30 hover:text-white transition-colors">FAQ</a>
-          <a href="/admin" class="font-caption text-caption text-white/30 hover:text-white transition-colors">Admin</a>
+          <a href="/privacy-policy.html" class="font-caption text-caption text-white/30 hover:text-white transition-colors">Privacy Policy</a>
+          <a href="/terms-of-service.html" class="font-caption text-caption text-white/30 hover:text-white transition-colors">Terms of Service</a>
+          <a href="/faq.html" class="font-caption text-caption text-white/30 hover:text-white transition-colors">FAQ</a>
         </div>
       </div>
     </div>
   </footer>
 
-  <script src="./main.js?v=6"></script>
   <script>
     // Hamburger menu toggle
     const hamburger = document.getElementById('hamburger');
@@ -954,6 +632,62 @@
       // Close menu when a link is clicked
       navMenu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => navMenu.classList.remove('open'));
+      });
+    }
+
+    // Header scroll effect
+    const navbar = document.getElementById('site-navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.style.background = 'rgba(2, 25, 54, 0.95)';
+        navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.1)';
+        navbar.style.backdropFilter = 'blur(10px)';
+      } else {
+        navbar.style.background = 'transparent';
+        navbar.style.boxShadow = 'none';
+        navbar.style.backdropFilter = 'none';
+      }
+    });
+
+    // Handle form submission (same as home page)
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+      contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = contactForm.querySelector('button[type="submit"]');
+        const statusDiv = document.getElementById('formStatus');
+        
+        btn.disabled = true;
+        btn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span><span>Sending...</span>';
+        
+        try {
+          const formData = new FormData(contactForm);
+          const data = {
+            name: formData.get('name'),
+            email: formData.get('email'),
+            phone: formData.get('phone'),
+            service: formData.get('service'),
+            message: formData.get('message'),
+          };
+
+          if (typeof supabase !== 'undefined') {
+            const { error } = await supabase.from('contacts').insert([data]);
+            if (error) throw error;
+          }
+
+          statusDiv.className = 'mt-4 p-4 rounded-lg font-body-md text-center bg-secondary-fixed/20 text-secondary-fixed';
+          statusDiv.innerText = 'Thank you! Your message has been sent successfully.';
+          statusDiv.classList.remove('hidden');
+          contactForm.reset();
+        } catch (error) {
+          console.error('Submission error:', error);
+          statusDiv.className = 'mt-4 p-4 rounded-lg font-body-md text-center bg-error/10 text-error';
+          statusDiv.innerText = 'An error occurred while sending your message. Please try again.';
+          statusDiv.classList.remove('hidden');
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = '<span>Submit Request</span><span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">send</span>';
+        }
       });
     }
   </script>
