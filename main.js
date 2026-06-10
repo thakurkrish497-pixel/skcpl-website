@@ -48,11 +48,15 @@
 
   /* ── Draw one frame (cover-fit, centred — fills full viewport, no grey bars) ── */
   function paint(idx) {
-    if (!canvas || idx === drawn) return;
-    drawn = idx;
-
+    if (!canvas || !ctx) return;
+    
     const img = imgs[idx];
-    if (!img || !img.complete) return;
+    // If image was purged by mobile browser, its naturalWidth will be 0.
+    // We must return before setting `drawn = idx` so it can try again next tick.
+    if (!img || !img.complete || !img.naturalWidth || !img.naturalHeight) return;
+
+    if (idx === drawn) return;
+    drawn = idx;
 
     const cw = canvas.width, ch = canvas.height;
     const iw = img.naturalWidth, ih = img.naturalHeight;
@@ -63,8 +67,12 @@
     const dx = (cw - dw) / 2;
     const dy = (ch - dh) / 2;
 
-    ctx.clearRect(0, 0, cw, ch);
-    ctx.drawImage(img, dx, dy, dw, dh);
+    try {
+      ctx.clearRect(0, 0, cw, ch);
+      ctx.drawImage(img, dx, dy, dw, dh);
+    } catch (e) {
+      console.error("Canvas draw error:", e);
+    }
   }
 
   /* ── Scroll → frame index (only within the spacer zone) ── */
@@ -111,14 +119,19 @@
 
   /* ── Animation loop ── */
   function tick() {
-    // Smoother lerp factor, increased responsiveness
-    scrollY += (targetY - scrollY) * 0.15;
-    if (Math.abs(targetY - scrollY) < 0.1) scrollY = targetY;
+    try {
+      // Smoother lerp factor, increased responsiveness
+      scrollY += (targetY - scrollY) * 0.15;
+      if (Math.abs(targetY - scrollY) < 0.1) scrollY = targetY;
 
-    paint(frameAt(scrollY));
-    updateCanvasVisibility();
-    updateHeroFade(scrollY);
-    requestAnimationFrame(tick);
+      paint(frameAt(scrollY));
+      updateCanvasVisibility();
+      updateHeroFade(scrollY);
+    } catch (e) {
+      console.error("Tick error:", e);
+    } finally {
+      requestAnimationFrame(tick);
+    }
   }
 
   /* ── Navbar scroll state ── */
