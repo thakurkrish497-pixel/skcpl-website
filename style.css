@@ -128,7 +128,7 @@ html, body {
 /* SCROLL ANIMATION                              */
 /* ══════════════════════════════════════════════ */
 #scroll-spacer {
-  height: 300vh;
+  height: 200vh;
   position: relative;
   z-index: 1;
   background: transparent;
