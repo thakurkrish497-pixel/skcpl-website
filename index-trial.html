@@ -252,53 +252,76 @@
 <body class="bg-background text-on-surface font-body-md selection:bg-secondary-fixed selection:text-on-secondary-fixed">
 
   <!-- ══════════════════════════════════════════════ -->
-  <!-- TRANSPARENT NAVIGATION BAR                    -->
-  <!-- ══════════════════════════════════════════════ -->
-  <nav class="site-navbar" id="site-navbar">
-    <a href="#animation" class="nav-brand">SKCPL</a>
-    <ul class="nav-menu" id="nav-menu">
-      <li><a href="#animation">Home</a></li>
-      <li><a href="#about">About Us</a></li>
-      <li><a href="#expertise">Services</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#gallery">Gallery</a></li>
-      <li><a href="#group">SKCPL Group</a></li>
-      <li><a href="#clients">Clients</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <li><a href="#contact" class="bg-secondary-fixed text-on-secondary-fixed px-4 py-2 rounded-lg font-bold hover:shadow-lg transition-all ml-2">Enquiry</a></li>
-    </ul>
-    <div class="hamburger" id="hamburger" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
+<!-- NEW DESIGN HERO SECTION                        -->
+<!-- ══════════════════════════════════════════════ -->
+<nav class="absolute top-0 w-full z-50 py-4 px-8 flex justify-between items-center bg-white shadow-sm border-b border-gray-200">
+  <div class="flex items-center gap-2">
+    <span class="text-3xl font-extrabold text-[#113155]">Skcpl</span>
+    <span class="text-secondary-fixed text-xl" style="font-variation-settings: 'FILL' 1; display: inline-block; transform: scaleX(-1);">waves</span>
+    <div class="flex flex-col leading-none mt-1">
+       <span class="text-[10px] font-semibold text-[#113155] tracking-widest uppercase">Connect to Waves</span>
     </div>
-  </nav>
-
-  <!-- Preloader -->
-  <div id="preloader">
-    <div class="loader-ring"></div>
-    <div class="loader-percent" id="loader-percent">0%</div>
   </div>
+  <ul class="hidden md:flex gap-8 text-[13px] font-semibold text-[#303030] tracking-widest uppercase">
+    <li><a href="#" class="hover:text-[#113155]">Our Portfolio</a></li>
+    <li><a href="#" class="hover:text-[#113155]">Companies</a></li>
+    <li><a href="#" class="hover:text-[#113155]">Sustainability</a></li>
+    <li><a href="#" class="hover:text-[#113155]">About</a></li>
+    <li><a href="#" class="hover:text-[#113155]">Contact</a></li>
+  </ul>
+</nav>
 
-  <!-- ══════════════════════════════════════════════ -->
-  <!-- SCROLL ANIMATION SECTION                      -->
-  <!-- ══════════════════════════════════════════════ -->
-  <div id="scroll-spacer"></div>
-  <div id="animation"></div>
-  <canvas id="canvas"></canvas>
+<div class="relative w-full min-h-screen overflow-hidden pt-24" style="background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(200,210,220,1) 15%, rgba(60,80,100,1) 40%, rgba(20,30,40,1) 100%);">
+  <!-- SVG Wavy Lines -->
+  <svg class="absolute inset-0 w-full h-full z-0 opacity-40" preserveAspectRatio="none" viewBox="0 0 1440 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+     <path d="M-100 400 C 300 200, 500 600, 900 400 C 1200 200, 1400 500, 1600 400" stroke="#D4AF37" stroke-width="1.5" fill="none" />
+     <path d="M-100 420 C 300 220, 500 620, 900 420 C 1200 220, 1400 520, 1600 420" stroke="#D4AF37" stroke-width="1" fill="none" />
+     <path d="M-100 440 C 300 240, 500 640, 900 440 C 1200 240, 1400 540, 1600 440" stroke="#D4AF37" stroke-width="0.5" fill="none" />
+     <path d="M-100 460 C 300 260, 500 660, 900 460 C 1200 260, 1400 560, 1600 460" stroke="#D4AF37" stroke-width="0.3" fill="none" />
+     <path d="M-100 480 C 300 280, 500 680, 900 480 C 1200 280, 1400 580, 1600 480" stroke="#D4AF37" stroke-width="0.2" fill="none" />
+     <path d="M-100 380 C 300 180, 500 580, 900 380 C 1200 180, 1400 480, 1600 380" stroke="#D4AF37" stroke-width="1" fill="none" />
+     <path d="M-100 360 C 300 160, 500 560, 900 360 C 1200 160, 1400 460, 1600 360" stroke="#D4AF37" stroke-width="0.5" fill="none" />
+  </svg>
 
-  <!-- Hero text overlay on top of the animation -->
-  <div class="hero-overlay" id="hero-overlay">
-    <h1 class="hero-heading">SKCPL</h1>
-    <p class="hero-subheading">Connect To Waves</p>
-    <div class="scroll-indicator flex flex-col items-center gap-2" id="scroll-indicator">
-      <div class="w-10 h-16 rounded-full border-2 border-white/50 flex justify-center p-2 mb-2 bg-black/20 backdrop-blur-sm">
-        <div class="w-1 h-3 bg-white/70 rounded-full animate-[bounce_1.5s_infinite]"></div>
+  <div class="relative z-10 container mx-auto px-6 pt-24 pb-32 flex flex-col items-center">
+    <h1 class="text-4xl md:text-5xl lg:text-[56px] font-medium text-white mb-20 text-center max-w-4xl leading-tight" style="font-family: 'Inter', sans-serif;">
+      Global Connections, Built on <br/> Foundations of Tomorrow
+    </h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 w-full max-w-5xl">
+      <div class="relative group aspect-square overflow-hidden border border-[#D4AF37]/80 p-[10px] bg-white/5 backdrop-blur-sm shadow-2xl">
+        <div class="w-full h-full relative overflow-hidden">
+            <img src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/real-state.jpg" onerror="this.src='./public/gallery/gallery-7.jpg'" alt="Residential" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-6 w-full text-center">
+              <h3 class="text-white text-lg font-semibold tracking-widest uppercase">RESIDENTIAL</h3>
+            </div>
+        </div>
       </div>
-      <span class="font-label-md text-label-md text-white/70 uppercase tracking-[0.3em]">Scroll Down</span>
-      <span class="material-symbols-outlined text-white/50 animate-pulse text-3xl">keyboard_arrow_down</span>
+      
+      <div class="relative group aspect-square overflow-hidden border border-[#D4AF37]/80 p-[10px] bg-white/5 backdrop-blur-sm shadow-2xl">
+        <div class="w-full h-full relative overflow-hidden">
+            <img src="./public/resort/fun-and-food-resorts-and-holidays-pvt-ltd-khandwa-road-indore-resorts-in6u3cbwmq.avif" alt="Hospitality" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-6 w-full text-center">
+              <h3 class="text-white text-lg font-semibold tracking-widest uppercase">HOSPITALITY</h3>
+            </div>
+        </div>
+      </div>
+      
+      <div class="relative group aspect-square overflow-hidden border border-[#D4AF37]/80 p-[10px] bg-white/5 backdrop-blur-sm shadow-2xl">
+        <div class="w-full h-full relative overflow-hidden">
+            <img src="./public/brands/skumar_solar_hero.png" onerror="this.src='./public/gallery/gallery-1.jpg'" alt="Energy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-6 w-full text-center">
+              <h3 class="text-white text-lg font-semibold tracking-widest uppercase">ENERGY</h3>
+            </div>
+        </div>
+      </div>
     </div>
   </div>
-
-  <!-- ══════════════════════════════════════════════ -->
+</div>
+<!-- ══════════════════════════════════════════════ -->
   <!-- MAIN CONTENT SECTIONS                         -->
   <!-- ══════════════════════════════════════════════ -->
   <main>
@@ -507,19 +530,19 @@
               </a>
             </div>
           </div>
-          <!-- Project 4: Degree College Pipalrawa Sonkach -->
+          <!-- Project 4: Parshav Nath City -->
           <div class="bg-white rounded-xl overflow-hidden shadow-[0px_10px_30px_rgba(26,46,76,0.05)] group hover:shadow-[0px_20px_60px_rgba(26,46,76,0.15)] transition-all duration-500">
             <div class="relative h-64 overflow-hidden">
-              <img data-dynamic-image="proj_degree_college" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
-                   alt="Degree College Pipalrawa Sonkach" 
-                   src="./public/gallery/ongoing/degree-college-1.jpeg"
+              <img data-dynamic-image="proj_parshav" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                   alt="Parshav Nath City Real Estate Project" 
+                   src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/real-state-2.jpg"
                    onerror="this.src='./public/gallery/gallery-5.jpg'"/>
               <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div class="absolute top-4 right-4 bg-secondary-fixed text-on-secondary-fixed px-3 py-1 font-label-md text-label-md rounded-lg text-xs">ONGOING</div>
+              <div class="absolute top-4 right-4 bg-secondary-fixed text-on-secondary-fixed px-3 py-1 font-label-md text-label-md rounded-lg text-xs">COMPLETED</div>
             </div>
             <div class="p-lg">
-              <h4 class="font-headline-md text-headline-md text-primary mb-base">Degree College Pipalrawa Sonkach</h4>
-              <p class="font-body-md text-body-md text-on-surface-variant mb-md">An ongoing educational infrastructure project to build a modern degree college in Pipalrawa Sonkach, providing state-of-the-art facilities for higher education.</p>
+              <h4 class="font-headline-md text-headline-md text-primary mb-base">Parshav Nath City</h4>
+              <p class="font-body-md text-body-md text-on-surface-variant mb-md">A flagship real estate development project delivered by SKCPL with architectural precision and exceptional quality standards, combining modern design with functional spaces.</p>
               <a class="inline-flex items-center gap-2 text-primary font-label-md text-label-md group-hover:gap-4 transition-all" href="#contact">
                 ENQUIRE <span class="material-symbols-outlined text-lg">arrow_forward</span>
               </a>
@@ -595,6 +618,7 @@
             <div class="client-logo">MP Warehousing Corp.</div>
             <div class="client-logo">PWD-PIU</div>
             <div class="client-logo">RES Solutions</div>
+            <div class="client-logo">Parshav Nath City</div>
             <!-- Duplicated for infinite scroll effect -->
             <div class="client-logo">MPRRDA</div>
             <div class="client-logo">MPPWD</div>
@@ -613,6 +637,7 @@
             <div class="client-logo">MP Warehousing Corp.</div>
             <div class="client-logo">PWD-PIU</div>
             <div class="client-logo">RES Solutions</div>
+            <div class="client-logo">Parshav Nath City</div>
           </div>
         </div>
       </div>
@@ -701,7 +726,7 @@
             <div class="brand-card-icon">
               <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">construction</span>
             </div>
-            <h4 class="brand-card-name">S. Kumar Creation Pvt. Ltd.</h4>
+            <h4 class="brand-card-name">S.Kumar Creation</h4>
             <span class="brand-card-short">SKCPL</span>
             <p class="brand-card-desc">Total turnkey solution provider for 16+ years in Telecom, Infrastructure, Real Estate &amp; Hospitality. Registered with MPPWD, MPEB Bhopal, A-class electrical contractor with MSME &amp; NSIC, OHSAS certified. Serving clients across India including major telecom operators, government bodies, and private firms.</p>
             <div class="brand-card-stats">
@@ -987,19 +1012,12 @@
           <h2 class="font-headline-md text-headline-md font-bold text-white mb-2">S. Kumar Creation Pvt. Ltd.</h2>
           <p class="font-caption text-caption text-white/40 mb-4">Connect To Waves</p>
           <p class="font-body-md text-body-md text-white/50 mb-6">Total turnkey solution provider in Telecom, Infrastructure, Real Estate &amp; Hospitality. Indore, MP.</p>
-          <div class="flex flex-col items-start gap-4">
+          <div class="flex gap-4">
             <a href="https://www.instagram.com/skcpl_group_?igsh=MXQwZXF3NnRjYzZneg==" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white font-medium hover:shadow-[0_0_20px_rgba(225,48,108,0.6)] hover:scale-105 transition-all duration-300" title="Follow us on Instagram">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12.5 6a6.5 6.5 0 100 13 6.5 6.5 0 000-13zm0 1.822a4.678 4.678 0 110 9.356 4.678 4.678 0 010-9.356zm3.844-1.91a1.07 1.07 0 11-2.14 0 1.07 1.07 0 012.14 0z" clip-rule="evenodd" />
               </svg>
               <span>Follow on Instagram</span>
-            </a>
-            <a href="https://wa.me/919425904286" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-tr from-[#25D366] to-[#128C7E] text-white font-medium hover:shadow-[0_0_20px_rgba(37,211,102,0.6)] hover:scale-105 transition-all duration-300" title="Chat on WhatsApp">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-                <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c-.003 1.396.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c.003-3.625 2.952-6.574 6.577-6.574a6.59 6.59 0 0 1 4.645 1.928 6.587 6.587 0 0 1 1.92 4.647c-.004 3.628-2.953 6.575-6.58 6.575z"/>
-                <path d="M11.871 9.771c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
-              </svg>
-              <span>Chat on WhatsApp</span>
             </a>
           </div>
         </div>
