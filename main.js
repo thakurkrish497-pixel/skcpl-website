@@ -91,14 +91,8 @@
     }
 
     const past = window.scrollY >= spacerBottom;
-    if (past !== canvas.classList.contains("hidden-canvas")) {
-      canvas.classList.toggle("hidden-canvas", past);
+    if (past !== heroOverlay.classList.contains("hidden-canvas")) {
       heroOverlay.classList.toggle("hidden-canvas", past);
-      // If we just scrolled back up (past is false), force a complete redraw of the canvas 
-      // in case the mobile browser aggressively cleared its memory while hidden
-      if (!past) {
-        drawn = -1;
-      }
     }
   }
 
