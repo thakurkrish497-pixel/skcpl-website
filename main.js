@@ -313,7 +313,7 @@
         });
 
         // 3. Collect Infinite Gallery Images
-        if (record.key.startsWith('skcpl_gallery_item_') || record.key.startsWith('resort_gallery_item_')) {
+        if (record.key.startsWith('skcpl_gallery_item_') || record.key.startsWith('resort_gallery_item_') || record.key.startsWith('solar_gallery_item_')) {
           if (record.image_url) {
             galleryImages.push(record);
           }

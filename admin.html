@@ -125,6 +125,25 @@
 
         <hr class="mb-10">
 
+        <!-- Solar Gallery -->
+        <div class="mb-10">
+          <div class="flex justify-between items-center mb-6">
+            <div>
+              <h2 class="text-lg font-bold text-gray-800">SKumar Solar Gallery</h2>
+              <p class="text-sm text-gray-500">Images shown on the Solar page gallery.</p>
+            </div>
+            <button onclick="triggerNewGalleryUpload('solar')" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold text-sm hover:bg-blue-700 transition-colors shadow-sm">
+              + Upload Solar Photo
+            </button>
+            <input type="file" id="new-gallery-upload-solar" accept="image/*" class="hidden" onchange="handleNewGalleryUpload(event, 'solar')">
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="dynamic-gallery-grid-solar">
+            <div class="col-span-full text-center py-10 text-gray-500">Loading gallery...</div>
+          </div>
+        </div>
+
+        <hr class="mb-10">
+
         <!-- Resort Gallery -->
         <div>
           <div class="flex justify-between items-center mb-6">
@@ -413,7 +432,7 @@ try {
       if (records) {
         records.forEach(r => {
           recordMap[r.key] = r;
-          if (r.key.startsWith('skcpl_gallery_item_') || r.key.startsWith('resort_gallery_item_')) {
+          if (r.key.startsWith('skcpl_gallery_item_') || r.key.startsWith('resort_gallery_item_') || r.key.startsWith('solar_gallery_item_')) {
             galleryRecords.push(r);
           }
         });
@@ -473,11 +492,14 @@ try {
       // Render Dynamic Gallery
       const skcplGalleryGrid = document.getElementById('dynamic-gallery-grid-skcpl');
       const resortGalleryGrid = document.getElementById('dynamic-gallery-grid-resort');
+      const solarGalleryGrid = document.getElementById('dynamic-gallery-grid-solar');
       skcplGalleryGrid.innerHTML = '';
       resortGalleryGrid.innerHTML = '';
+      solarGalleryGrid.innerHTML = '';
       
       const skcplImages = galleryRecords.filter(r => r.key.startsWith('skcpl_gallery_item_'));
       const resortImages = galleryRecords.filter(r => r.key.startsWith('resort_gallery_item_'));
+      const solarImages = galleryRecords.filter(r => r.key.startsWith('solar_gallery_item_'));
 
       function renderDynamicGallery(gridEl, images) {
         if (images.length === 0) {
@@ -504,6 +526,7 @@ try {
 
       renderDynamicGallery(skcplGalleryGrid, skcplImages);
       renderDynamicGallery(resortGalleryGrid, resortImages);
+      renderDynamicGallery(solarGalleryGrid, solarImages);
 
       logDebug("Dashboard data rendered successfully.");
     } catch (err) {
