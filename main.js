@@ -1,8 +1,8 @@
 (() => {
   /* ── Config ── */
   const isMobile = window.innerWidth <= 768;
-  const START = isMobile ? 1 : 160;
-  const TOTAL = isMobile ? 64 : 81;
+  const START = isMobile ? 1 : 0;
+  const TOTAL = isMobile ? 64 : 196;
   const src = (i) => {
     const frameNum = String(START + i).padStart(3, '0');
     return isMobile 
