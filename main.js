@@ -68,8 +68,8 @@
     const iw = img.naturalWidth, ih = img.naturalHeight;
 
     // cover: scale so the image fills the canvas entirely (crops if needed)
-    // Use 'cover' for mobile, and 'contain' for desktop since the new frames are portrait (1440x2560)
-    const s = isMobile ? Math.max(cw / iw, ch / ih) : Math.min(cw / iw, ch / ih);
+    // cover: scale so the image fills the canvas entirely (crops if needed)
+    const s = Math.max(cw / iw, ch / ih);
     const dw = iw * s, dh = ih * s;
     const dx = (cw - dw) / 2;
     const dy = (ch - dh) / 2;
