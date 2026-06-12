@@ -7,7 +7,7 @@
     const frameNum = String(START + i).padStart(3, '0');
     return isMobile 
       ? `/public/frames/mobile/ezgif-frame-${frameNum}.jpg`
-      : `/public/frames/ezgif-frame-${frameNum}.jpg`;
+      : `/public/frames/ezgif-frame-${frameNum}.jpg?v=2`;
   };
 
   /* ── DOM ── */
