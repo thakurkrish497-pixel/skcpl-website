@@ -68,7 +68,10 @@
     const iw = img.naturalWidth, ih = img.naturalHeight;
 
     // cover: scale so the image fills the canvas entirely (crops if needed)
-    const s = Math.max(cw / iw, ch / ih);
+    let s = Math.max(cw / iw, ch / ih);
+    if (!isMobile) {
+      s *= 0.85; // Make the animation slightly smaller on desktop
+    }
     const dw = iw * s, dh = ih * s;
     const dx = (cw - dw) / 2;
     const dy = (ch - dh) / 2;
