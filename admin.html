@@ -227,6 +227,7 @@ try {
   
   // --- IMAGE KEYS DEFINITION ---
   const editableImages = [
+    { key: "home_corporate_video", label: "Home Page - Corporate Video", type: "video" },
     { key: "index_about", label: "Home Page - About Us Image 1" },
     { key: "index_about_2", label: "Home Page - About Us Image 2" },
     { key: "proj_telecom", label: "Home Page - Project Telecom" },
@@ -444,15 +445,27 @@ try {
       editableImages.forEach((imgObj) => {
         const currentRecord = recordMap[imgObj.key];
         const hasImage = currentRecord && currentRecord.image_url;
-        const displayUrl = hasImage ? currentRecord.image_url : 'https://placehold.co/600x400/e2e8f0/64748b?text=No+Photo+Yet';
+        
+        let mediaHtml;
+        const acceptType = imgObj.type === 'video' ? 'video/*' : 'image/*';
+        const buttonText = imgObj.type === 'video' ? 'Replace Video' : 'Replace Photo';
+        const uploadText = imgObj.type === 'video' ? 'Upload New Video' : 'Upload New Photo';
+        
+        if (imgObj.type === 'video') {
+          const displayUrl = hasImage ? currentRecord.image_url : '';
+          mediaHtml = `<video src="${displayUrl}" class="w-full h-full object-cover" muted loop playsinline></video>`;
+        } else {
+          const displayUrl = hasImage ? currentRecord.image_url : 'https://placehold.co/600x400/e2e8f0/64748b?text=No+Photo+Yet';
+          mediaHtml = `<img src="${displayUrl}" class="w-full h-full object-cover" alt="${imgObj.label}">`;
+        }
         
         const cardHtml = `
           <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col">
             <div class="h-48 w-full bg-gray-100 relative group">
-              <img src="${displayUrl}" class="w-full h-full object-cover" alt="${imgObj.label}">
+              ${mediaHtml}
               <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                  <button onclick="triggerFileInput('${imgObj.key}')" class="bg-white text-gray-900 px-4 py-2 rounded-lg font-semibold text-sm shadow-lg hover:bg-gray-50 transition-colors">
-                   Replace Photo
+                   ${buttonText}
                  </button>
               </div>
             </div>
@@ -461,10 +474,10 @@ try {
                 <h3 class="font-bold text-gray-800 text-sm mb-1">${imgObj.label}</h3>
                 <p class="text-xs text-gray-500 break-all mb-3">ID: ${imgObj.key}</p>
               </div>
-              <input type="file" id="file-${imgObj.key}" accept="image/*" class="hidden" onchange="handleImageUpload(event, '${imgObj.key}')">
+              <input type="file" id="file-${imgObj.key}" accept="${acceptType}" class="hidden" onchange="handleImageUpload(event, '${imgObj.key}')">
               <button onclick="triggerFileInput('${imgObj.key}')" class="w-full py-2 bg-gray-50 border border-gray-200 hover:bg-gray-100 text-gray-700 text-sm font-semibold rounded-lg transition-colors flex items-center justify-center gap-2">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
-                Upload New Photo
+                ${uploadText}
               </button>
             </div>
           </div>

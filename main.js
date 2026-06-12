@@ -289,7 +289,7 @@
       const galleryImages = [];
 
       data.forEach(record => {
-        // 1. Handle Dynamic Images
+        // 1. Handle Dynamic Media
         const imgEls = document.querySelectorAll(`[data-dynamic-image="${record.key}"]`);
         imgEls.forEach(el => {
           if (record.image_url && el.tagName === 'IMG') {
@@ -297,6 +297,9 @@
             if (!el.hasAttribute("loading")) {
               el.setAttribute("loading", "lazy");
             }
+          } else if (record.image_url && el.tagName === 'VIDEO') {
+            el.src = record.image_url;
+            el.load();
           } else if (record.image_url) {
             // Background image replacement
             el.style.backgroundImage = `url('${record.image_url}')`;
