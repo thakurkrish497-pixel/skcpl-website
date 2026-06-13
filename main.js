@@ -1,13 +1,14 @@
 (() => {
   /* ── Config ── */
   const isMobile = window.innerWidth <= 768;
-  const START = isMobile ? 1 : 0;
-  const TOTAL = isMobile ? 64 : 196;
+  const START = 0;
+  // Load all 196 frames on desktop. On mobile, load every 3rd frame (66 frames total) to prevent memory crashes.
+  const TOTAL = isMobile ? 66 : 196;
   const src = (i) => {
-    const frameNum = String(START + i).padStart(3, '0');
-    return isMobile 
-      ? `/public/frames/mobile/ezgif-frame-${frameNum}.jpg`
-      : `/public/frames/ezgif-frame-${frameNum}.jpg`;
+    // For mobile, i=1 -> 1, i=2 -> 4, i=3 -> 7, up to 196.
+    const actualIndex = isMobile ? ((i - 1) * 3 + 1) : i;
+    const frameNum = String(START + actualIndex).padStart(3, '0');
+    return `/public/frames/ezgif-frame-${frameNum}.jpg`;
   };
 
   /* ── DOM ── */
