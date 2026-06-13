@@ -1,10 +1,13 @@
 (() => {
   /* ── Config ── */
-  const START = 0;
-  const TOTAL = 196;
+  const isMobile = window.innerWidth <= 768;
+  const START = isMobile ? 1 : 0;
+  const TOTAL = isMobile ? 64 : 196;
   const src = (i) => {
     const frameNum = String(START + i).padStart(3, '0');
-    return `/public/frames/ezgif-frame-${frameNum}.jpg`;
+    return isMobile 
+      ? `/public/frames/mobile/ezgif-frame-${frameNum}.jpg`
+      : `/public/frames/ezgif-frame-${frameNum}.jpg`;
   };
 
   /* ── DOM ── */
