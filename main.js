@@ -8,7 +8,7 @@
     // For mobile, i=1 -> 1, i=2 -> 4, i=3 -> 7, up to 196.
     const actualIndex = isMobile ? ((i - 1) * 3 + 1) : i;
     const frameNum = String(START + actualIndex).padStart(3, '0');
-    return `/public/frames/ezgif-frame-${frameNum}.jpg`;
+    return `/public/frames/ezgif-frame-${frameNum}.jpg?v=3`;
   };
 
   /* ── DOM ── */
