@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html class="scroll-smooth" lang="en">
 <head>
+  <script>
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Frequently Asked Questions (FAQ) | SKCPL Group</title>
@@ -140,8 +147,14 @@
       <li><a href="index.html#gallery">Gallery</a></li>
       <li><a href="index.html#group">SKCPL Group</a></li>
       <li><a href="index.html#contact" class="bg-secondary-fixed text-on-secondary-fixed px-4 py-2 rounded-lg font-bold hover:shadow-lg transition-all ml-2">Enquiry</a></li>
+          <li>
+        <button id="theme-toggle" class="ml-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center justify-center border border-white/20" aria-label="Toggle Dark Mode">
+          <span class="material-symbols-outlined text-white dark:hidden">dark_mode</span>
+          <span class="material-symbols-outlined text-white hidden dark:block">light_mode</span>
+        </button>
+      </li>
     </ul>
-    <div class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <div class="hamburger" id="hamburger" aria-label="Toggle menu">
       <span></span><span></span><span></span>
     </div>
   </nav>

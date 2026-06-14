@@ -358,4 +358,17 @@
   // Load dynamic content right away
   loadDynamicContent();
 
+  /* ── Theme Toggle ── */
+  const themeToggle = document.getElementById('theme-toggle');
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      if (document.documentElement.classList.contains('dark')) {
+        localStorage.theme = 'dark';
+      } else {
+        localStorage.theme = 'light';
+      }
+    });
+  }
+
 })();
