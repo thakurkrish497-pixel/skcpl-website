@@ -435,11 +435,13 @@ footer {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  padding: 40px;
+  box-sizing: border-box;
   transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .brand-card:hover .brand-card-image img {
-  transform: scale(1.08);
+  transform: scale(1);
 }
 
 .brand-card-overlay {
