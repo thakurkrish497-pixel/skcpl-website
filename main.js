@@ -2,13 +2,18 @@
   /* ── Config ── */
   const isMobile = window.innerWidth <= 768;
   const START = 0;
-  // Load all 196 frames on desktop. On mobile, load every 3rd frame (66 frames total) to prevent memory crashes.
-  const TOTAL = isMobile ? 66 : 196;
+  // Load all 210 frames on desktop. On mobile, load every 3rd frame (66 frames total) to prevent memory crashes.
+  const TOTAL = isMobile ? 66 : 210;
   const src = (i) => {
-    // For mobile, i=1 -> 1, i=2 -> 4, i=3 -> 7, up to 196.
-    const actualIndex = isMobile ? ((i - 1) * 3 + 1) : i;
-    const frameNum = String(START + actualIndex).padStart(3, '0');
-    return `/public/frames/ezgif-frame-${frameNum}.jpg?v=3`;
+    if (isMobile) {
+      // For mobile, i=1 -> 1, i=2 -> 4, i=3 -> 7, up to 196.
+      const actualIndex = ((i - 1) * 3 + 1);
+      const frameNum = String(START + actualIndex).padStart(3, '0');
+      return `/public/frames/ezgif-frame-${frameNum}.jpg?v=3`;
+    } else {
+      const frameNum = String(i).padStart(3, '0');
+      return `/public/frames_desktop/ezgif-frame-${frameNum}.jpg?v=1`;
+    }
   };
 
   /* ── DOM ── */
@@ -68,11 +73,15 @@
     const cw = canvas.width, ch = canvas.height;
     const iw = img.naturalWidth, ih = img.naturalHeight;
 
-    // cover: scale so the image fills the canvas entirely (crops if needed)
-    // The JPEGs are 1440x2560, but contain massive black bars. The actual video is 1440x812 in the center.
-    // We scale based on the actual video height so it fills the screen on mobile devices without black bars.
-    const actualVideoHeight = 812;
-    const s = Math.max(cw / iw, ch / actualVideoHeight);
+    let s;
+    if (isMobile) {
+      // The mobile JPEGs are 1440x2560, but contain massive black bars. The actual video is 1440x812.
+      const actualVideoHeight = 812;
+      s = Math.max(cw / iw, ch / actualVideoHeight);
+    } else {
+      // The new desktop JPEGs are 1280x720, no black bars.
+      s = Math.max(cw / iw, ch / ih);
+    }
     const dw = iw * s, dh = ih * s;
     const dx = (cw - dw) / 2;
     const dy = (ch - dh) / 2;
