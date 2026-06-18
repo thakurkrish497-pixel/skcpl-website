@@ -157,7 +157,8 @@
   const navbar = document.getElementById("site-navbar");
   function updateNavbar() {
     if (!navbar) return;
-    const threshold = cachedMaxScroll > 0 ? cachedMaxScroll : 80;
+    // Turn solid only when the next section (<main>) reaches the top of the viewport
+    const threshold = cachedSpacerHeight > 0 ? cachedSpacerHeight : 80;
     if (window.scrollY > threshold) {
       navbar.classList.add("scrolled");
     } else {
