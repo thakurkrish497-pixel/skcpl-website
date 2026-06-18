@@ -80,9 +80,10 @@ html, body {
   font-family: 'Montserrat', sans-serif;
   font-size: 1.5rem;
   font-weight: 800;
-  color: #fff;
+  color: #021936;
   text-decoration: none;
   letter-spacing: 0.08em;
+  transition: color 0.3s ease;
 }
 
 .nav-menu {
@@ -93,7 +94,7 @@ html, body {
 }
 
 .nav-menu a {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(2, 25, 54, 0.8);
   text-decoration: none;
   font-family: 'Inter', sans-serif;
   font-size: 0.8rem;
@@ -117,6 +118,18 @@ html, body {
 }
 
 .nav-menu a:hover {
+  color: #021936;
+}
+
+.site-navbar.scrolled .nav-brand {
+  color: #fff;
+}
+
+.site-navbar.scrolled .nav-menu a {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.site-navbar.scrolled .nav-menu a:hover {
   color: #fff;
 }
 
