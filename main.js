@@ -157,7 +157,8 @@
   const navbar = document.getElementById("site-navbar");
   function updateNavbar() {
     if (!navbar) return;
-    if (window.scrollY > 80) {
+    const threshold = cachedMaxScroll > 0 ? cachedMaxScroll : 80;
+    if (window.scrollY > threshold) {
       navbar.classList.add("scrolled");
     } else {
       navbar.classList.remove("scrolled");
