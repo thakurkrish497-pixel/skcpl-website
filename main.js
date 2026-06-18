@@ -68,11 +68,16 @@
     const cw = canvas.width, ch = canvas.height;
     const iw = img.naturalWidth, ih = img.naturalHeight;
 
-    // cover: scale so the image fills the canvas entirely (crops if needed)
     // The JPEGs are 1440x2560, but contain massive black bars. The actual video is 1440x812 in the center.
-    // We scale based on the actual video height so it fills the screen on mobile devices without black bars.
     const actualVideoHeight = 812;
-    const s = Math.max(cw / iw, ch / actualVideoHeight);
+    let s;
+    if (isMobile) {
+      // Mobile: cover-fit to avoid black bars, zooming horizontally if needed
+      s = Math.max(cw / iw, ch / actualVideoHeight);
+    } else {
+      // PC/Big screen: contain-fit to keep natural 16:9 ratio without zooming
+      s = Math.min(cw / iw, ch / actualVideoHeight);
+    }
     const dw = iw * s, dh = ih * s;
     const dx = (cw - dw) / 2;
     const dy = (ch - dh) / 2;
