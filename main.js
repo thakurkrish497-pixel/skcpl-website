@@ -373,4 +373,50 @@
     });
   }
 
+  /* ── Stats Counter Animation ── */
+  const statNumbers = document.querySelectorAll('.stat-number');
+  if (statNumbers.length > 0) {
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const targetText = el.getAttribute('data-target');
+          const targetNum = parseInt(targetText.replace(/[^0-9]/g, ''));
+          const suffix = targetText.replace(/[0-9]/g, '');
+          
+          let startTimestamp = null;
+          const duration = 2000;
+          
+          const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            // easeOutExpo for smoother ending
+            const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+            const currentNum = Math.floor(easeProgress * targetNum);
+            
+            el.innerText = currentNum + suffix;
+            
+            if (progress < 1) {
+              window.requestAnimationFrame(step);
+            } else {
+              el.innerText = targetNum + suffix;
+            }
+          };
+          
+          window.requestAnimationFrame(step);
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    statNumbers.forEach(el => {
+      const originalText = el.innerText;
+      if (originalText && !isNaN(parseInt(originalText))) {
+        el.setAttribute('data-target', originalText);
+        el.innerText = '0' + originalText.replace(/[0-9]/g, '');
+        observer.observe(el);
+      }
+    });
+  }
+
 })();
