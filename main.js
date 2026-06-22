@@ -385,14 +385,15 @@
           const suffix = targetText.replace(/[0-9]/g, '');
           
           let startTimestamp = null;
-          const duration = 2000;
+          const duration = 1500;
           
           const step = (timestamp) => {
             if (!startTimestamp) startTimestamp = timestamp;
             const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            // easeOutExpo for smoother ending
-            const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-            const currentNum = Math.floor(easeProgress * targetNum);
+            
+            // easeOutQuad for a very smooth and consistent slow down
+            const easeProgress = 1 - (1 - progress) * (1 - progress);
+            const currentNum = Math.round(easeProgress * targetNum);
             
             el.innerText = currentNum + suffix;
             
