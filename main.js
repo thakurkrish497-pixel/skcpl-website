@@ -176,32 +176,20 @@
   /* ── Preload all frames ── */
   function preload() {
     return new Promise((resolve) => {
-      const loadImg = (i) => {
-        return new Promise((res) => {
-          const img = new Image();
-          img.decoding = "async";
-          img.src = src(i + 1);
-          const done = () => {
-            loaded++;
-            if (pctEl) pctEl.textContent = `${Math.round((loaded / TOTAL) * 100)}%`;
-            res(img);
-          };
-          img.onload = done;
-          img.onerror = done;
-          imgs[i] = img;
-        });
-      };
+      for (let i = 0; i < TOTAL; i++) {
+        const img = new Image();
+        img.decoding = "async";
+        img.src = src(i + 1);
 
-      // Load first frame immediately
-      loadImg(0).then(() => {
-        // Unblock UI as soon as the first frame is guaranteed to be ready
-        resolve();
-        
-        // Load the remaining frames in the background
-        for (let i = 1; i < TOTAL; i++) {
-          loadImg(i);
-        }
-      });
+        const done = () => {
+          loaded++;
+          if (pctEl) pctEl.textContent = `${Math.round((loaded / TOTAL) * 100)}%`;
+          if (loaded === TOTAL) resolve();
+        };
+        img.onload = done;
+        img.onerror = done;
+        imgs[i] = img;
+      }
     });
   }
 
