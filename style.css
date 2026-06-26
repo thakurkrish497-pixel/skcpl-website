@@ -996,3 +996,71 @@ html.dark option {
   background-color: #111827;
   color: #fff;
 }
+
+
+/* ==========================================================================
+   MOBILE MENU AND RESPONSIVE OPTIMIZATIONS
+   ========================================================================== */
+
+/* Fix Hamburger Menu not being closable */
+@media (max-width: 900px) {
+  .hamburger {
+    z-index: 201 !important;
+    position: relative;
+  }
+  .nav-menu.open ~ .hamburger span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+    background: #fff !important;
+  }
+  .nav-menu.open ~ .hamburger span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-menu.open ~ .hamburger span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+    background: #fff !important;
+  }
+  /* Optional: backdrop for mobile menu */
+  .mobile-menu-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.5);
+    z-index: 199;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+  .mobile-menu-backdrop.open {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* General Mobile Spacing Fixes to prevent overflow and huge gaps */
+@media (max-width: 768px) {
+  .py-xl {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+  .mb-xl {
+    margin-bottom: 40px !important;
+  }
+  .mb-lg {
+    margin-bottom: 32px !important;
+  }
+  .gap-xl {
+    gap: 32px !important;
+  }
+  .px-margin {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  h1.text-headline-xl, h2.text-headline-xl {
+    font-size: 36px !important;
+  }
+  h2.text-headline-md, h3.text-headline-md {
+    font-size: 24px !important;
+  }
+}

@@ -3,7 +3,7 @@
 <head>
   <link rel="icon" type="image/png" href="./public/images/favicon.png">
   <script>
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    if (localStorage.theme === 'dark') {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
@@ -11,13 +11,13 @@
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>S. Kumar Construction | SKCPL Group</title>
-  <meta name="description" content="S. Kumar Creation Pvt. Ltd. (SKCPL) - Total Turnkey Solution Provider for Telecom, Infrastructure, Real Estate & Hospitality in India for 16+ years. Based in Indore, MP.">
-  <meta property="og:title" content="S. Kumar Creation Pvt. Ltd. | Connect To Waves">
-  <meta property="og:description" content="S. Kumar Creation Pvt. Ltd. (SKCPL) - Total Turnkey Solution Provider for Telecom, Infrastructure, Real Estate & Hospitality in India for 16+ years.">
+  <title>SKCPL Construction & Real Estate | Premier Builders in Indore</title>
+  <meta name="description" content="S. Kumar Creation Pvt. Ltd. (SKCPL) — Top infrastructure and real estate development company in Indore. Specializing in private/public building construction, renovation, and architectural design.">
+  <link rel="canonical" href="https://www.skumarcreation.com/skumar-construction.html" />
+  <meta property="og:title" content="SKCPL Construction & Real Estate | Premier Builders in Indore">
+  <meta property="og:description" content="S. Kumar Creation Pvt. Ltd. (SKCPL) — Top infrastructure and real estate development company in Indore.">
   <meta property="og:image" content="https://www.skumarcreation.com/public/brands/skcpl-construction.png">
-  <meta property="og:url" content="https://www.skumarcreation.com/">
-  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.skumarcreation.com/skumar-construction.html">
   <meta name="twitter:card" content="summary_large_image">
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="./style.css?v=4">
   
   <!-- Supabase JS Library -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 
   <!-- Tailwind Configuration -->
   <script>
@@ -308,19 +308,19 @@
   <!-- DYNAMIC HERO SLIDESHOW SECTION -->
   <header class="relative pt-40 pb-32 bg-primary overflow-hidden" id="home">
     <div class="absolute inset-0 z-0 bg-black">
-      <img data-dynamic-image="skcpl_masonry_1" src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/electricity-infrastructure-low-angle-shot-159218.jpg" 
+      <img loading="lazy" data-dynamic-image="skcpl_masonry_1" src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/electricity-infrastructure-low-angle-shot-159218.jpg" 
            onerror="this.src='./public/gallery/gallery-1.jpg'" 
            alt="Slideshow Image 1" class="slideshow-bg">
-      <img data-dynamic-image="skcpl_masonry_2" src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/real-state-2.jpg" 
+      <img loading="lazy" data-dynamic-image="skcpl_masonry_2" src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/real-state-2.jpg" 
            onerror="this.src='./public/gallery/gallery-8.jpg'" 
            alt="Slideshow Image 2" class="slideshow-bg">
-      <img data-dynamic-image="skcpl_masonry_3" src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/office.jpg" 
+      <img loading="lazy" data-dynamic-image="skcpl_masonry_3" src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/office.jpg" 
            onerror="this.src='./public/gallery/gallery-3.jpg'" 
            alt="Slideshow Image 3" class="slideshow-bg">
-      <img data-dynamic-image="skcpl_masonry_4" src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/real-state.jpg" 
+      <img loading="lazy" data-dynamic-image="skcpl_masonry_4" src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/real-state.jpg" 
            onerror="this.src='./public/gallery/gallery-7.jpg'" 
            alt="Slideshow Image 4" class="slideshow-bg">
-      <img data-dynamic-image="skcpl_masonry_5" src="./public/gallery/gallery-6.jpg" 
+      <img loading="lazy" data-dynamic-image="skcpl_masonry_5" src="./public/gallery/gallery-6.jpg" 
            alt="Slideshow Image 5" class="slideshow-bg">
       <div class="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/70 to-background"></div>
     </div>
@@ -398,7 +398,7 @@
           </div>
           <div class="relative">
             <div class="absolute inset-0 bg-primary rounded-xl translate-x-4 translate-y-4 -z-10"></div>
-            <img src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/real-state.jpg" 
+            <img loading="lazy" src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/real-state.jpg" 
                  onerror="this.src='./public/gallery/gallery-7.jpg'" 
                  alt="Construction Vision" class="rounded-xl w-full h-auto object-cover shadow-xl border border-surface-variant">
           </div>
@@ -483,7 +483,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
           <div class="bg-surface rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group border border-surface-variant">
             <div class="relative h-64 overflow-hidden">
-              <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+              <img loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                    alt="Telecom Infrastructure" 
                    src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/electricity-infrastructure-low-angle-shot-159218.jpg"
                    onerror="this.src='./public/gallery/gallery-1.jpg'"/>
@@ -496,7 +496,7 @@
           </div>
           <div class="bg-surface rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group border border-surface-variant">
             <div class="relative h-64 overflow-hidden">
-              <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+              <img loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                    alt="MPRRDA Projects" 
                    src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/office3.jpg"
                    onerror="this.src='./public/gallery/gallery-4.jpg'"/>
@@ -509,7 +509,7 @@
           </div>
           <div class="bg-surface rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group border border-surface-variant">
             <div class="relative h-64 overflow-hidden">
-              <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+              <img loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                    alt="Commercial Real Estate" 
                    src="./public/gallery/gallery-6.jpg" />
               <div class="absolute top-4 right-4 bg-secondary-fixed text-on-secondary-fixed px-3 py-1 font-label-md text-label-md rounded-lg text-xs font-bold shadow-md">ONGOING</div>
@@ -522,7 +522,7 @@
           <!-- Degree College -->
           <div class="bg-surface rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group border border-surface-variant">
             <div class="relative h-64 overflow-hidden">
-              <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+              <img loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                    alt="Degree College Pipalrawa Sonkach" 
                    src="./public/gallery/ongoing/degree-college-1.jpeg" />
               <div class="absolute top-4 right-4 bg-secondary-fixed text-on-secondary-fixed px-3 py-1 font-label-md text-label-md rounded-lg text-xs font-bold shadow-md">ONGOING</div>
@@ -535,7 +535,7 @@
           <!-- ITI Hostel -->
           <div class="bg-surface rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group border border-surface-variant">
             <div class="relative h-64 overflow-hidden">
-              <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+              <img loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                    alt="ITI Hostel Kukshi" 
                    src="./public/gallery/ongoing/iti-hostel-1.jpeg" />
               <div class="absolute top-4 right-4 bg-secondary-fixed text-on-secondary-fixed px-3 py-1 font-label-md text-label-md rounded-lg text-xs font-bold shadow-md">ONGOING</div>
@@ -548,7 +548,7 @@
           <!-- Khelparisar -->
           <div class="bg-surface rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group border border-surface-variant">
             <div class="relative h-64 overflow-hidden">
-              <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+              <img loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                    alt="Khelparisar" 
                    src="./public/gallery/ongoing/khelparisar-1.jpeg" />
               <div class="absolute top-4 right-4 bg-secondary-fixed text-on-secondary-fixed px-3 py-1 font-label-md text-label-md rounded-lg text-xs font-bold shadow-md">ONGOING</div>
@@ -574,7 +574,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
           <div class="flex flex-col md:flex-row bg-white rounded-xl overflow-hidden shadow-md group">
             <div class="w-full md:w-2/5 relative overflow-hidden">
-              <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+              <img loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                    alt="Completed Infrastructure Project" 
                    src="./public/gallery/completed/project-1.jpeg"/>
             </div>
@@ -601,27 +601,27 @@
         </div>
         <div class="gallery-grid">
           <div class="gallery-item gallery-tall group">
-            <img data-dynamic-image="skcpl_masonry_1" src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/electricity-infrastructure-low-angle-shot-159218.jpg" 
+            <img loading="lazy" data-dynamic-image="skcpl_masonry_1" src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/electricity-infrastructure-low-angle-shot-159218.jpg" 
                  onerror="this.src='./public/gallery/gallery-1.jpg'" 
                  alt="Gallery Image 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
           </div>
           <div class="gallery-item group">
-            <img data-dynamic-image="skcpl_masonry_2" src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/real-state-2.jpg" 
+            <img loading="lazy" data-dynamic-image="skcpl_masonry_2" src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/real-state-2.jpg" 
                  onerror="this.src='./public/gallery/gallery-8.jpg'" 
                  alt="Gallery Image 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
           </div>
           <div class="gallery-item group">
-            <img data-dynamic-image="skcpl_masonry_3" src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/office.jpg" 
+            <img loading="lazy" data-dynamic-image="skcpl_masonry_3" src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/office.jpg" 
                  onerror="this.src='./public/gallery/gallery-3.jpg'" 
                  alt="Gallery Image 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
           </div>
           <div class="gallery-item gallery-wide group">
-            <img data-dynamic-image="skcpl_masonry_4" src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/real-state.jpg" 
+            <img loading="lazy" data-dynamic-image="skcpl_masonry_4" src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/real-state.jpg" 
                  onerror="this.src='./public/gallery/gallery-7.jpg'" 
                  alt="Gallery Image 4" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
           </div>
           <div class="gallery-item group">
-            <img data-dynamic-image="skcpl_masonry_5" src="./public/gallery/gallery-6.jpg" 
+            <img loading="lazy" data-dynamic-image="skcpl_masonry_5" src="./public/gallery/gallery-6.jpg" 
                  alt="Gallery Image 5" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
           </div>
         </div>

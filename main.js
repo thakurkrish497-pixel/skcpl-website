@@ -184,7 +184,7 @@
         const done = () => {
           loaded++;
           pctEl.textContent = `${Math.round((loaded / TOTAL) * 100)}%`;
-          if (loaded === TOTAL) resolve();
+          if (loaded === 1) resolve();
         };
         img.onload = done;
         img.onerror = done;

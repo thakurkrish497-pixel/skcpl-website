@@ -3,7 +3,7 @@
 <head>
   <link rel="icon" type="image/png" href="./public/images/favicon.png">
   <script>
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    if (localStorage.theme === 'dark') {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
@@ -13,11 +13,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SKCPL Construction Gallery | SKCPL Group</title>
   <meta name="description" content="Explore the dynamic gallery of S. Kumar Creation Pvt. Ltd. (SKCPL) projects.">
+  <link rel="canonical" href="https://www.skumarcreation.com/skcpl-gallery.html" />
+  <meta property="og:title" content="SKCPL Construction Gallery | SKCPL Group">
+  <meta property="og:description" content="Explore the dynamic gallery of S. Kumar Creation Pvt. Ltd. (SKCPL) projects.">
+  <meta property="og:image" content="https://www.skumarcreation.com/public/brands/skcpl-construction.png">
+  <meta property="og:url" content="https://www.skumarcreation.com/skcpl-gallery.html">
+  <meta name="twitter:card" content="summary_large_image">
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
   <style>
     .material-symbols-outlined {
       font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -92,28 +98,28 @@
       <!-- Dynamic Gallery Container -->
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4" data-dynamic-gallery="skcpl">
         <div class="group relative rounded-xl overflow-hidden h-48 sm:h-64 cursor-pointer shadow-sm hover:shadow-md transition-shadow">
-          <img src="./public/gallery/ongoing/degree-college-1.jpeg" alt="Degree College" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <img loading="lazy" src="./public/gallery/ongoing/degree-college-1.jpeg" alt="Degree College" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
         </div>
         <div class="group relative rounded-xl overflow-hidden h-48 sm:h-64 cursor-pointer shadow-sm hover:shadow-md transition-shadow">
-          <img src="./public/gallery/ongoing/degree-college-2.jpeg" alt="Degree College" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <img loading="lazy" src="./public/gallery/ongoing/degree-college-2.jpeg" alt="Degree College" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
         </div>
         <div class="group relative rounded-xl overflow-hidden h-48 sm:h-64 cursor-pointer shadow-sm hover:shadow-md transition-shadow">
-          <img src="./public/gallery/ongoing/degree-college-3.jpeg" alt="Degree College" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <img loading="lazy" src="./public/gallery/ongoing/degree-college-3.jpeg" alt="Degree College" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
         </div>
         <div class="group relative rounded-xl overflow-hidden h-48 sm:h-64 cursor-pointer shadow-sm hover:shadow-md transition-shadow">
-          <img src="./public/gallery/ongoing/iti-hostel-1.jpeg" alt="ITI Hostel" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <img loading="lazy" src="./public/gallery/ongoing/iti-hostel-1.jpeg" alt="ITI Hostel" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
         </div>
         <div class="group relative rounded-xl overflow-hidden h-48 sm:h-64 cursor-pointer shadow-sm hover:shadow-md transition-shadow">
-          <img src="./public/gallery/ongoing/iti-hostel-2.jpeg" alt="ITI Hostel" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <img loading="lazy" src="./public/gallery/ongoing/iti-hostel-2.jpeg" alt="ITI Hostel" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
         </div>
         <div class="group relative rounded-xl overflow-hidden h-48 sm:h-64 cursor-pointer shadow-sm hover:shadow-md transition-shadow">
-          <img src="./public/gallery/ongoing/khelparisar-1.jpeg" alt="Khelparisar" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <img loading="lazy" src="./public/gallery/ongoing/khelparisar-1.jpeg" alt="Khelparisar" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
         </div>
         <div class="group relative rounded-xl overflow-hidden h-48 sm:h-64 cursor-pointer shadow-sm hover:shadow-md transition-shadow">
-          <img src="./public/gallery/ongoing/khelparisar-2.jpeg" alt="Khelparisar" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <img loading="lazy" src="./public/gallery/ongoing/khelparisar-2.jpeg" alt="Khelparisar" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
         </div>
         <div class="group relative rounded-xl overflow-hidden h-48 sm:h-64 cursor-pointer shadow-sm hover:shadow-md transition-shadow">
-          <img src="./public/gallery/ongoing/khelparisar-3.jpeg" alt="Khelparisar" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <img loading="lazy" src="./public/gallery/ongoing/khelparisar-3.jpeg" alt="Khelparisar" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
         </div>
         <!-- Main.js will dynamically inject images here -->
       </div>
