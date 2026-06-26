@@ -176,20 +176,40 @@
   /* ── Preload all frames ── */
   function preload() {
     return new Promise((resolve) => {
-      for (let i = 0; i < TOTAL; i++) {
-        const img = new Image();
-        img.decoding = "async";
-        img.src = src(i + 1);
+      // "Sweet spot" threshold: Wait for 25% of the animation to load
+      const threshold = Math.max(1, Math.floor(TOTAL * 0.25)); 
+      
+      const loadImg = (i) => {
+        return new Promise((res) => {
+          const img = new Image();
+          img.decoding = "async";
+          img.src = src(i + 1);
+          const done = () => {
+            loaded++;
+            if (pctEl) pctEl.textContent = `${Math.round((loaded / TOTAL) * 100)}%`;
+            res(img);
+          };
+          img.onload = done;
+          img.onerror = done;
+          imgs[i] = img;
+        });
+      };
 
-        const done = () => {
-          loaded++;
-          if (pctEl) pctEl.textContent = `${Math.round((loaded / TOTAL) * 100)}%`;
-          if (loaded === TOTAL) resolve();
-        };
-        img.onload = done;
-        img.onerror = done;
-        imgs[i] = img;
+      // 1. Load the "sweet spot" frames upfront
+      const initialPromises = [];
+      for (let i = 0; i < threshold; i++) {
+        initialPromises.push(loadImg(i));
       }
+
+      Promise.all(initialPromises).then(() => {
+        // Unblock UI as soon as the first batch is ready
+        resolve();
+        
+        // 2. Load the remaining frames in the background quietly
+        for (let i = threshold; i < TOTAL; i++) {
+          loadImg(i);
+        }
+      });
     });
   }
 
