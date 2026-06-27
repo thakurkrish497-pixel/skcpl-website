@@ -176,40 +176,36 @@
   /* ── Preload all frames ── */
   function preload() {
     return new Promise((resolve) => {
-      // "Sweet spot" threshold: Wait for 25% of the animation to load
-      const threshold = Math.max(1, Math.floor(TOTAL * 0.25)); 
+      let resolved = false;
+      // Wait for just 2 frames to unblock UI very quickly
+      const threshold = Math.min(2, TOTAL); 
       
-      const loadImg = (i) => {
-        return new Promise((res) => {
-          const img = new Image();
-          img.decoding = "async";
-          img.src = src(i + 1);
-          const done = () => {
-            loaded++;
-            if (pctEl) pctEl.textContent = `${Math.round((loaded / TOTAL) * 100)}%`;
-            res(img);
-          };
-          img.onload = done;
-          img.onerror = done;
-          imgs[i] = img;
-        });
-      };
+      for (let i = 0; i < TOTAL; i++) {
+        const img = new Image();
+        img.decoding = "async";
+        img.src = src(i + 1);
 
-      // 1. Load the "sweet spot" frames upfront
-      const initialPromises = [];
-      for (let i = 0; i < threshold; i++) {
-        initialPromises.push(loadImg(i));
+        const done = () => {
+          loaded++;
+          if (pctEl) pctEl.textContent = `${Math.round((loaded / TOTAL) * 100)}%`;
+          
+          if (loaded >= threshold && !resolved) {
+            resolved = true;
+            resolve();
+          }
+        };
+        img.onload = done;
+        img.onerror = done;
+        imgs[i] = img;
       }
-
-      Promise.all(initialPromises).then(() => {
-        // Unblock UI as soon as the first batch is ready
-        resolve();
-        
-        // 2. Load the remaining frames in the background quietly
-        for (let i = threshold; i < TOTAL; i++) {
-          loadImg(i);
+      
+      // Fallback timeout to guarantee UI unblocks even on slow networks
+      setTimeout(() => {
+        if (!resolved) {
+          resolved = true;
+          resolve();
         }
-      });
+      }, 2500);
     });
   }
 
