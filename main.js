@@ -177,9 +177,17 @@
   function preload() {
     return new Promise((resolve) => {
       let resolved = false;
-      // Wait for just 2 frames to unblock UI very quickly
-      const threshold = Math.min(2, TOTAL); 
       
+      const checkResolve = () => {
+        if (resolved) return;
+        // Unblock UI ONLY if the very first frame is fully loaded (so we never see a black screen)
+        // AND at least 3 frames are loaded to ensure a smooth start
+        if (imgs[0] && imgs[0].complete && loaded >= Math.min(3, TOTAL)) {
+          resolved = true;
+          resolve();
+        }
+      };
+
       for (let i = 0; i < TOTAL; i++) {
         const img = new Image();
         img.decoding = "async";
@@ -188,24 +196,20 @@
         const done = () => {
           loaded++;
           if (pctEl) pctEl.textContent = `${Math.round((loaded / TOTAL) * 100)}%`;
-          
-          if (loaded >= threshold && !resolved) {
-            resolved = true;
-            resolve();
-          }
+          checkResolve();
         };
         img.onload = done;
         img.onerror = done;
         imgs[i] = img;
       }
       
-      // Fallback timeout to guarantee UI unblocks even on slow networks
+      // Fallback timeout to guarantee UI unblocks, but give it 5 seconds for slow 3G
       setTimeout(() => {
         if (!resolved) {
           resolved = true;
           resolve();
         }
-      }, 2500);
+      }, 5000);
     });
   }
 
