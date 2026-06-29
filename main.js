@@ -2,13 +2,12 @@
   /* ── Config ── */
   const isMobile = window.innerWidth <= 768;
   const START = 0;
-  // Load all 196 frames on desktop. On mobile, load every 3rd frame of the 192-frame sequence (64 frames total) to prevent memory crashes.
-  const TOTAL = isMobile ? 64 : 196;
+  // Desktop sequence has 196 frames. New mobile sequence has 192 frames.
+  const TOTAL = isMobile ? 192 : 196;
   const src = (i) => {
     if (isMobile) {
-      // For mobile, skip every 3rd frame to optimize memory. 192 frames total.
-      const actualIndex = (i - 1) * 3 + 1;
-      const frameNum = String(actualIndex).padStart(4, '0');
+      // Use all 192 frames for smooth animation
+      const frameNum = String(i).padStart(4, '0');
       return `./public/mobile_frames/img_${frameNum}.jpg`;
     } else {
       const actualIndex = i;
@@ -75,10 +74,15 @@
     const iw = img.naturalWidth, ih = img.naturalHeight;
 
     // cover: scale so the image fills the canvas entirely (crops if needed)
-    // The JPEGs are 1440x2560, but contain massive black bars. The actual video is 1440x812 in the center.
-    // We scale based on the actual video height so it fills the screen on mobile devices without black bars.
-    const actualVideoHeight = 812;
-    const s = Math.max(cw / iw, ch / actualVideoHeight);
+    let s;
+    if (isMobile) {
+      // Mobile sequence is natively 9:16, so standard cover works perfectly
+      s = Math.max(cw / iw, ch / ih);
+    } else {
+      // The desktop JPEGs are 1440x2560 but contain massive black bars. The actual video is 1440x812 in the center.
+      const actualVideoHeight = 812;
+      s = Math.max(cw / iw, ch / actualVideoHeight);
+    }
     const dw = iw * s, dh = ih * s;
     const dx = (cw - dw) / 2;
     const dy = (ch - dh) / 2;
