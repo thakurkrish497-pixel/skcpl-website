@@ -2,13 +2,13 @@
   /* ── Config ── */
   const isMobile = window.innerWidth <= 768;
   const START = 0;
-  // Desktop sequence has 196 frames. New mobile sequence has 192 frames.
-  const TOTAL = isMobile ? 192 : 196;
+  // Desktop sequence has 196 frames. New mobile sequence has 240 frames.
+  const TOTAL = isMobile ? 240 : 196;
   const src = (i) => {
     if (isMobile) {
-      // Use all 192 frames for smooth animation
-      const frameNum = String(i).padStart(4, '0');
-      return `./public/mobile_frames/img_${frameNum}.jpg`;
+      // Use all 240 frames for smooth animation
+      const frameNum = String(i).padStart(3, '0');
+      return `./public/mobile_frames/ezgif-frame-${frameNum}.jpg`;
     } else {
       const actualIndex = i;
       const frameNum = String(START + actualIndex).padStart(3, '0');
