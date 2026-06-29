@@ -207,9 +207,8 @@
       
       const checkResolve = () => {
         if (resolved) return;
-        // Unblock UI ONLY if the very first frame is fully loaded (so we never see a black screen)
-        // AND at least 3 frames are loaded to ensure a smooth start
-        if (imgs[0] && imgs[0].complete && loaded >= Math.min(3, TOTAL)) {
+        // Unblock UI instantly once the very first frame is fully loaded so we never see a black screen
+        if (imgs[0] && imgs[0].complete && loaded >= 1) {
           resolved = true;
           resolve();
         }
