@@ -62,14 +62,31 @@
   function paint(idx) {
     if (!canvas || !ctx) return;
     
-    const img = imgs[idx];
-    // If image was purged by mobile browser, its naturalWidth will be 0.
-    // We must return before setting `drawn = idx` so it can try again next tick.
-    if (!img || !img.complete || !img.naturalWidth || !img.naturalHeight) return;
+    // Find closest loaded frame if requested frame is not ready
+    let bestIdx = idx;
+    if (!imgs[bestIdx] || !imgs[bestIdx].complete || !imgs[bestIdx].naturalWidth) {
+      let found = false;
+      for (let offset = 1; offset < TOTAL; offset++) {
+        let prev = idx - offset;
+        if (prev >= 0 && imgs[prev] && imgs[prev].complete && imgs[prev].naturalWidth) {
+          bestIdx = prev;
+          found = true;
+          break;
+        }
+        let next = idx + offset;
+        if (next < TOTAL && imgs[next] && imgs[next].complete && imgs[next].naturalWidth) {
+          bestIdx = next;
+          found = true;
+          break;
+        }
+      }
+      if (!found) return; // Nothing loaded at all
+    }
 
-    if (idx === drawn) return;
-    drawn = idx;
+    if (bestIdx === drawn) return;
+    drawn = bestIdx;
 
+    const img = imgs[bestIdx];
     const cw = canvas.width, ch = canvas.height;
     const iw = img.naturalWidth, ih = img.naturalHeight;
 
@@ -198,7 +215,23 @@
         }
       };
 
-      for (let i = 0; i < TOTAL; i++) {
+      // Build a priority load order (Strided Preloading)
+      const loadOrder = [];
+      const added = new Set();
+      const add = (i) => { if (!added.has(i)) { loadOrder.push(i); added.add(i); } };
+      
+      // 1. First 10 frames sequentially (immediate start)
+      for (let i = 0; i < 10 && i < TOTAL; i++) add(i);
+      
+      // 2. Strided frames (skeleton)
+      for (let i = 0; i < TOTAL; i += 10) add(i);
+      for (let i = 0; i < TOTAL; i += 5) add(i);
+      for (let i = 0; i < TOTAL; i += 2) add(i);
+      
+      // 3. The rest
+      for (let i = 0; i < TOTAL; i++) add(i);
+
+      loadOrder.forEach((i) => {
         const img = new Image();
         img.decoding = "async";
         img.src = src(i + 1);
@@ -211,7 +244,7 @@
         img.onload = done;
         img.onerror = done;
         imgs[i] = img;
-      }
+      });
       
       // Fallback timeout to guarantee UI unblocks, but give it 5 seconds for slow 3G
       setTimeout(() => {
