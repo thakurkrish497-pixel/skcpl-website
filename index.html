@@ -19,7 +19,7 @@
   <meta property="og:image" content="https://www.skumarcreation.com/public/brands/skcpl-construction.png">
   <meta property="og:url" content="https://www.skumarcreation.com/">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="stylesheet" href="./public/tailwind.css">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap">
@@ -53,7 +53,100 @@
   </script>
 
   <!-- Tailwind Configuration -->
-  
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-variant": "#e1e3e4",
+            "on-primary-fixed-variant": "#344767",
+            "outline-variant": "#c4c6ce",
+            "surface-container": "#edeeef",
+            "error-container": "#ffdad6",
+            "tertiary": "#001b2c",
+            "surface-tint": "#4c5f80",
+            "on-secondary": "#ffffff",
+            "inverse-surface": "#2e3132",
+            "background": "#f8f9fa",
+            "secondary": "#735c00",
+            "on-error": "#ffffff",
+            "secondary-container": "#fed65b",
+            "tertiary-fixed-dim": "#90cdfd",
+            "secondary-fixed-dim": "#e9c349",
+            "inverse-primary": "#b4c7ed",
+            "on-primary-fixed": "#051b39",
+            "tertiary-container": "#00314b",
+            "surface-dim": "#d9dadb",
+            "surface": "#f8f9fa",
+            "on-tertiary-fixed-variant": "#004b70",
+            "primary-fixed": "#d6e3ff",
+            "inverse-on-surface": "#f0f1f2",
+            "on-secondary-container": "#745c00",
+            "surface-container-highest": "#e1e3e4",
+            "primary-fixed-dim": "#b4c7ed",
+            "outline": "#74777e",
+            "surface-bright": "#f8f9fa",
+            "on-error-container": "#93000a",
+            "surface-container-lowest": "#ffffff",
+            "on-primary": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "on-secondary-fixed": "#241a00",
+            "on-surface-variant": "#44474e",
+            "primary": "#021936",
+            "primary-container": "#1a2e4c",
+            "surface-container-low": "#f3f4f5",
+            "on-surface": "#191c1d",
+            "on-secondary-fixed-variant": "#574500",
+            "on-tertiary-fixed": "#001e30",
+            "on-primary-container": "#8396b9",
+            "secondary-fixed": "#ffe088",
+            "surface-container-high": "#e7e8e9",
+            "on-background": "#191c1d",
+            "tertiary-fixed": "#cae6ff",
+            "on-tertiary-container": "#5e9bc9",
+            "error": "#ba1a1a"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "xs": "4px",
+            "margin": "32px",
+            "gutter": "24px",
+            "sm": "12px",
+            "base": "8px",
+            "xl": "80px",
+            "md": "24px",
+            "lg": "48px"
+          },
+          "fontFamily": {
+            "caption": ["Inter"],
+            "body-lg": ["Inter"],
+            "headline-lg": ["Montserrat"],
+            "headline-xl": ["Montserrat"],
+            "headline-md": ["Montserrat"],
+            "body-md": ["Inter"],
+            "label-md": ["Inter"],
+            "headline-lg-mobile": ["Montserrat"]
+          },
+          "fontSize": {
+            "caption": ["12px", {"lineHeight": "1.4", "fontWeight": "400"}],
+            "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+            "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+            "headline-xl": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+            "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+            "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+            "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "fontWeight": "600"}]
+          }
+        },
+      },
+    }
+  </script>
   <style>
     .material-symbols-outlined {
       font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -327,10 +420,10 @@
             <p class="font-body-md text-body-md text-on-surface-variant">Our Mission is to contribute to the country's development by providing the best Telecom, Infrastructure &amp; Real Estate services. Our company culture is based on openness and respect, empowering our team members to play a significant role in achieving individual and group goals.</p>
           </div>
           <div class="grid grid-cols-2 gap-4">
-            <img loading="lazy" decoding="async" data-dynamic-image="index_about" src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/office-1.jpg" 
+            <img data-dynamic-image="index_about" src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/office-1.jpg" 
                  onerror="this.src='./public/gallery/gallery-2.jpg'" 
                  alt="SKCPL Office" class="rounded-xl w-full h-full object-cover shadow-lg">
-            <img loading="lazy" decoding="async" data-dynamic-image="index_about_2" src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/office.jpg" 
+            <img data-dynamic-image="index_about_2" src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/office.jpg" 
                  onerror="this.src='./public/gallery/gallery-6.jpg'" 
                  alt="SKCPL Real Estate Project" class="rounded-xl w-full h-full object-cover shadow-lg mt-8">
           </div>
@@ -433,7 +526,7 @@
           <!-- Project 1: Telecom -->
           <div class="bg-white rounded-xl overflow-hidden shadow-[0px_10px_30px_rgba(26,46,76,0.05)] group hover:shadow-[0px_20px_60px_rgba(26,46,76,0.15)] transition-all duration-500">
             <div class="relative h-64 overflow-hidden">
-              <img loading="lazy" decoding="async" data-dynamic-image="proj_telecom" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+              <img data-dynamic-image="proj_telecom" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                    alt="Telecom BTS Installation & Commissioning" 
                    src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/electricity-infrastructure-low-angle-shot-159218.jpg"
                    onerror="this.src='./public/gallery/gallery-1.jpg'"/>
@@ -451,7 +544,7 @@
           <!-- Project 2: Infrastructure Roads -->
           <div class="bg-white rounded-xl overflow-hidden shadow-[0px_10px_30px_rgba(26,46,76,0.05)] group hover:shadow-[0px_20px_60px_rgba(26,46,76,0.15)] transition-all duration-500">
             <div class="relative h-64 overflow-hidden">
-              <img loading="lazy" decoding="async" data-dynamic-image="proj_infrastructure" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+              <img data-dynamic-image="proj_infrastructure" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                    alt="Infrastructure & Road Development Project" 
                    src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/site-photo.jpg"
                    onerror="this.src='./public/gallery/gallery-8.jpg'"/>
@@ -469,7 +562,7 @@
           <!-- Project 3: Real Estate -->
           <div class="bg-white rounded-xl overflow-hidden shadow-[0px_10px_30px_rgba(26,46,76,0.05)] group hover:shadow-[0px_20px_60px_rgba(26,46,76,0.15)] transition-all duration-500">
             <div class="relative h-64 overflow-hidden">
-              <img loading="lazy" decoding="async" data-dynamic-image="proj_real_estate" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+              <img data-dynamic-image="proj_real_estate" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                    alt="Real Estate Building Project" 
                    src="http://skumarcreation.com/wp-content/flagallery/gallary/webview/real-state.jpg"
                    onerror="this.src='./public/gallery/gallery-7.jpg'"/>
@@ -487,7 +580,7 @@
           <!-- Project 4: Degree College Pipalrawa Sonkach -->
           <div class="bg-white rounded-xl overflow-hidden shadow-[0px_10px_30px_rgba(26,46,76,0.05)] group hover:shadow-[0px_20px_60px_rgba(26,46,76,0.15)] transition-all duration-500">
             <div class="relative h-64 overflow-hidden">
-              <img loading="lazy" decoding="async" data-dynamic-image="proj_degree_college" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+              <img data-dynamic-image="proj_degree_college" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                    alt="Degree College Pipalrawa Sonkach" 
                    src="./public/gallery/ongoing/degree-college-1.jpeg"
                    onerror="this.src='./public/gallery/gallery-5.jpg'"/>
@@ -505,7 +598,7 @@
           <!-- Project 5: Fun N Food Resort -->
           <div class="bg-white rounded-xl overflow-hidden shadow-[0px_10px_30px_rgba(26,46,76,0.05)] group hover:shadow-[0px_20px_60px_rgba(26,46,76,0.15)] transition-all duration-500">
             <div class="relative h-64 overflow-hidden">
-              <img loading="lazy" decoding="async" data-dynamic-image="proj_hospitality" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+              <img data-dynamic-image="proj_hospitality" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                    alt="Fun N Food Resort Water Park Indore" 
                    src="./public/resort/fun-and-food-resorts-and-holidays-pvt-ltd-khandwa-road-indore-resorts-in6u3cbwmq.avif"/>
               <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -522,7 +615,7 @@
           <!-- Project 6: SKumar Solar -->
           <div class="bg-white rounded-xl overflow-hidden shadow-[0px_10px_30px_rgba(26,46,76,0.05)] group hover:shadow-[0px_20px_60px_rgba(26,46,76,0.15)] transition-all duration-500">
             <div class="relative h-64 overflow-hidden">
-              <img loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+              <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                    alt="SKumar Solar Project" 
                    src="./public/gallery/solar/photo_2026-06-12_19-27-59.jpg"/>
               <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -613,22 +706,22 @@
           </div>
           <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
             <div class="group relative rounded-xl overflow-hidden h-48 cursor-pointer shadow-sm">
-              <img loading="lazy" decoding="async" data-dynamic-image="index_skcpl_1" src="./public/gallery/ongoing/degree-college-1.jpeg" 
+              <img data-dynamic-image="index_skcpl_1" src="./public/gallery/ongoing/degree-college-1.jpeg" 
                    alt="SKCPL Project 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
               <div class="gallery-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
             </div>
             <div class="group relative rounded-xl overflow-hidden h-48 cursor-pointer shadow-sm">
-              <img loading="lazy" decoding="async" data-dynamic-image="index_skcpl_2" src="./public/gallery/ongoing/iti-hostel-1.jpeg" 
+              <img data-dynamic-image="index_skcpl_2" src="./public/gallery/ongoing/iti-hostel-1.jpeg" 
                    alt="SKCPL Project 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
               <div class="gallery-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
             </div>
             <div class="group relative rounded-xl overflow-hidden h-48 cursor-pointer shadow-sm">
-              <img loading="lazy" decoding="async" data-dynamic-image="index_skcpl_3" src="./public/gallery/ongoing/khelparisar-1.jpeg" 
+              <img data-dynamic-image="index_skcpl_3" src="./public/gallery/ongoing/khelparisar-1.jpeg" 
                    alt="SKCPL Project 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
               <div class="gallery-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
             </div>
             <div class="group relative rounded-xl overflow-hidden h-48 cursor-pointer shadow-sm">
-              <img loading="lazy" decoding="async" data-dynamic-image="index_skcpl_4" src="./public/gallery/completed/project-1.jpeg" 
+              <img data-dynamic-image="index_skcpl_4" src="./public/gallery/completed/project-1.jpeg" 
                    alt="SKCPL Project 4" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
               <div class="gallery-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
             </div>
@@ -646,22 +739,22 @@
           </div>
           <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
             <div class="group relative rounded-xl overflow-hidden h-48 cursor-pointer">
-              <img loading="lazy" decoding="async" data-dynamic-image="index_gallery_1" src="./public/resort/fun-and-food-resorts-and-holidays-pvt-ltd-khandwa-road-indore-resorts-in6u3cbwmq.avif" 
+              <img data-dynamic-image="index_gallery_1" src="./public/resort/fun-and-food-resorts-and-holidays-pvt-ltd-khandwa-road-indore-resorts-in6u3cbwmq.avif" 
                    alt="Fun N Food Resort" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
               <div class="gallery-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
             </div>
             <div class="group relative rounded-xl overflow-hidden h-48 cursor-pointer">
-              <img loading="lazy" decoding="async" data-dynamic-image="index_gallery_2" src="./public/resort/3026c4e5.avif" 
+              <img data-dynamic-image="index_gallery_2" src="./public/resort/3026c4e5.avif" 
                    alt="Resort Activities" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
               <div class="gallery-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
             </div>
             <div class="group relative rounded-xl overflow-hidden h-48 cursor-pointer">
-              <img loading="lazy" decoding="async" data-dynamic-image="index_gallery_3" src="./public/resort/c5e355ca54710e7f4de6f16bdec76dac.jpg" 
+              <img data-dynamic-image="index_gallery_3" src="./public/resort/c5e355ca54710e7f4de6f16bdec76dac.jpg" 
                    alt="Resort Pool" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
               <div class="gallery-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
             </div>
             <div class="group relative rounded-xl overflow-hidden h-48 cursor-pointer">
-              <img loading="lazy" decoding="async" data-dynamic-image="index_gallery_4" src="./public/resort/oyo-22504-fun-and-food.jpg" 
+              <img data-dynamic-image="index_gallery_4" src="./public/resort/oyo-22504-fun-and-food.jpg" 
                    alt="Resort Landscape" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
               <div class="gallery-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
             </div>
@@ -685,22 +778,22 @@
           </div>
           <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
             <div class="group relative rounded-xl overflow-hidden h-48 cursor-pointer">
-              <img loading="lazy" decoding="async" data-dynamic-image="index_solar_1" src="./public/gallery/solar/photo_2026-06-12_19-27-59.jpg" 
+              <img data-dynamic-image="index_solar_1" src="./public/gallery/solar/photo_2026-06-12_19-27-59.jpg" 
                    alt="Solar Installation 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
               <div class="gallery-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
             </div>
             <div class="group relative rounded-xl overflow-hidden h-48 cursor-pointer">
-              <img loading="lazy" decoding="async" data-dynamic-image="index_solar_2" src="./public/gallery/solar/photo_2026-06-12_19-28-37.jpg" 
+              <img data-dynamic-image="index_solar_2" src="./public/gallery/solar/photo_2026-06-12_19-28-37.jpg" 
                    alt="Solar Installation 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
               <div class="gallery-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
             </div>
             <div class="group relative rounded-xl overflow-hidden h-48 cursor-pointer">
-              <img loading="lazy" decoding="async" data-dynamic-image="index_solar_3" src="./public/gallery/solar/photo_2026-06-12_19-28-42.jpg" 
+              <img data-dynamic-image="index_solar_3" src="./public/gallery/solar/photo_2026-06-12_19-28-42.jpg" 
                    alt="Solar Installation 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
               <div class="gallery-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
             </div>
             <div class="group relative rounded-xl overflow-hidden h-48 cursor-pointer">
-              <img loading="lazy" decoding="async" data-dynamic-image="index_solar_4" src="./public/gallery/solar/photo_2026-06-12_19-29-08.jpg" 
+              <img data-dynamic-image="index_solar_4" src="./public/gallery/solar/photo_2026-06-12_19-29-08.jpg" 
                    alt="Solar Installation 4" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
               <div class="gallery-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
             </div>
@@ -738,7 +831,7 @@
         <!-- Brand 1: S.Kumar Creation -->
         <div class="brand-card" id="brand-skcpl">
           <div class="brand-card-image">
-            <img loading="lazy" decoding="async" src="./public/brands/skcpl-construction.png" alt="S.Kumar Creation Pvt. Ltd. - Building Excellence for 16+ Years" >
+            <img src="./public/brands/skcpl-construction.png" alt="S.Kumar Creation Pvt. Ltd. - Building Excellence for 16+ Years" >
             <div class="brand-card-overlay"></div>
           </div>
           <div class="brand-card-badge">
@@ -772,7 +865,7 @@
         <!-- Brand 2: Fun N Food Resort -->
         <div class="brand-card" id="brand-fnf">
           <div class="brand-card-image">
-            <img loading="lazy" decoding="async" src="./public/brands/fun-food-resort.png" alt="Fun N Food Resort - Premium Hospitality & Leisure Destination Indore" >
+            <img src="./public/brands/fun-food-resort.png" alt="Fun N Food Resort - Premium Hospitality & Leisure Destination Indore" >
             <div class="brand-card-overlay"></div>
           </div>
           <div class="brand-card-badge">
@@ -806,7 +899,7 @@
         <!-- Brand 3: SKumar Solar -->
         <div class="brand-card" id="brand-solar">
           <div class="brand-card-image">
-            <img loading="lazy" decoding="async" src="./public/brands/skumar-solar.png" alt="SKumar Solar - Clean Energy Solutions & Installation" >
+            <img src="./public/brands/skumar-solar.png" alt="SKumar Solar - Clean Energy Solutions & Installation" >
             <div class="brand-card-overlay"></div>
           </div>
           <div class="brand-card-badge badge-green">
