@@ -204,75 +204,54 @@
   function preload() {
     return new Promise((resolve) => {
       let resolved = false;
+      
       const checkResolve = () => {
-        if (!resolved) {
+        if (resolved) return;
+        // Unblock UI instantly once the very first frame is fully loaded so we never see a black screen
+        if (imgs[0] && imgs[0].complete && loaded >= 1) {
           resolved = true;
           resolve();
         }
       };
 
-      // 1. Load the first 5 frames immediately so the UI can unblock instantly
-      let initialPromises = [];
-      for (let i = 0; i < Math.min(5, TOTAL); i++) {
-        initialPromises.push(new Promise((res) => {
-          const img = new Image();
-          img.decoding = "async";
-          img.src = src(i + 1);
-          const done = () => {
-            loaded++;
-            if (pctEl && !resolved) pctEl.textContent = `${Math.round((loaded / 5) * 100)}%`;
-            res();
-          };
-          img.onload = done;
-          img.onerror = done;
-          imgs[i] = img;
-        }));
-      }
+      // Build a priority load order (Strided Preloading)
+      const loadOrder = [];
+      const added = new Set();
+      const add = (i) => { if (!added.has(i)) { loadOrder.push(i); added.add(i); } };
+      
+      // 1. First 10 frames sequentially (immediate start)
+      for (let i = 0; i < 10 && i < TOTAL; i++) add(i);
+      
+      // 2. Strided frames (skeleton)
+      for (let i = 0; i < TOTAL; i += 10) add(i);
+      for (let i = 0; i < TOTAL; i += 5) add(i);
+      for (let i = 0; i < TOTAL; i += 2) add(i);
+      
+      // 3. The rest
+      for (let i = 0; i < TOTAL; i++) add(i);
 
-      // Wait for the first 5 frames, then unblock the UI
-      Promise.all(initialPromises).then(() => {
-        checkResolve();
-        // 2. Lazily load the rest in the background sequentially to avoid network congestion
-        let i = 5;
-        const loadNextBatch = () => {
-          if (i >= TOTAL) return;
-          
-          const batchSize = 5;
-          let batchPromises = [];
-          
-          for (let j = 0; j < batchSize && i < TOTAL; j++, i++) {
-            const currentI = i; // capture index
-            batchPromises.push(new Promise((res) => {
-              const img = new Image();
-              img.decoding = "async";
-              img.fetchPriority = "low"; // Tell browser this is low priority background work
-              img.src = src(currentI + 1);
-              const done = () => {
-                loaded++;
-                res();
-              };
-              img.onload = done;
-              img.onerror = done;
-              imgs[currentI] = img;
-            }));
-          }
-          
-          // Wait for this batch before requesting the next to keep network free
-          Promise.all(batchPromises).then(() => {
-            // Give the browser breathing room
-            if (window.requestIdleCallback) {
-              requestIdleCallback(loadNextBatch);
-            } else {
-              setTimeout(loadNextBatch, 50);
-            }
-          });
+      loadOrder.forEach((i) => {
+        const img = new Image();
+        img.decoding = "async";
+        img.src = src(i + 1);
+
+        const done = () => {
+          loaded++;
+          if (pctEl) pctEl.textContent = `${Math.round((loaded / TOTAL) * 100)}%`;
+          checkResolve();
         };
-        
-        loadNextBatch();
+        img.onload = done;
+        img.onerror = done;
+        imgs[i] = img;
       });
-
-      // Fallback timeout to guarantee UI unblocks
-      setTimeout(checkResolve, 3000);
+      
+      // Fallback timeout to guarantee UI unblocks, but give it 5 seconds for slow 3G
+      setTimeout(() => {
+        if (!resolved) {
+          resolved = true;
+          resolve();
+        }
+      }, 5000);
     });
   }
 
