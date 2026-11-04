@@ -68,10 +68,10 @@ html, body {
 }
 
 .site-navbar.scrolled {
-  background: rgba(2, 25, 54, 0.9);
+  background: rgba(2, 132, 199, 0.92);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 30px rgba(2, 132, 199, 0.25);
   padding-top: 0.7rem;
   padding-bottom: 0.7rem;
 }
@@ -80,7 +80,7 @@ html, body {
   font-family: 'Montserrat', sans-serif;
   font-size: 1.5rem;
   font-weight: 800;
-  color: #021936;
+  color: #0284c7;
   text-decoration: none;
   letter-spacing: 0.08em;
   transition: color 0.3s ease;
@@ -94,7 +94,7 @@ html, body {
 }
 
 .nav-menu a {
-  color: rgba(2, 25, 54, 0.8);
+  color: rgba(2, 132, 199, 0.9);
   text-decoration: none;
   font-family: 'Inter', sans-serif;
   font-size: 0.8rem;
@@ -118,7 +118,7 @@ html, body {
 }
 
 .nav-menu a:hover {
-  color: #021936;
+  color: #0284c7;
 }
 
 .site-navbar.scrolled .nav-brand {
@@ -319,7 +319,7 @@ footer {
 /* ══════════════════════════════════════════════ */
 .brands-section {
   padding: 100px 0 120px;
-  background: #021936;
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
   position: relative;
   overflow: hidden;
 }
@@ -762,8 +762,8 @@ footer {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   font-size: 24px;
-  color: #021936;
-  opacity: 0.5;
+  color: #0284c7;
+  opacity: 0.6;
   transition: opacity 0.3s ease, transform 0.3s ease;
   cursor: pointer;
   padding: 0 16px;
